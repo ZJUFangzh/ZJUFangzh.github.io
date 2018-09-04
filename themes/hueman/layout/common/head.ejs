@@ -57,4 +57,33 @@
 
     <%- js('libs/jquery/3.3.1/jquery.min') %>
     <%- partial('plugin/scripts', { isHead: true }) %>
+    <!--百度统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c48627a60135ae47d77a79844f7e5b04";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    <!--百度SEO-->
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+        </script>
+    <!--googleseo-->
+    <meta name="google-site-verification" content="p1u63jgcp2J7NsJHR_UxQX2Fzj_UY6Zwf8C1zTRpONM" />
+    
+    <meta name="google-site-verification" content="8ojU19tXQIB94wIY0cAPI5BKSsrqV-xxrlx46C_-WMg" />
 </head>

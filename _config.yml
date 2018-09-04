@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 直上云霄的博客
-subtitle: 关于人工智能
+title: Fangzh的个人博客 | 人工智能拯救世界
+subtitle: 人工智能、人生感悟
 description: 人工智能、计算机、机器学习、linux、程序员
 keywords:
 author: Fangzh
@@ -13,9 +13,11 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+#url: http://yoursite.com
+url: http://fangzh.top
 root: /
-permalink: :year/:month/:day/:title/
+#将链接改为id，减少了中文字符，id要每次自己设，我是根据年份月份日期小时来的2018090213
+permalink: :year/:id/
 permalink_defaults:
 
 # Directory
@@ -87,5 +89,8 @@ theme: hueman
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:ZJUFangzh/ZJUFangzh.github.io.git
-  branch: master
+  repo: 
+    coding: git@git.coding.net:ZJUFangzh/ZJUFangzh.git,master
+    github: git@github.com:ZJUFangzh/ZJUFangzh.github.io.git,master
+    
+ # branch: master

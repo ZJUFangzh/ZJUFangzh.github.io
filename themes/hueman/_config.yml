@@ -3,10 +3,12 @@
 menu:
     Home: /
     # Delete this row if you don't want categories in your header nav bar
-    Category: /abc
-    uncategorized: /bcd
-    About: /about/index.html
-
+    Archive: /archives
+    #Category: /abc
+    #uncategorized: /bcd
+    #About: /about/index.html
+    Life: /categories/生活
+    Board: /borad
 # Customize
 customize:
     logo:
@@ -121,7 +123,11 @@ miscellaneous:
         Hexo: http://hexo.io
 
 
-
+#统计阅读量
+leancloud_visitors:
+    enable: true
+    app_id: YVSE8R91f8Qc6d6FwMTnwytk-gzGzoHsz
+    app_key: ajFB9Ueh08Y5pIvkDsXSOW56
 
 
 

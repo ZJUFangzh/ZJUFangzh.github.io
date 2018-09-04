@@ -4,8 +4,10 @@ index:
     search: '搜索'
     archive: '归档'
     category: '分类'
+    life: '生活'
     uncategorized: '未分类'
     tag: '标签：'
+    board: '小黑板'
 nav:
     current_page:
         other: '第 %d 页，'
