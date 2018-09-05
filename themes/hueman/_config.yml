@@ -4,10 +4,11 @@ menu:
     Home: /
     # Delete this row if you don't want categories in your header nav bar
     Archive: /archives
-    #Category: /abc
+    Categories: 
     #uncategorized: /bcd
     #About: /about/index.html
-    Life: /categories/生活
+    #Categories 已经默认支持多级分类了
+    #Life: /categories/生活
     Board: /borad
 # Customize
 customize:
