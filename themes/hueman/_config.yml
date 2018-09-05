@@ -9,7 +9,7 @@ menu:
     #About: /about/index.html
     #Categories 已经默认支持多级分类了
     #Life: /categories/生活
-    Board: /borad
+    Board: /board
 # Customize
 customize:
     logo:
