@@ -19,8 +19,8 @@ categories:
 github上一大堆[shadowsocks-windows](https://github.com/shadowsocks/shadowsocks-windows)
 
 ---
-Linux上，可以用shell命令行解决的，绝不用GUI
-
+Linux上，可以用shell命令行解决的，绝不用GUI。
+<!--more-->
 
 ```
 sudo apt-get install python-pip

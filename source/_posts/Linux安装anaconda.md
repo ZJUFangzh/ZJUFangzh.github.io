@@ -13,7 +13,7 @@ categories:
 ![](http://i1.bvimg.com/660676/7aa1a3c6a1b0f42b.jpg)
 Anaconda是python的一个很好的发行版，安装了anaconda就可以解决很多python第三方库的问题。
 
-
+<!--more-->
 首先，检查一下电脑中的python版本。
 
 ```

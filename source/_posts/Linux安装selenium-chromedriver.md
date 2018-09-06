@@ -17,7 +17,7 @@ Selenium是爬虫中用来模拟JS的利器。
 
 下面介绍一下Linux安装selenium和chromedriver的具体做法。
 
-
+<!--more-->
 ## 1. install selenium
 
 首先确保已经安装了pip命令，接下来：
