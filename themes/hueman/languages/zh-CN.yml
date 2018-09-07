@@ -7,7 +7,7 @@ index:
     life: '生活'
     uncategorized: '未分类'
     tag: '标签：'
-    board: '小黑板'
+    board: '留言板'
 nav:
     current_page:
         other: '第 %d 页，'
