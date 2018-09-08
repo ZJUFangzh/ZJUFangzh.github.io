@@ -177,7 +177,7 @@ ssh，简单来讲，就是一个秘钥，其中，`id_rsa`是你这台电脑的
 
 在gitbash中，查看是否成功
 ```
-ssh -T gitZ@github.com
+ssh -T git@github.com
 ```
 
 # 6. 将hexo部署到GitHub
