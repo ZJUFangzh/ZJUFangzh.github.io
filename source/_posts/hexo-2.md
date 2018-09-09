@@ -45,15 +45,14 @@ date: 2018-09-07 15:18:31
 
 ### 网址
 
-|                      |                                                              |                             |
-| -------------------- | ------------------------------------------------------------ | --------------------------- |
 | 参数                 | 描述                                                         | 默认值                      |
+| -------------------- | ------------------------------------------------------------ | --------------------------- |
 | `url`                | 网址                                                         |                             |
 | `root`               | 网站根目录                                                   |                             |
 | `permalink`          | 文章的 [永久链接](https://hexo.io/zh-cn/docs/permalinks) 格式 | `:year/:month/:day/:title/` |
 | `permalink_defaults` | 永久链接中各部分的默认值                                     |                             |
 
-
+ 
 
 在这里，你需要把`url`改成你的网站域名。
 
@@ -92,6 +91,107 @@ deploy:
 
 
 接下来这个`deploy`就是网站的部署的，`repo`就是仓库(`Repository`)的简写。`branch`选择仓库的哪个分支。这个在之前进行github page部署的时候已经修改过了，不再赘述。而这个在后面进行双平台部署的时候会再次用到。
+
+
+
+### Front-matter
+
+Front-matter 是文件最上方以 `---` 分隔的区域，用于指定个别文件的变量，举例来说：
+
+```
+title: Hello World
+date: 2013/7/13 20:46:25
+---
+```
+
+下是预先定义的参数，您可在模板中使用这些参数值并加以利用。
+
+| 参数         | 描述                 | 默认值       |
+| ------------ | -------------------- | ------------ |
+| `layout`     | 布局                 |              |
+| `title`      | 标题                 |              |
+| `date`       | 建立日期             | 文件建立日期 |
+| `updated`    | 更新日期             | 文件更新日期 |
+| `comments`   | 开启文章的评论功能   | true         |
+| `tags`       | 标签（不适用于分页） |              |
+| `categories` | 分类（不适用于分页） |              |
+| `permalink`  | 覆盖文章网址         |              |
+
+
+
+其中，分类和标签需要区别一下，分类具有顺序性和层次性，也就是说 `Foo, Bar` 不等于 `Bar, Foo`；而标签没有顺序和层次。
+
+```
+categories:
+- Diary
+tags:
+- PS3
+- Games
+```
+
+### layout（布局）
+
+当你每一次使用代码
+
+```
+hexo new paper
+```
+
+它其实默认使用的是`post`这个布局，也就是在`source`文件夹下的`_post`里面。
+
+Hexo 有三种默认布局：`post`、`page` 和 `draft`，它们分别对应不同的路径，而您自定义的其他布局和 `post` 相同，都将储存到 `source/_posts` 文件夹。
+
+| 布局    | 路径             |
+| ------- | ---------------- |
+| `post`  | `source/_posts`  |
+| `page`  | `source`         |
+| `draft` | `source/_drafts` |
+
+而new这个命令其实是：
+
+```
+hexo new [layout] <title>
+```
+
+只不过这个layout默认是post罢了。
+
+
+
+#### page
+
+如果你想另起一页，那么可以使用
+
+```
+hexo new page board
+```
+
+系统会自动给你在source文件夹下创建一个board文件夹，以及board文件夹中的index.md，这样你访问的board对应的链接就是`http://xxx.xxx/board`
+
+#### draft
+
+draft是草稿的意思，也就是你如果想写文章，又不希望被看到，那么可以
+
+```
+hexo new draft newpage
+```
+
+这样会在source/_draft中新建一个newpage.md文件，如果你的草稿文件写的过程中，想要预览一下，那么可以使用
+
+```
+hexo server --draft
+```
+
+在本地端口中开启服务预览。
+
+
+
+如果你的草稿文件写完了，想要发表到post中，
+
+```
+hexo publish draft newpage
+```
+
+就会自动把newpage.md发送到post中。
 
 
 
