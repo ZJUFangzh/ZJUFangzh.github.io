@@ -2,13 +2,14 @@
 
 
 
-1. hexo(3)
+1. hexo(3)  done
    - layout的几种形式
    - 阅读量统计
    - 评论系统
    - 访问量统计
    - seo设置
    - 图床
+   - done
 2. git总结
 3. sql总结
 4. shell命令总结
