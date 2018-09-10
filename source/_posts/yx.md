@@ -1,17 +1,18 @@
 ---
-title: view
-date: 2018-09-09 15:21:32
-id: 2018090915
+title: 你见过什么样的云霄？
+id: 2018091015
 tags:
-- 航拍
-- 旅行
-- 视频
+  - 航拍
+  - 旅行
+  - 视频
 categories:
-- 生活
-- 旅行
+  - 生活
+  - 旅行
+date: 2018-09-10 15:21:32
 ---
 
-![]()
+
+![](http://peu31tfv4.bkt.clouddn.com/DeepinScreenshot_select-area_20180910183243.png)
 
 花了三年时间做的家乡的航拍视频，有点生涩，顺便放上来试试hexo的视频嵌入。
 

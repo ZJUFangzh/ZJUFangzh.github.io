@@ -12,7 +12,7 @@ date: 2018-09-07 15:18:31
 ---
 
 
-![](http://i2.bvimg.com/660676/11ef61c079e23a2c.jpg)
+![](http://peu31tfv4.bkt.clouddn.com/1.jpg)
 
 
 
@@ -201,11 +201,11 @@ hexo publish draft newpage
 
 到这一步，如果你觉得默认的`landscape`主题不好看，那么可以在官网的主题中，选择你喜欢的一个主题进行修改就可以啦。[点这里](https://hexo.io/themes/)
 
-![](http://i2.bvimg.com/660676/02a0a2455255af6c.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo1.png)
 
 这里有200多个主题可以选。不过最受欢迎的就是那么几个，比如[NexT主题](https://github.com/theme-next/hexo-theme-next)，非常的简洁好看，大多数人都选择这个，关于这个的教程也比较多。不过我选择的是[hueman](https://github.com/ppoffice/hexo-theme-hueman)这个主题，好像是从WordPress移植过来的，展示效果如下：
 
-![](http://i2.bvimg.com/660676/d1e1c2d59f2b82b3.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo13.png)
 
 
 
@@ -223,7 +223,7 @@ hexo publish draft newpage
 
 也就是上面菜单栏上的这些东西。
 
-![](http://i2.bvimg.com/660676/5dcc46d877312b0b.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo2.png)
 
 其中，About这个你是找不到网页的，因为你的文章中没有about这个东西。如果你想要的话，可以执行命令
 
@@ -380,7 +380,7 @@ rss: /atom.xml
 
 机制是这样的，由于`hexo d`上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。
 
-![可以看到，并没有source等源文件在内](http://i2.bvimg.com/660676/744b897d445decea.png)
+![可以看到，并没有source等源文件在内](http://peu31tfv4.bkt.clouddn.com/2hexo4.png)
 
 
 
@@ -388,7 +388,7 @@ rss: /atom.xml
 
 其他文件 ，包括我们写在source 里面的，和配置文件，主题文件，都没有上传到github
 
-![](http://i2.bvimg.com/660676/433e77f8b6d80c0d.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo3.png)
 
 
 
@@ -402,13 +402,13 @@ rss: /atom.xml
 
 首先，先在github上新建一个hexo分支，如图：
 
-![](http://i2.bvimg.com/660676/315142647742c48e.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo8.png)
 
 
 
 然后在这个仓库的settings中，选择默认分支为hexo分支（这样每次同步的时候就不用指定分支，比较方便）。
 
-![](http://i2.bvimg.com/660676/b732d5b0e42e8a4e.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo9.png)
 
 
 
@@ -448,7 +448,7 @@ git push
 
 这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中`node_modules`、`public`、`db.json`已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 。
 
-![](http://i2.bvimg.com/660676/95435007ebc0858d.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo7.png)
 
 
 
@@ -607,11 +607,11 @@ hexo d
 
 如图：
 
-![](http://i2.bvimg.com/660676/ca3217d2813c9586.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo11.png)
 
 **6. 阿里云添加解析**
 
-![](http://i2.bvimg.com/660676/6188a68405b2bed1.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo5.png)
 
 这个时候就可以把之前github的解析改成境外，把coding的解析设为默认了。
 
@@ -621,7 +621,7 @@ coding page的一个比较恶心人的地方就是，你只是银牌会员的话
 
 这里：
 
-![](http://i2.bvimg.com/660676/c9c5a0130528a0d4.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo10.png)
 
 只要你在页面上添加一行文字，写`Hosted by Coding Pages`，然后点下面的小勾勾，两个工作日内它就会审核通过了。
 
@@ -631,7 +631,7 @@ coding page的一个比较恶心人的地方就是，你只是银牌会员的话
 
 我的选择是把这一行代码放在主题文件夹`/layout/common/footer.ejs`里面，也就是本来在页面中看到的页脚部分。
 
-![](http://i2.bvimg.com/660676/8649e810335e4cd3.png)
+![](http://peu31tfv4.bkt.clouddn.com/2hexo6.png)
 
 当然，为了统一，我又在后面加上了and **Github**哈哈，可以不加。
 

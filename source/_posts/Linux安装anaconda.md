@@ -10,7 +10,7 @@ categories:
 - 日常技术
 - Linux
 ---
-![](http://i1.bvimg.com/660676/7aa1a3c6a1b0f42b.jpg)
+![](http://peu31tfv4.bkt.clouddn.com/ana.jpg)
 Anaconda是python的一个很好的发行版，安装了anaconda就可以解决很多python第三方库的问题。
 
 <!--more-->

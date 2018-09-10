@@ -10,7 +10,7 @@ categories:
 - 日常技术
 - Linux
 ---
-![](http://i1.bvimg.com/660676/fd66351cc0e61781.jpg)
+![](http://peu31tfv4.bkt.clouddn.com/fd66351cc0e61781.jpg)
 
 
 Selenium是爬虫中用来模拟JS的利器。

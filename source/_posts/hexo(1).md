@@ -11,7 +11,7 @@ categories:
 - 博客搭建
 ---
 
-![](http://i2.bvimg.com/660676/11ef61c079e23a2c.jpg)
+![](http://peu31tfv4.bkt.clouddn.com/1.jpg)
 
 >喜欢写Blog的人，会经历三个阶段。
 
@@ -123,7 +123,7 @@ hexo server
 打开hexo的服务，在浏览器输入localhost:4000就可以看到你生成的博客了。
 
 大概长这样：
-![](http://i2.bvimg.com/660676/cf3be91440dc13e7.png)
+![](http://peu31tfv4.bkt.clouddn.com/1hexo9.png)
 使用ctrl+c可以把服务关掉。
 
 # 4. GitHub创建个人仓库
@@ -131,12 +131,12 @@ hexo server
 首先，你先要有一个GitHub账户，去注册一个吧。
 
 注册完登录后，在GitHub.com中看到一个New repository，新建仓库
-![](http://i2.bvimg.com/660676/6711330c7f6ad397.png)
+![](http://peu31tfv4.bkt.clouddn.com/1hexo4.png)
 
 
 创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到GitHub page的时候，才会被识别，也就是xxxx.github.io，其中xxx就是你注册GitHub的用户名。我这里是已经建过了。
 
-![](http://i2.bvimg.com/660676/97353ab3d2785a10.png)
+![](http://peu31tfv4.bkt.clouddn.com/1hexo3.png)
 
 点击create repository。
 
@@ -164,7 +164,7 @@ ssh-keygen -t rsa -C "youremail"
 
 这个时候它会告诉你已经生成了.ssh的文件夹。在你的电脑中找到这个文件夹。
 
-![](http://i2.bvimg.com/660676/8ac5c0fc0ad28e33.png)
+![](http://peu31tfv4.bkt.clouddn.com/1hexo2.png)
 
 ssh，简单来讲，就是一个秘钥，其中，`id_rsa`是你这台电脑的私人秘钥，不能给别人看的，`id_rsa.pub`是公共秘钥，可以随便给别人看。把这个公钥放在GitHub上，这样当你链接GitHub自己的账户时，它就会根据公钥匹配你的私钥，当能够相互匹配时，才能够顺利的通过git上传你的文件到GitHub上。
 
@@ -172,7 +172,7 @@ ssh，简单来讲，就是一个秘钥，其中，`id_rsa`是你这台电脑的
 而后在GitHub的setting中，找到SSH keys的设置选项，点击`New SSH key`
 把你的`id_rsa.pub`里面的信息复制进去。
 
-![](http://i2.bvimg.com/660676/27818109a3b24992.png)
+![](http://peu31tfv4.bkt.clouddn.com/1hexo5.png)
 
 
 在gitbash中，查看是否成功
@@ -210,7 +210,7 @@ hexo deploy
 注意deploy时可能要你输入username和password。
 
 得到下图就说明部署成功了，过一会儿就可以在`http://yourname.github.io` 这个网站看到你的博客了！！
-![](http://i2.bvimg.com/660676/6aa0a748594642bb.png)
+![](http://peu31tfv4.bkt.clouddn.com/1hexo1.png)
 
 # 7. 设置个人域名
 
@@ -223,23 +223,23 @@ hexo deploy
 
 点**解析**进去，添加解析。
 
-![](http://i2.bvimg.com/660676/a7e0b212a9587523.png)
+![](http://peu31tfv4.bkt.clouddn.com/1hexo6.png)
 
 
 其中，192.30.252.153 和 192.30.252.154 是GitHub的服务器地址。
 **注意，解析线路选择默认**，不要像我一样选境外。这个境外是后面来做国内外分流用的,在后面的博客中会讲到。记得现在选择**默认**！！
 
-![](http://i2.bvimg.com/660676/a9ead3823ac1c95d.png)
+![](http://peu31tfv4.bkt.clouddn.com/1hexo7.png)
 
 
 登录GitHub，进入之前创建的仓库，点击settings，设置Custom domain，输入你的域名`fangzh.top`
 
-![](http://i2.bvimg.com/660676/ef28852f69b521f4.png)
+![](http://peu31tfv4.bkt.clouddn.com/1hexo10.png)
 
 
 然后在你的博客文件source中创建一个名为CNAME文件，不要后缀。写上你的域名。
 
-![](http://i2.bvimg.com/660676/b877ab0e7909a895.png)
+![](http://peu31tfv4.bkt.clouddn.com/1hexo8.png)
 
 
 最后，在gitbash中，输入
