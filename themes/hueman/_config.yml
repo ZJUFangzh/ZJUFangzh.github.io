@@ -107,7 +107,8 @@ plugins:
       sc_security: # enter security code
       public: # enter true if you want a link to your public stats. Must be configured on statcouter as well.
       on: # enter true to enable statcounter
-    mathjax: false # options: true, false
+    #数学公式只要把这个开了就行
+    mathjax: true # options: true, false
 
 #其他
 # Miscellaneous
