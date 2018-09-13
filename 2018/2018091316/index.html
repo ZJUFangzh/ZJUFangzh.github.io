@@ -21,7 +21,7 @@
 <meta property="og:description" content="这一周主要讲了深层的神经网络搭建。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
-<meta property="og:updated_time" content="2018-09-13T09:06:29.503Z">
+<meta property="og:updated_time" content="2018-09-13T09:07:47.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepLearning.ai笔记:(1-4)-- 深层神经网络（Deep neural networks）">
 <meta name="twitter:description" content="这一周主要讲了深层的神经网络搭建。">
@@ -262,7 +262,7 @@
 <h1 id="搭建深层神经网络块"><a href="#搭建深层神经网络块" class="headerlink" title="搭建深层神经网络块"></a>搭建深层神经网络块</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-4.jpg" alt=""></p>
 <p>和之前说的一样，一个网络块中包含了前向传播和反向传播。</p>
 <p>前向输入$a^{[l-1]}$，经过神经网络的计算，$g^{[l]}(w^{[l]}a^{[l-1]} + b^{[l]})$得到$a^{[l]}$</p>
-<p>反向传播，输入$da^{[l]}$，再有之前在cache的$z^{[l]}$,即可得到$dw^{[l],db^{[l]}}$还有上一层的$da^{[l-1]}$</p>
+<p>反向传播，输入$da^{[l]}$，再有之前在cache的$z^{[l]}$,即可得到$dw^{[l]},db^{[l]}$还有上一层的$da^{[l-1]}$</p>
 <h1 id="参数与超参数"><a href="#参数与超参数" class="headerlink" title="参数与超参数"></a>参数与超参数</h1><p>超参数就是你自己调的，玄学参数：</p>
 <ul>
 <li>learning_rate</li>
