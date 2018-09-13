@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/2018091318/</loc>
+    <lastmod>2018-09-13T11:17:39.209Z</lastmod>
+    <data>
+        <display>
+        <title>DeepLearning.ai作业:(1-4)-- 深层神经网络（Deep neural networks）</title>
+        <pubTime>2018-09-13T09:59:43.000Z</pubTime>
+        
+        <tag>dl.ai</tag>
+         
+        <tag>homework</tag>
+         
+         
+           
+             
+              <breadCrumb title="AI" url="http://fangzh.top/categories/AI/"/>
+          
+             
+              <breadCrumb title="Deep Learning" url="http://fangzh.top/categories/AI/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/2018091316/</loc>
     <lastmod>2018-09-13T09:08:42.439Z</lastmod>
     <data>
@@ -154,6 +179,33 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/2018090521/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>Linux安装anaconda</title>
+        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>install</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/2018090520/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -174,6 +226,33 @@
           
              
               <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fangzh.top/2018/2018091015/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>你见过什么样的云霄？</title>
+        <pubTime>2018-09-10T07:21:32.000Z</pubTime>
+        
+        <tag>航拍</tag>
+         
+        <tag>旅行</tag>
+         
+        <tag>视频</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+             
+              <breadCrumb title="旅行" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E6%97%85%E8%A1%8C/"/>
           
         </display>
     </data>
@@ -208,56 +287,6 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090521/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>Linux安装anaconda</title>
-        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>install</tag>
-         
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fangzh.top/2018/2018090413/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>开篇博客</title>
-        <pubTime>2018-09-04T05:38:44.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-             
-              <breadCrumb title="随笔" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://fangzh.top/2018/2018090715/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -285,18 +314,14 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018091015/</loc>
+    <loc>http://fangzh.top/2018/2018090413/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
         <display>
-        <title>你见过什么样的云霄？</title>
-        <pubTime>2018-09-10T07:21:32.000Z</pubTime>
+        <title>开篇博客</title>
+        <pubTime>2018-09-04T05:38:44.000Z</pubTime>
         
-        <tag>航拍</tag>
-         
-        <tag>旅行</tag>
-         
-        <tag>视频</tag>
+        <tag>生活</tag>
          
          
            
@@ -304,7 +329,7 @@
               <breadCrumb title="生活" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/"/>
           
              
-              <breadCrumb title="旅行" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E6%97%85%E8%A1%8C/"/>
+              <breadCrumb title="随笔" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/"/>
           
         </display>
     </data>
