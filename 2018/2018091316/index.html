@@ -6,21 +6,26 @@
     
 
     
-    <title>标签：: homework | Fangzh的个人博客 | 人工智能拯救世界</title>
+    <title>DeepLearning.ai笔记:(1-4)-- 深层神经网络（Deep neural networks） | Fangzh的个人博客 | 人工智能拯救世界</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="人工智能、计算机、机器学习、linux、程序员">
-<meta name="keywords" content="人工智能、计算机、机器学习、linux、程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta property="og:url" content="http://fangzh.top/tags/homework/index.html">
+        <meta name="keywords" content="dl.ai" />
+    
+    <meta name="description" content="这一周主要讲了深层的神经网络搭建。">
+<meta name="keywords" content="dl.ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepLearning.ai笔记:(1-4)-- 深层神经网络（Deep neural networks）">
+<meta property="og:url" content="http://fangzh.top/2018/2018091316/index.html">
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta property="og:description" content="人工智能、计算机、机器学习、linux、程序员">
+<meta property="og:description" content="这一周主要讲了深层的神经网络搭建。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
+<meta property="og:updated_time" content="2018-09-13T09:06:29.503Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta name="twitter:description" content="人工智能、计算机、机器学习、linux、程序员">
+<meta name="twitter:title" content="DeepLearning.ai笔记:(1-4)-- 深层神经网络（Deep neural networks）">
+<meta name="twitter:description" content="这一周主要讲了深层的神经网络搭建。">
+<meta name="twitter:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
     
 
     
@@ -175,70 +180,202 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-tag"></i>标签：: <em>homework</em>
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-dl-ai-1-4" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2018" class="archive-year"><i class="icon fa fa-calendar-o"></i>2018</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/2018091216/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)" alt="DeepLearning.ai作业:(1-3)-- 浅层神经网络（Shallow neural networks）" class="thumbnail-image"></span>
-    
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
-            </div>
-            <div class="date"><time datetime="2018-09-12T07:49:22.000Z" itemprop="datePublished">2018-09-12</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2018/2018091216/">DeepLearning.ai作业:(1-3)-- 浅层神经网络（Shallow neural networks）</a>
+        DeepLearning.ai笔记:(1-4)-- 深层神经网络（Deep neural networks）
         </h1>
     
 
-        <p class="article-excerpt">
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/2018091316/" class="article-date">
+            <time datetime="2018-09-13T08:54:18.000Z" itemprop="datePublished">2018-09-13</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/dl-ai/">dl.ai</a>
+    </div>
+
+                <!---cloud阅读量统计系统-->
+                阅读数量:<span id="/2018/2018091316/" class="leancloud_visitors" data-flag-title="DeepLearning.ai笔记:(1-4)-- 深层神经网络（Deep neural networks）"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png" alt=""></p>
+<p>这一周主要讲了深层的神经网络搭建。</p>
+<a id="more"></a>
+<h1 id="深层神经网络的符号表示"><a href="#深层神经网络的符号表示" class="headerlink" title="深层神经网络的符号表示"></a>深层神经网络的符号表示</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-1.jpg" alt=""></p>
+<p>在深层的神经网络中，</p>
+<ul>
+<li>$L$表示神经网络的层数 $L = 4$</li>
+<li>$n^{[l]}$表示第$l$层的神经网络个数</li>
+<li>$W^{[l]}: (n^{[l]},n^{l-1})$</li>
+<li>$dW^{[l]}: (n^{[l]},n^{l-1})$</li>
+<li>$b^{[l]}: (n^{[l]},1)$</li>
+<li>$db^{[l]}: (n^{[l]},1)$</li>
+<li>$z^{[l]}:(n^{[l]},1)$</li>
+<li>$a^{[l]}:(n^{[l]},1)$</li>
+</ul>
+<h1 id="前向传播和反向传播"><a href="#前向传播和反向传播" class="headerlink" title="前向传播和反向传播"></a>前向传播和反向传播</h1><p><strong>前向传播</strong></p>
+<p>input $a^{[l-1]}$</p>
+<p>output $a^{[l]},cache (z^{[l]})$ ，其中cache也顺便把 $W^[l],  b^[l]$也保存下来了</p>
+<p>所以，前向传播的公式可以写作：</p>
+<p>$$Z^{[l]} = W^{[l]} A^{[l-1]} + b^{[l]}$$</p>
+<p>$$A^{[l]} = g^{[l]}(Z^{[l]})$$</p>
+<p><strong>维度</strong></p>
+<p>假设有m个样本，那么$Z^{[l]}$ 维度就是 $(n^{[l]}, m)$ ，$A^{[l]}$的维度和$Z^{[l]}$一样。</p>
+<p>那么 $ W^{[l]} A^{[l-1]}$维度就是 $(n^{[l]},n^{l-1})  *  (n^{[l-1]},m)$  也就是  $(n^{[l]}, m)$，这个时候，还需要加上$b^{[l]}$，而$b^{[l]}$本身的维度是$(n^{[l]},1)$，借助python的广播，扩充到了m个维度。</p>
+<p><strong>反向传播</strong></p>
+<p>input $da^{[l]}$</p>
+<p>output $da^{[l-1]} , dW^{[l]} , db^{[l]}$</p>
+<p>公式：</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-5.jpg" alt=""></p>
+<p>向量化：</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-6.jpg" alt=""></p>
+<p>正向传播和反向传播如图：</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-2.jpg" alt=""></p>
+<p>具体过程为，第一层和第二层用Relu函数，第三层输出用sigmoid，这个时候的输出值是$a^{[3]}$</p>
+<p>而首先进行反向传播的时候先求得$da^{[3]} = - \frac{y}{a} - \frac{1-y}{1-a}$，然后再包括之前存在cache里面的$z^{[3]}$,反向传播可以得到$dw^{[3]}, db^{[3]},da^{[2]}$，然后继续反向，知道得到了$dw^{[1]},db^{[1]}$后，更新一下w，b的参数，然后继续做前向传播、反向传播，不断循环。</p>
+<h1 id="Why-Deep？"><a href="#Why-Deep？" class="headerlink" title="Why Deep？"></a>Why Deep？</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-3.jpg" alt=""></p>
+<p>如图直观上感觉，比如第一层，它会先识别出一些边缘信息；第二层则将这些边缘进行整合，得到一些五官信息，如眼睛、嘴巴等；到了第三层，就可以将这些信息整合起来，输出一张人脸了。</p>
+<p>如果网络层数不够深的话，可以组合的情况就很少，或者需要类似门电路那样，用单层很多个特征才能得到和深层神经网络类似的效果。</p>
+<h1 id="搭建深层神经网络块"><a href="#搭建深层神经网络块" class="headerlink" title="搭建深层神经网络块"></a>搭建深层神经网络块</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-4.jpg" alt=""></p>
+<p>和之前说的一样，一个网络块中包含了前向传播和反向传播。</p>
+<p>前向输入$a^{[l-1]}$，经过神经网络的计算，$g^{[l]}(w^{[l]}a^{[l-1]} + b^{[l]})$得到$a^{[l]}$</p>
+<p>反向传播，输入$da^{[l]}$，再有之前在cache的$z^{[l]}$,即可得到$dw^{[l],db^{[l]}}$还有上一层的$da^{[l-1]}$</p>
+<h1 id="参数与超参数"><a href="#参数与超参数" class="headerlink" title="参数与超参数"></a>参数与超参数</h1><p>超参数就是你自己调的，玄学参数：</p>
+<ul>
+<li>learning_rate</li>
+<li>iterations</li>
+<li>L = len(hidden layer)</li>
+<li>$n^{[l]}$</li>
+<li>activation function</li>
+<li>mini batch size（最小的计算批）</li>
+<li>regularization（正则）</li>
+<li>momentum（动量）</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
             
 
-不要抄作业！
-我只是把思路整理了，供个人学习。
-不要抄作业！
 
-        </p>
+
+    <a data-url="http://fangzh.top/2018/2018091316/" data-id="cjm0cntyd000f2ou3vf0n5mff" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+
+        </footer>
     </div>
 </article>
+<!--
+    <section id="comments">
     
-        </div>
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
     
+    </section>
 
+-->
+<!--来比力评论系统，在commetn/livebe.ejs中-->
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ4OC8xNjAxNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
 
-    </div></section>
+       if (typeof LivereTower === 'function') { return; }
 
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
 
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
 
                         </div>
                     </section>
@@ -266,6 +403,19 @@
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/2018091216/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">DeepLearning.ai作业:(1-3)-- 浅层神经网络（Shallow neural networks）</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -540,11 +690,13 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'http://fangzh.top/2018/2018091316/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
