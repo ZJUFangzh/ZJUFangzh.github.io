@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/2018091515/</loc>
+    <lastmod>2018-09-15T08:52:43.330Z</lastmod>
+    <data>
+        <display>
+        <title>DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</title>
+        <pubTime>2018-09-15T07:58:33.000Z</pubTime>
+        
+        <tag>dl.ai</tag>
+         
+         
+           
+             
+              <breadCrumb title="AI" url="http://fangzh.top/categories/AI/"/>
+          
+             
+              <breadCrumb title="Deep Learning" url="http://fangzh.top/categories/AI/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/20180901513/</loc>
     <lastmod>2018-09-15T07:48:45.253Z</lastmod>
     <data>
@@ -175,33 +198,6 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090514/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>hexo教程：github page+独立域名搭建(1)</title>
-        <pubTime>2018-09-05T05:38:44.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-        <tag>blog</tag>
-         
-        <tag>教程</tag>
-         
-         
-           
-             
-              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="博客搭建" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://fangzh.top/2018/2018090521/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -222,33 +218,6 @@
           
              
               <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fangzh.top/2018/2018091015/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>你见过什么样的云霄？</title>
-        <pubTime>2018-09-10T07:21:32.000Z</pubTime>
-        
-        <tag>航拍</tag>
-         
-        <tag>旅行</tag>
-         
-        <tag>视频</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-             
-              <breadCrumb title="旅行" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E6%97%85%E8%A1%8C/"/>
           
         </display>
     </data>
@@ -283,29 +252,6 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090413/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>开篇博客</title>
-        <pubTime>2018-09-04T05:38:44.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/"/>
-          
-             
-              <breadCrumb title="随笔" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://fangzh.top/2018/2018090715/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -333,6 +279,60 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/2018090514/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>hexo教程：github page+独立域名搭建(1)</title>
+        <pubTime>2018-09-05T05:38:44.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+        <tag>blog</tag>
+         
+        <tag>教程</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="博客搭建" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fangzh.top/2018/2018091015/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>你见过什么样的云霄？</title>
+        <pubTime>2018-09-10T07:21:32.000Z</pubTime>
+        
+        <tag>航拍</tag>
+         
+        <tag>旅行</tag>
+         
+        <tag>视频</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+             
+              <breadCrumb title="旅行" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E6%97%85%E8%A1%8C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/2018090522/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -353,6 +353,29 @@
           
              
               <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fangzh.top/2018/2018090413/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>开篇博客</title>
+        <pubTime>2018-09-04T05:38:44.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+             
+              <breadCrumb title="随笔" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/"/>
           
         </display>
     </data>
