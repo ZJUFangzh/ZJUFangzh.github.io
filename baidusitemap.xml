@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/20180901513/</loc>
+    <lastmod>2018-09-15T07:45:30.341Z</lastmod>
+    <data>
+        <display>
+        <title>dl-ai-2-1</title>
+        <pubTime>2018-09-15T05:37:15.000Z</pubTime>
+        
+        <tag>dl.ai</tag>
+         
+         
+           
+             
+              <breadCrumb title="AI" url="http://fangzh.top/categories/AI/"/>
+          
+             
+              <breadCrumb title="Deep Learning" url="http://fangzh.top/categories/AI/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/2018091318/</loc>
     <lastmod>2018-09-13T11:22:59.836Z</lastmod>
     <data>
@@ -206,33 +229,6 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090520/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>Linux安装selenium+chromedriver</title>
-        <pubTime>2018-09-05T13:51:41.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>install</tag>
-         
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://fangzh.top/2018/2018091015/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -260,18 +256,18 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090522/</loc>
+    <loc>http://fangzh.top/2018/2018090520/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
         <display>
-        <title>Linux安装shadowcocks</title>
-        <pubTime>2018-09-05T13:53:29.000Z</pubTime>
+        <title>Linux安装selenium+chromedriver</title>
+        <pubTime>2018-09-05T13:51:41.000Z</pubTime>
         
         <tag>Linux</tag>
          
         <tag>install</tag>
          
-        <tag>shadowsocks</tag>
+        <tag>python</tag>
          
          
            
@@ -280,6 +276,29 @@
           
              
               <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fangzh.top/2018/2018090413/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>开篇博客</title>
+        <pubTime>2018-09-04T05:38:44.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/"/>
+          
+             
+              <breadCrumb title="随笔" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/"/>
           
         </display>
     </data>
@@ -314,22 +333,26 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090413/</loc>
+    <loc>http://fangzh.top/2018/2018090522/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
         <display>
-        <title>开篇博客</title>
-        <pubTime>2018-09-04T05:38:44.000Z</pubTime>
+        <title>Linux安装shadowcocks</title>
+        <pubTime>2018-09-05T13:53:29.000Z</pubTime>
         
-        <tag>生活</tag>
+        <tag>Linux</tag>
+         
+        <tag>install</tag>
+         
+        <tag>shadowsocks</tag>
          
          
            
              
-              <breadCrumb title="生活" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/"/>
+              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
           
              
-              <breadCrumb title="随笔" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/"/>
+              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
           
         </display>
     </data>
