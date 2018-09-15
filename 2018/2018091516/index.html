@@ -21,7 +21,7 @@
 <meta property="og:description" content="不要抄作业！ 我只是把思路整理了，供个人学习。 不要抄作业！">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
-<meta property="og:updated_time" content="2018-09-15T08:58:23.116Z">
+<meta property="og:updated_time" content="2018-09-15T08:59:23.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）">
 <meta name="twitter:description" content="不要抄作业！ 我只是把思路整理了，供个人学习。 不要抄作业！">
@@ -249,10 +249,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Returns:</span><br><span class="line">parameters -- python dictionary containing your parameters <span class="string">"W1"</span>, <span class="string">"b1"</span>, ..., <span class="string">"WL"</span>, <span class="string">"bL"</span>:</span><br><span class="line">                W1 -- weight matrix of shape (layers_dims[<span class="number">1</span>], layers_dims[<span class="number">0</span>])</span><br><span class="line">                b1 -- bias vector of shape (layers_dims[<span class="number">1</span>], <span class="number">1</span>)</span><br><span class="line">                ...</span><br><span class="line">                WL -- weight matrix of shape (layers_dims[L], layers_dims[L<span class="number">-1</span>])</span><br><span class="line">                bL -- bias vector of shape (layers_dims[L], <span class="number">1</span>)</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">np.random.seed(3)</span></span><br><span class="line"><span class="string">parameters = &#123;&#125;</span></span><br><span class="line"><span class="string">L = len(layers_dims) - 1 # integer representing the number of layers</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">for l in range(1, L + 1):</span></span><br><span class="line"><span class="string">    ### START CODE HERE ### (≈ 2 lines of code)</span></span><br><span class="line"><span class="string">    parameters['W' + str(l)] = np.random.randn(layers_dims[l],layers_dims[l-1]) * np.sqrt(2./layers_dims[l-1])</span></span><br><span class="line"><span class="string">    parameters['b' + str(l)] = np.zeros((layers_dims[l], 1))</span></span><br><span class="line"><span class="string">    ### END CODE HERE ###</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">return parameters</span></span><br></pre></td></tr></table></figure>
 <p>结果非常理想。</p>
 <p><img src="http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-12.png" alt=""></p>
-<p>三者结果比较：</p>
-<table><br>    <tr><br>        <td><br>        <strong>Model</strong><br>        </td><br>        <td><br>        <strong>Train accuracy</strong><br>        </td><br>        <td><br>        <strong>Problem/Comment</strong><br>        </td><br>        </tr><br>    <td><br>    3-layer NN with zeros initialization<br>    </td><br>    <td><br>    50%<br>    </td><br>    <td><br>    fails to break symmetry<br>    </td><br><tr><br>    <td><br>    3-layer NN with large random initialization<br>    </td><br>    <td><br>    83%<br>    </td><br>    <td><br>    too large weights<br>    </td><br></tr><br><tr><br>    <td><br>    3-layer NN with He initialization<br>    </td><br>    <td><br>    99%<br>    </td><br>    <td><br>    recommended method<br>    </td><br></tr><br></table> 
-
-<p>​        </p>
 <h1 id="Part-2：Regularization"><a href="#Part-2：Regularization" class="headerlink" title="Part 2：Regularization"></a>Part 2：Regularization</h1><p>数据集：</p>
 <p><img src="http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-14.png" alt=""></p>
 <p>模型函数：</p>
@@ -337,7 +333,7 @@
 
 
 
-    <a data-url="http://fangzh.top/2018/2018091516/" data-id="cjm373q7o000jdcu3c21qznwi" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://fangzh.top/2018/2018091516/" data-id="cjm37ahig000pk8u3h37ya1go" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
