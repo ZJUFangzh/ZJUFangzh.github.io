@@ -4,8 +4,8 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018091516/</loc>
-    <lastmod>2018-09-15T08:59:23.297Z</lastmod>
+    <loc>http://fangzh.top/2018/2018091515/</loc>
+    <lastmod>2018-09-15T09:01:11.084Z</lastmod>
     <data>
         <display>
         <title>DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</title>
@@ -200,18 +200,18 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090715/</loc>
+    <loc>http://fangzh.top/2018/2018090521/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
         <display>
-        <title>hexo教程:基本配置+更换主题+多终端工作+coding page部署分流(2)</title>
-        <pubTime>2018-09-07T07:18:31.000Z</pubTime>
+        <title>Linux安装anaconda</title>
+        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
         
-        <tag>hexo</tag>
+        <tag>Linux</tag>
          
-        <tag>blog</tag>
+        <tag>install</tag>
          
-        <tag>教程</tag>
+        <tag>python</tag>
          
          
            
@@ -219,7 +219,7 @@
               <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
           
              
-              <breadCrumb title="博客搭建" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
           
         </display>
     </data>
@@ -254,18 +254,18 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090521/</loc>
+    <loc>http://fangzh.top/2018/2018090715/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
         <display>
-        <title>Linux安装anaconda</title>
-        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
+        <title>hexo教程:基本配置+更换主题+多终端工作+coding page部署分流(2)</title>
+        <pubTime>2018-09-07T07:18:31.000Z</pubTime>
         
-        <tag>Linux</tag>
+        <tag>hexo</tag>
          
-        <tag>install</tag>
+        <tag>blog</tag>
          
-        <tag>python</tag>
+        <tag>教程</tag>
          
          
            
@@ -273,7 +273,7 @@
               <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
           
              
-              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
+              <breadCrumb title="博客搭建" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
           
         </display>
     </data>

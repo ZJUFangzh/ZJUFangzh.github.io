@@ -16,12 +16,12 @@
 <meta name="keywords" content="dl.ai,homework">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）">
-<meta property="og:url" content="http://fangzh.top/2018/2018091516/index.html">
+<meta property="og:url" content="http://fangzh.top/2018/2018091515/index.html">
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
 <meta property="og:description" content="不要抄作业！ 我只是把思路整理了，供个人学习。 不要抄作业！">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
-<meta property="og:updated_time" content="2018-09-15T08:59:23.297Z">
+<meta property="og:updated_time" content="2018-09-15T09:01:11.084Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）">
 <meta name="twitter:description" content="不要抄作业！ 我只是把思路整理了，供个人学习。 不要抄作业！">
@@ -202,7 +202,7 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2018/2018091516/" class="article-date">
+        <a href="/2018/2018091515/" class="article-date">
             <time datetime="2018-09-15T07:58:33.000Z" itemprop="datePublished">2018-09-15</time>
         </a>
     </div>
@@ -216,7 +216,7 @@
     </div>
 
                 <!---cloud阅读量统计系统-->
-                阅读数量:<span id="/2018/2018091516/" class="leancloud_visitors" data-flag-title="DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）"></span>次
+                阅读数量:<span id="/2018/2018091515/" class="leancloud_visitors" data-flag-title="DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）"></span>次
             </div>
         
         
@@ -256,7 +256,7 @@
 <p>没有使用正则化时，效果：</p>
 <p><img src="http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-15.png" alt=""></p>
 <h2 id="L2-正则"><a href="#L2-正则" class="headerlink" title="L2 正则"></a>L2 正则</h2><p><strong>计算代价函数</strong></p>
-<p>$$J_{regularized} = \small \underbrace{-\frac{1}{m} \sum\limits_{i = 1}^{m} \large{(}\small y^{(i)}\log\left(a^{<a href="i">L</a>}\right) + (1-y^{(i)})\log\left(1- a^{<a href="i">L</a>}\right) \large{)} }_\text{cross-entropy cost} + \underbrace{\frac{1}{m} \frac{\lambda}{2} \sum\limits_l\sum\limits_k\sum\limits_j W_{k,j}^{[l]2} }_\text{L2 regularization cost} $$</p>
+<p>$$J_{regularized} = \small \underbrace{-\frac{1}{m} \sum\limits_{i = 1}^{m} \large{(}\small y^{(i)}\log\left(a^{[L] (i)}\right) + (1-y^{(i)})\log\left(1- a^{[L] (i)}\right) \large{)} }_\text{cross-entropy cost} + \underbrace{\frac{1}{m} \frac{\lambda}{2} \sum\limits_l\sum\limits_k\sum\limits_j W_{k,j}^{[l]2} }_\text{L2 regularization cost} $$</p>
 <p>公式已经给了，只要加上后面那一项就可以了</p>
 <p>使用<code>np.sum(np.square(Wl))</code>来计算$\sum\limits_k\sum\limits_j W_{k,j}^{[l]2}$</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: compute_cost_with_regularization</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_cost_with_regularization</span><span class="params">(A3, Y, parameters, lambd)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implement the cost function with L2 regularization. See formula (2) above.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    A3 -- post-activation, output of forward propagation, of shape (output size, number of examples)</span></span><br><span class="line"><span class="string">    Y -- "true" labels vector, of shape (output size, number of examples)</span></span><br><span class="line"><span class="string">    parameters -- python dictionary containing parameters of the model</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    cost - value of the regularized loss function (formula (2))</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    m = Y.shape[<span class="number">1</span>]</span><br><span class="line">    W1 = parameters[<span class="string">"W1"</span>]</span><br><span class="line">    W2 = parameters[<span class="string">"W2"</span>]</span><br><span class="line">    W3 = parameters[<span class="string">"W3"</span>]</span><br><span class="line">    </span><br><span class="line">    cross_entropy_cost = compute_cost(A3, Y) <span class="comment"># This gives you the cross-entropy part of the cost</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ### (approx. 1 line)</span></span><br><span class="line">    L2_regularization_cost = lambd / (m * <span class="number">2</span>) * (np.sum(np.square(W1)) + np.sum(np.square(W2)) + np.sum(np.square(W3)))</span><br><span class="line">    <span class="comment">### END CODER HERE ###</span></span><br><span class="line">    </span><br><span class="line">    cost = cross_entropy_cost + L2_regularization_cost</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cost</span><br></pre></td></tr></table></figure>
@@ -333,7 +333,7 @@
 
 
 
-    <a data-url="http://fangzh.top/2018/2018091516/" data-id="cjm37ahig000pk8u3h37ya1go" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://fangzh.top/2018/2018091515/" data-id="cjm37cvv3000gesu3dif3mguo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -484,7 +484,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/2018091516/" class="thumbnail">
+                            <a href="/2018/2018091515/" class="thumbnail">
     
     
         <span style="background-image:url(http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)" alt="DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）" class="thumbnail-image"></span>
@@ -496,7 +496,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
-                            <p class="item-title"><a href="/2018/2018091516/" class="title">DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</a></p>
+                            <p class="item-title"><a href="/2018/2018091515/" class="title">DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</a></p>
                             <p class="item-date"><time datetime="2018-09-15T07:58:33.000Z" itemprop="datePublished">2018-09-15</time></p>
                         </div>
                     </li>
@@ -754,7 +754,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://fangzh.top/2018/2018091516/';
+    var disqus_url = 'http://fangzh.top/2018/2018091515/';
     
     (function() {
     var dsq = document.createElement('script');
