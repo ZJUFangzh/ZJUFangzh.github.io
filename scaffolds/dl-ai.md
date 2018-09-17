@@ -7,5 +7,4 @@ tags:
 categories:
 - AI
 - Deep Learning
-layout: false
 ---

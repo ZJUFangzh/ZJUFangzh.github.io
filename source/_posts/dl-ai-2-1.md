@@ -112,7 +112,7 @@ $$dW^{[l]} = (form backprop) + \frac{\lambda}{m}W^{[l]}$$
 
 代入
 
-$$W^{[l]} = W^{[l]} - \alpha dW{[l]}$$
+$$W^{[l]} = W^{[l]} - \alpha dW^{[l]}$$
 
 得到：
 
