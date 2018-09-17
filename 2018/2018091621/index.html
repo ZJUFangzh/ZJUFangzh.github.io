@@ -6,21 +6,26 @@
     
 
     
-    <title>标签：: 航拍 | Fangzh的个人博客 | 人工智能拯救世界</title>
+    <title>DeepLearning.ai笔记:(2-2)-- 优化算法（Optimization algorithms） | Fangzh的个人博客 | 人工智能拯救世界</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="人工智能、计算机、机器学习、linux、程序员">
-<meta name="keywords" content="人工智能、计算机、机器学习、linux、程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta property="og:url" content="http://fangzh.top/tags/航拍/index.html">
+        <meta name="keywords" content="dl.ai" />
+    
+    <meta name="description" content="这周学习了优化算法，可以让神经网络运行的更快。">
+<meta name="keywords" content="dl.ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepLearning.ai笔记:(2-2)-- 优化算法（Optimization algorithms）">
+<meta property="og:url" content="http://fangzh.top/2018/2018091621/index.html">
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta property="og:description" content="人工智能、计算机、机器学习、linux、程序员">
+<meta property="og:description" content="这周学习了优化算法，可以让神经网络运行的更快。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
+<meta property="og:updated_time" content="2018-09-17T03:18:34.061Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta name="twitter:description" content="人工智能、计算机、机器学习、linux、程序员">
+<meta name="twitter:title" content="DeepLearning.ai笔记:(2-2)-- 优化算法（Optimization algorithms）">
+<meta name="twitter:description" content="这周学习了优化算法，可以让神经网络运行的更快。">
+<meta name="twitter:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
     
 
     
@@ -175,72 +180,249 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-tag"></i>标签：: <em>航拍</em>
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-dl-ai-2-2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2018" class="archive-year"><i class="icon fa fa-calendar-o"></i>2018</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/2018091015/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://peu31tfv4.bkt.clouddn.com/DeepinScreenshot_select-area_20180910183243.png)" alt="你见过什么样的云霄？" class="thumbnail-image"></span>
-    
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/生活/">生活</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/生活/旅行/">旅行</a>
-            </div>
-            <div class="date"><time datetime="2018-09-10T07:21:32.000Z" itemprop="datePublished">2018-09-10</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2018/2018091015/">你见过什么样的云霄？</a>
+        DeepLearning.ai笔记:(2-2)-- 优化算法（Optimization algorithms）
         </h1>
     
 
-        <p class="article-excerpt">
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/2018091621/" class="article-date">
+            <time datetime="2018-09-16T13:42:33.000Z" itemprop="datePublished">2018-09-16</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/dl-ai/">dl.ai</a>
+    </div>
+
+                <!---cloud阅读量统计系统-->
+                阅读数量:<span id="/2018/2018091621/" class="leancloud_visitors" data-flag-title="DeepLearning.ai笔记:(2-2)-- 优化算法（Optimization algorithms）"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png" alt=""></p>
+<p>这周学习了优化算法，可以让神经网络运行的更快。</p>
+<a id="more"></a>
+<p>主要有:</p>
+<ul>
+<li>mini-batch</li>
+<li>动量梯度下降(momentum)</li>
+<li>RMSprop</li>
+<li>Adam优化算法</li>
+<li>学习率衰减</li>
+</ul>
+<h1 id="mini-batch-小批量"><a href="#mini-batch-小批量" class="headerlink" title="mini-batch(小批量)"></a>mini-batch(小批量)</h1><p>原本的梯度下降算法，在每一次的迭代中，要把所有的数据都进行计算再取平均，那如果你的数据量特别大的话，每进行一次迭代就会耗费大量的时间。</p>
+<p>所以就有了mini-batch，做小批量的计算迭代。也就是把训练集划分成n等分，比如数据量有500万个的时候，以1000为单位，将数据集划分为5000份，<br>$$x =  {x^{\lbrace 1 \rbrace},x^{\lbrace 2 \rbrace},x^{\lbrace 3 \rbrace},…..,x^{\lbrace 5000 \rbrace}}$$</p>
+<p>用大括弧表示每一份的mini-batch，其中每一份$x^{\lbrace t \rbrace}$都是1000个样本。</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-1.png" alt=""></p>
+<p>这个时候引入epoch的概念，1个epoch相当于是遍历了一次数据集，比如用mini-batch，1个epoch就可以进行5000次迭代，而传统的batch把数据集都一起计算，相当于1个epoch只进行了1次迭代。</p>
+<p>具体计算步骤是：</p>
+<ul>
+<li>先划分好每一个mini-batch</li>
+<li><code>for t in range(5000)</code>，循环每次迭代<ul>
+<li>循环里面和之前的计算过程一样，前向传播，但每次计算量是1000个样本</li>
+<li>计算损失函数</li>
+<li>反向传播</li>
+<li>更新参数</li>
+</ul>
+</li>
+</ul>
+<p>batch和mini-batch的对比如图：</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-2.png" alt=""></p>
+<ul>
+<li>如果mini-batch的样本为m的话，其实就是<strong>batch gradient descent</strong>，缺点是如果样本量太大的话，每一次迭代的时间会比较长，但是优点是每一次迭代的损失函数都是下降的，比较平稳。</li>
+<li>mini-batch样本为1的话，那就是<strong>随机梯度下降（Stochastic gradient descent）</strong>,也就是每次迭代只选择其中一个样本进行迭代，但是这样会失去了样本向量化带来的计算加速效果，损失函数总体是下降的，但是局部会很抖动，很可能无法达到全局最小点。</li>
+<li>所以选择一个合适的size很重要，$1 &lt; size &lt; m$，可以实现快速的计算效果，也能够享受向量化带来的加速。</li>
+</ul>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-3.png" alt="三种下降对比，蓝色为batch，紫色为Stochastic，绿色为mini-batch"></p>
+<p><strong>mini-batch size的选择</strong></p>
+<p>因为电脑的内存和使用方式都是二进制的，而且是2的n次方，所以之前选1000也不太合理，可以选1024，但是1024也比较少见，一般是从64到512。也就是$64、128、256、512$</p>
+<h1 id="指数加权平均-Exponentially-weighted-averages"><a href="#指数加权平均-Exponentially-weighted-averages" class="headerlink" title="指数加权平均(Exponentially weighted averages )"></a>指数加权平均(Exponentially weighted averages )</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-4.png" alt=""></p>
+<p>蓝色的点是每一天的气温，可以看到是非常抖动的，那如果可以把它平均一下，比如把10天内的气温平均一下，就可以得到如红色的曲线。</p>
+<p>但是如果是单纯的把前面的10天气温一起平均的话，那么这样你就需要把前10天的气温全部储存记录下来，这样子虽然会更准一点，但是很浪费储存空间，所以就有了<strong>指数加权平均</strong>这样的概念。方法如下：</p>
+<p>$$V_0 = 0$$</p>
+<p>$$V_1 = \beta * V_0 + (1 - \beta) \theta_1$$</p>
+<p>$……$</p>
+<p>$$V_t = \beta * V_{t-1} + (1 - \beta) \theta_t$$</p>
+<p>其中，$\theta_t$表示第t天的温度，而$V_t$表示指数加权平均后的第t天温度，$\beta$这个参数表示$\frac{1}{1-\beta}$天的平均，也就是，$\beta = 0.9$，表示10天内的平均，$\beta = 0.98$，表示50天内的平均。</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-5.png" alt="黄、红、绿线依次表示$\beta = 0.5,0.9,0.98，即2、10、50天的平均$"></p>
+<h1 id="理解指数加权平均"><a href="#理解指数加权平均" class="headerlink" title="理解指数加权平均"></a>理解指数加权平均</h1><p>我们再来看一下公式：</p>
+<p>$$v_t = \beta v_{t-1} + (1 - \beta) \theta_t$$</p>
+<p>假设$\beta = 0.9$，那么</p>
+<p>$$v_{100} = 0.9v_{99} + 0.1\theta_{100}$$</p>
+<p>$$v_{99} = 0.9v_{98} + 0.1\theta_{99}$$</p>
+<p>$$v_{98} = 0.9v_{97} + 0.1\theta_{98}$$</p>
+<p>展开一下，得到：</p>
+<p>$$ v_{100} = 0.1 \theta_{100} + 0.1 \times 0.9 \times \theta_{99} +  0.1 \times 0.9^2  \times \theta_{98} + ……$$</p>
+<p>看到没有，每一项都会乘以0.9，这样就是指数加权的意思了，那么为什么表示的是10天内的平均值呢？明明是10天以前的数据都有加进去的才对，其实是因为$0.9^{10} \approx 0.35 \approx \frac{1}{e}$，也就是10天以前的权重只占了三分之一左右，已经很小了，所以我们就可以认为这个权重就是10天内的温度平均，其实有详细的数学证明的，这里就不要证明了，反正理解了$(1-\epsilon)^{\frac{1}{\epsilon}} \approx \frac{1}{e}$，$\epsilon$为0.02的时候，就代表了50天内的数据。</p>
+<p>因为指数加权平均不需要知道前面n个数据，只要一步一步进行迭代，知道当前的数据就行，所以非常节省空间。</p>
+<h1 id="指数加权平均的偏差修正"><a href="#指数加权平均的偏差修正" class="headerlink" title="指数加权平均的偏差修正"></a>指数加权平均的偏差修正</h1><p>如果你细心一点，你就会发现其实这个公式有问题，</p>
+<p>$$V_0 = 0$$</p>
+<p>$$V_1 = \beta * V_0 + (1 - \beta) \theta_1$$</p>
+<p>$……$</p>
+<p>$$V_t = \beta * V_{t-1} + (1 - \beta) \theta_t$$</p>
+<p>如果第一天的温度是40摄氏度，那么$V_1 = 0.1 * 40 = 4$，显然是不合理的。因为初始值$V_0 = 0$，也就是前面几天的数据都会普遍偏低。所以特别是在估测初期，需要进行一些修正，这个时候就不要用$v_t$了，而是用$\frac{v_t}{1-\beta^t}$来代表第t天的温度平均，你会发现随着t的增加，$\beta^t$接近于0，所以偏差修正几乎就没有用了，而t比较小的时候，就非常有效果。</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-6.png" alt="紫色线为修正前，绿色线为修正后的效果"></p>
+<p>不过在大部分机器学习中，一般也不需要修正，因为只是前面的初始时期比较有偏差而已，到后面就基本不会有偏差了，所以也不太用。</p>
+<h1 id="动量梯度下降法-Gradient-descent-with-Momentum"><a href="#动量梯度下降法-Gradient-descent-with-Momentum" class="headerlink" title="动量梯度下降法 (Gradient descent with Momentum )"></a>动量梯度下降法 (Gradient descent with Momentum )</h1><p>用动量梯度下降法运行速度总是比标准的梯度下降法要来的快。它的基本思想是计算梯度的指数加权平均数，然后用该梯度来更新权重。</p>
+<p>效果如图：</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-7.png" alt=""></p>
+<p>使用动量梯度下降法后，在竖直方向上的抖动减少了，而在水平方向上的运动反而加速了。</p>
+<p>算法公式：</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-8.png" alt=""></p>
+<p>可以发现，就是根据指数平均计算出了$v_{dW}$，然后更新参数时把$dW$换成了$v_{dw}$，$\beta$一般的取值是0.9。可以发现，在纵向的波动经过平均以后，变得非常小了，而因为在横向上，每一次的微分分量都是指向低点，所以平均后的值一直朝着低点前进。</p>
+<p>物理意义：</p>
+<ul>
+<li>个人的理解是大概这个公式也很像动量的公式$m v = m_1 v_1 + m_2 v_2$，也就是把两个物体合并了得到新物体的质量和速度的意思</li>
+<li>理解成速度和加速度，把$v_{dW}$看成速度，$dW$看成加速度，这样每次因为有速度的存在，加速度只能影响到速度的大小而不能够立刻改变速度的方向。</li>
+</ul>
+<h1 id="RMSprop（root-mean-square-prop）"><a href="#RMSprop（root-mean-square-prop）" class="headerlink" title="RMSprop（root mean square prop）"></a>RMSprop（root mean square prop）</h1><p>均方根传播。这是另一种梯度下降的优化算法。</p>
+<p>顾名思义，先平方再开根号。</p>
+<p>其实和动量梯度下降法公式差不多：</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-9.png" alt=""></p>
+<p>在更新参数的分母项加了一项$\epsilon = 10^{-8}$,来确保算法不会除以0</p>
+<h1 id="Adam算法"><a href="#Adam算法" class="headerlink" title="Adam算法"></a>Adam算法</h1><p>Adam算法其实就是结合了Momentum和RMSprop ，注意这个时候要加上偏差修正：</p>
+<ul>
+<li>初始化参数：$v_{dW} = 0$，$S_{dW} =0$，$v_{db} = 0$，$S_{db} =0$</li>
+<li>在第$t$次迭代中，<ul>
+<li>计算mini-batch的dW,db</li>
+<li>Momentum: $v_{dW}= \beta_{1}v_{dW} + ( 1 - \beta_{1})dW$，$v_{db}= \beta_{1}v_{db} + ( 1 -\beta_{1} ){db}$</li>
+<li>RMSprop:$S_{dW}=\beta_{2}S_{dW} + ( 1 - \beta_{2}){(dW)}^{2}$，$S_{db} =\beta_{2}S_{db} + \left( 1 - \beta_{2} \right){(db)}^{2}$</li>
+<li>$v_{dW}^{\text{corrected}}= \frac{v_{dW}}{1 - \beta_{1}^{t}}$，$v_{db}^{\text{corrected}} =\frac{v_{db}}{1 -\beta_{1}^{t}}$</li>
+<li>$S_{dW}^{\text{corrected}} =\frac{S_{dW}}{1 - \beta_{2}^{t}}$，$S_{db}^{\text{corrected}} =\frac{S_{db}}{1 - \beta_{2}^{t}}$</li>
+<li>$W:= W - \frac{a v_{dW}^{\text{corrected}}}{\sqrt{S_{dW}^{\text{corrected}}} +\varepsilon}$</li>
+</ul>
+</li>
+</ul>
+<p>超参数有$\alpha,\beta_1,\beta_2,\epsilon$，一般$\beta_1 = 0.9,\beta_2 = 0.999,\epsilon = 10^{-8}$</p>
+<h1 id="学习率衰减"><a href="#学习率衰减" class="headerlink" title="学习率衰减"></a>学习率衰减</h1><p>在梯度下降时，如果是固定的学习率$\alpha$，在到达最小值附近的时候，可能不会精确收敛，会很抖动，因此很难达到最小值，所以可以考虑学习率衰减，在迭代过程中，逐渐减小$\alpha$，这样一开始比较快，后来慢慢的变慢。</p>
+<p>常用的是：</p>
+<p>$$a= \frac{1}{1 + decayrate * \text{epoch_num}} a_{0}$$</p>
+<p>$$a =\frac{k}{\sqrt{\text{epoch_num}}}a_{0}$$</p>
+<p>$$a =\frac{k}{\sqrt{t}}a_{0}$$</p>
+
+        </div>
+        <footer class="article-footer">
             
-花了三年时间做的家乡的航拍视频，有点生涩，顺便放上来试试hexo的视频嵌入。
-你见过什么样的云霄？
 
 
 
+    <a data-url="http://fangzh.top/2018/2018091621/" data-id="cjm5qqevn000fasu3v1ru49n7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
 
-123456789&lt;iframe 	height=300 width=510 	src=&apos;http://player.youku.com/embed/XMzc4NzA3Njg0MA==&apos; 	frameborder=0  allowfullscreen&gt;&lt
-        </p>
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+
+        </footer>
     </div>
 </article>
+<!--
+    <section id="comments">
     
-        </div>
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
     
+    </section>
 
+-->
+<!--来比力评论系统，在commetn/livebe.ejs中-->
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ4OC8xNjAxNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
 
-    </div></section>
+       if (typeof LivereTower === 'function') { return; }
 
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
 
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
 
                         </div>
                     </section>
@@ -268,6 +450,29 @@
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/2018091711/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            DeepLearning.ai作业:(2-2)-- 优化算法（Optimization algorithms）
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/2018091515/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -554,11 +759,13 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'http://fangzh.top/2018/2018091621/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
