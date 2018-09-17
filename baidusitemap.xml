@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/2018091720/</loc>
+    <lastmod>2018-09-17T13:34:03.972Z</lastmod>
+    <data>
+        <display>
+        <title>DeepLearning.ai笔记:(2-3)-- 超参数调试（Hyperparameter tuning）</title>
+        <pubTime>2018-09-17T12:19:55.000Z</pubTime>
+        
+        <tag>dl.ai</tag>
+         
+         
+           
+             
+              <breadCrumb title="AI" url="http://fangzh.top/categories/AI/"/>
+          
+             
+              <breadCrumb title="Deep Learning" url="http://fangzh.top/categories/AI/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/2018091711/</loc>
     <lastmod>2018-09-17T03:45:44.300Z</lastmod>
     <data>
@@ -52,16 +75,14 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018091515/</loc>
+    <loc>http://fangzh.top/2018/20180901513/</loc>
     <lastmod>2018-09-17T03:04:28.359Z</lastmod>
     <data>
         <display>
-        <title>DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</title>
-        <pubTime>2018-09-15T07:58:33.000Z</pubTime>
+        <title>DeepLearning.ai笔记:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</title>
+        <pubTime>2018-09-15T05:37:15.000Z</pubTime>
         
         <tag>dl.ai</tag>
-         
-        <tag>homework</tag>
          
          
            
@@ -77,14 +98,16 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/20180901513/</loc>
+    <loc>http://fangzh.top/2018/2018091515/</loc>
     <lastmod>2018-09-17T03:04:28.359Z</lastmod>
     <data>
         <display>
-        <title>DeepLearning.ai笔记:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</title>
-        <pubTime>2018-09-15T05:37:15.000Z</pubTime>
+        <title>DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</title>
+        <pubTime>2018-09-15T07:58:33.000Z</pubTime>
         
         <tag>dl.ai</tag>
+         
+        <tag>homework</tag>
          
          
            
@@ -248,33 +271,6 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090521/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>Linux安装anaconda</title>
-        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>install</tag>
-         
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://fangzh.top/2018/2018090514/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -302,12 +298,12 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090520/</loc>
+    <loc>http://fangzh.top/2018/2018090521/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
         <display>
-        <title>Linux安装selenium+chromedriver</title>
-        <pubTime>2018-09-05T13:51:41.000Z</pubTime>
+        <title>Linux安装anaconda</title>
+        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
         
         <tag>Linux</tag>
          
@@ -368,6 +364,33 @@
         <tag>install</tag>
          
         <tag>shadowsocks</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fangzh.top/2018/2018090520/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>Linux安装selenium+chromedriver</title>
+        <pubTime>2018-09-05T13:51:41.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>install</tag>
+         
+        <tag>python</tag>
          
          
            

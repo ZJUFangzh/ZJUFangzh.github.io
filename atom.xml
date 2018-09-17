@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fangzh.top/"/>
-  <updated>2018-09-17T03:45:44.300Z</updated>
+  <updated>2018-09-17T13:34:03.972Z</updated>
   <id>http://fangzh.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DeepLearning.ai笔记:(2-3)-- 超参数调试（Hyperparameter tuning）</title>
+    <link href="http://fangzh.top/2018/2018091720/"/>
+    <id>http://fangzh.top/2018/2018091720/</id>
+    <published>2018-09-17T12:19:55.000Z</published>
+    <updated>2018-09-17T13:34:03.972Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png" alt=""></p><p>这周主要讲了这些超参数调试的方法以及batch norm，还有softmax多分类函数的使用。</p><a id="more"></a><h1 id="调试处理"><a href="#调试处理" class="headerlink" title="调试处理"></a>调试处理</h1><p>之前提到的超参数有：</p><ul><li><font color="#FF0000">$\alpha$</font></li><li><font color="#AE8F00">hidden units</font></li><li><font color="#AE8F00">minibatch size</font></li><li><font color="#AE8F00">$\beta$</font>(Momentum)</li><li>layers</li><li>learning rate decay</li><li>$\beta_1,\beta_2,\epsilon$</li></ul><p>颜色代表重要性。</p><p>在调参中，常用的方式是在网格中取不同的点，然后计算这些点中的最佳值，</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-1.png" alt=""></p><p>但是左边是均匀的选点，这样有可能导致在某一个参数上变化很小，浪费计算时间，所以应该更推荐右边的选点方法，即随机选点。</p><p>而后，当随机选点选到几个结果比较好的点时，逐步缩小范围，进行更精细的选取。</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-2.png" alt=""></p><h1 id="超参数的合适范围"><a href="#超参数的合适范围" class="headerlink" title="超参数的合适范围"></a>超参数的合适范围</h1><p>当然，随机采样并不是在轴上均匀的采样。</p><p>比如说$\alpha = 0.001  — 1$，这样子，那么在$0.1-1$的部分占了90%的概率，显然是不合理的，所以应该将区间对数化，转化成$[0.001,0.01],[0.01,0.1],[0.1,1]$的区间，这样更为合理。思路是：$10^{-3} = 0.001$，所以取值从$[10^{-3},10^{0}]$，我们只要将指数随机就可以了。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r = <span class="number">-3</span>*np.random.rand() <span class="comment"># rand()表示在 [0，1]随机取样，再乘以系数，就可以得到[-3,0]</span></span><br><span class="line">a = <span class="number">10</span>**r</span><br></pre></td></tr></table></figure><p>同理,$\beta = 0.9 ,…..,0.999$</p><p>通过$1-\beta = 0.1,….,0.001$，所以$1-\beta = 10^{r}$，$\beta = 1-10^{r}$</p><h1 id="归一化网络的激活函数"><a href="#归一化网络的激活函数" class="headerlink" title="归一化网络的激活函数"></a>归一化网络的激活函数</h1><p>我们之前是将输入的数据X归一化，可以加速训练，其实在神经网络中，也可以同样归一化，一般是对$z^{[l]}$归一化。</p><p>这个方法叫做 batch norm</p><p>公式是：</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-3.png" alt=""></p><p>加上$\epsilon$是为了不至于除以0</p><p>而一般标准化后还会加上两个参数，来表示新的方差$\gamma$和均值$\beta$：</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-4.png" alt=""></p><p>$\gamma$和$\beta$也是参数，和$w,b$一样，可以在学习中进行更新。</p><h1 id="将batch-norm-放入神经网络"><a href="#将batch-norm-放入神经网络" class="headerlink" title="将batch norm 放入神经网络"></a>将batch norm 放入神经网络</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-5.png" alt=""></p><p>可以看到，</p><p>先求的$z^{[1]}$，再进行batch norm，加上参数$\beta^{[1]},\gamma^{[1]}$，得到${\tilde{z}}^{[1]}$,再根据activation function得到$a^{[1]}$</p><p>batch norm同样适用于Momentum、RMSprop 、Adam的梯度下降法来进行更新。</p><h1 id="Batch-Norm为什么有用？"><a href="#Batch-Norm为什么有用？" class="headerlink" title="Batch Norm为什么有用？"></a>Batch Norm为什么有用？</h1><p>如果我们的图片中训练的都是黑猫，这个时候给你一些橘猫的图片，那么大概率是训练不好的。因为相当于样本集合的分布改变了，batch norm就可以解决这个问题。</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-6.png" alt=""></p><p>如果这个时候要计算第三层，那么很显然计算结果是依赖第二层的数据的。但是如果我们对第二层的数据进行了归一化，那么就可以将第二层的均值和方差都限制在同一分布，而且这两个参数是自动学习的。也就是归一化后的数据可以减弱前层参数的作用与后层参数的作用之间的联系，它使得网络每层都可以自己学习。</p><p>还有就是batch norm在某种程度上有正则化的效果，因为归一化会使各个层之间的依赖性降低，而且归一化有带来一定的噪声，有点像dropout。</p><h1 id="测试集的batch-norm"><a href="#测试集的batch-norm" class="headerlink" title="测试集的batch norm"></a>测试集的batch norm</h1><p>batch norm是在训练集上得到的，那么怎么把它应用在测试集呢？</p><p>这个时候可以直接从训练集中拿到$\mu$和$\sigma^{2}$</p><p>使用指数加权平均，在每一步中保留$\mu$和$\sigma^{2}$，就可以得到训练后的$\mu$和$\sigma^{2}$</p><h1 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h1><p>之前说的都是二分类问题，如何解决多分类问题呢？</p><p>可以用softmax算法来解决。</p><p>前面的步骤都一样，而到了最后一层output layer，你想要分为多少类，就用多少个神经元。</p><p>这个时候，最后一层的activation function就变成了：</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-7.png" alt=""></p><p>$a^{[l]}_i$就表示了每一个分类的概率。</p><p>计算例子如图：</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-8.png" alt=""></p><p>而它的损失函数用的也是cross-entropy：</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-9.png" alt=""></p><p>最终得到一个关于Y的矩阵：</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-10.png" alt=""></p><p>其实是可以证明，当分类为2时，softmax就是logistic regression</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://peu31tfv4.bkt.clouddn.com/dl.ai1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;这周主要讲了这些超参数调试的方法以及batch norm，还有softmax多分类函数的使用。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="AI" scheme="http://fangzh.top/categories/AI/"/>
+    
+      <category term="Deep Learning" scheme="http://fangzh.top/categories/AI/Deep-Learning/"/>
+    
+    
+      <category term="dl.ai" scheme="http://fangzh.top/tags/dl-ai/"/>
+    
+  </entry>
   
   <entry>
     <title>DeepLearning.ai作业:(2-2)-- 优化算法（Optimization algorithms）</title>
