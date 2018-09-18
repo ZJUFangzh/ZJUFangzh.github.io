@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/2018091810/</loc>
+    <lastmod>2018-09-18T02:42:16.576Z</lastmod>
+    <data>
+        <display>
+        <title>DeepLearning.ai笔记:(2-3)-- 超参数调试（Hyperparameter tuning）</title>
+        <pubTime>2018-09-18T02:35:32.000Z</pubTime>
+        
+        <tag>dl.ai</tag>
+         
+        <tag>homework</tag>
+         
+         
+           
+             
+              <breadCrumb title="AI" url="http://fangzh.top/categories/AI/"/>
+          
+             
+              <breadCrumb title="Deep Learning" url="http://fangzh.top/categories/AI/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/2018091720/</loc>
     <lastmod>2018-09-17T13:34:03.972Z</lastmod>
     <data>
@@ -271,6 +296,33 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/2018090521/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>Linux安装anaconda</title>
+        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>install</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/2018090514/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -298,18 +350,45 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090521/</loc>
+    <loc>http://fangzh.top/2018/2018090520/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
         <display>
-        <title>Linux安装anaconda</title>
-        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
+        <title>Linux安装selenium+chromedriver</title>
+        <pubTime>2018-09-05T13:51:41.000Z</pubTime>
         
         <tag>Linux</tag>
          
         <tag>install</tag>
          
         <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fangzh.top/2018/2018090522/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>Linux安装shadowcocks</title>
+        <pubTime>2018-09-05T13:53:29.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>install</tag>
+         
+        <tag>shadowsocks</tag>
          
          
            
@@ -345,60 +424,6 @@
           
              
               <breadCrumb title="博客搭建" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fangzh.top/2018/2018090522/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>Linux安装shadowcocks</title>
-        <pubTime>2018-09-05T13:53:29.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>install</tag>
-         
-        <tag>shadowsocks</tag>
-         
-         
-           
-             
-              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fangzh.top/2018/2018090520/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>Linux安装selenium+chromedriver</title>
-        <pubTime>2018-09-05T13:51:41.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>install</tag>
-         
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
           
         </display>
     </data>
