@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fangzh.top/"/>
-  <updated>2018-09-20T09:22:42.608Z</updated>
+  <updated>2018-09-20T10:34:48.851Z</updated>
   <id>http://fangzh.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DeepLearning.ai笔记:(3-1)-- 机器学习策略(2)(ML strategy)</title>
+    <link href="http://fangzh.top/2018/2018092017/"/>
+    <id>http://fangzh.top/2018/2018092017/</id>
+    <published>2018-09-20T09:59:04.000Z</published>
+    <updated>2018-09-20T10:34:48.851Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png" alt=""></p><p>这周继续讲了机器学习策略,包括误差分析、错误样本清楚、数据分布不同、迁移学习、多任务学习等。</p><a id="more"></a><h1 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h1><p>对于训练后的模型，如果不进行误差分析，那么很难提升精度。所以应该在验证集中，找到标记错误的那些样本，统计一下都是因为什么原因出现的错误，如是不是照片模糊，还是本来是猫把它标记成狗了等等。</p><h1 id="清除错误标记样本"><a href="#清除错误标记样本" class="headerlink" title="清除错误标记样本"></a>清除错误标记样本</h1><p>如果是随机的误差，也就是人为标记样本出现了随机错误，那么没有关系，因为算法对随即误差还是很有鲁棒性的。</p><p>如果是系统误差，那没办法了。</p><p>比如说总体误差是10%，然后发现因为人工错误标记引起的误差是0.6%，那么其他原因造成的误差就是9.4%，这个时候应该集中精力去找那9.4%的误差原因，并进行修正。</p><h1 id="快速搭建系统"><a href="#快速搭建系统" class="headerlink" title="快速搭建系统"></a>快速搭建系统</h1><p>对于一个项目来说，我们一开始不要想得太复杂，先快速搭建一个基本的系统，进行迭代，然后在慢慢分析，逐步提高，不要想着一步到位，这样子往往会难以入手。</p><h1 id="不同分布的训练和测试"><a href="#不同分布的训练和测试" class="headerlink" title="不同分布的训练和测试"></a>不同分布的训练和测试</h1><p>假设你在网上找到了20万张照片去分析，但是我们实际上要测试的是用户在手机拍摄情况下的准确度。但是问题是手机上拍摄的数据不足，假设只有1万张。也就是训练集和测试集不是在同一分布，那么怎么办呢？</p><p>显然，如果把21万张照片加在一起，重新分配，是不合理的，因为这样子你验证集和测试集上的数据显然很少是手机拍摄的。</p><p>所以，应该用20万张照片，再加上5000张照片作为训练集，然后把剩下来的5000张照片对半分为验证集和测试集，那样子才更为符合实际情况。</p><h1 id="不同分布的偏差和方差"><a href="#不同分布的偏差和方差" class="headerlink" title="不同分布的偏差和方差"></a>不同分布的偏差和方差</h1><p>如上述情况，你的训练集和验证测试集不同一分布的，假设training error：1%，dev error：10%，那么这个时候能说是方差太大吗，显然是不合理的，因为不是同一分布的。</p><p>那么这个时候应该重新定义一个集合，叫做训练验证集：train-dev</p><p>也就是在训练集中拿出一部分数据，跟验证集合在一起，不参与训练，这样我们就得到了：training error：1%，training-dev error：9%，dev error：10%，如果是这种情况，这样才能说是方差问题。</p><p>如果是training error：1%，training-dev error：1.5%，dev error：10%，那么，显然不是因为方差问题，而是因为分布不同而导致的。</p><p>如何解决呢？</p><ul><li>进行人工误差分析，看一看训练集和测试集的差别到底在哪里，比如是不是有噪音、照片模糊等等</li><li>然后把训练集搞得更像测试集，也就是多收集点类似于测试集的数据，或者通过人工合成技术，把噪声加上去。</li></ul><h1 id="迁移学习"><a href="#迁移学习" class="headerlink" title="迁移学习"></a>迁移学习</h1><p>如果我们现在训练了一个猫的分类器，然后这个时候有了新任务，要识别红绿灯，问题是，我们没有那么多红绿灯的照片，没有那么多的数据，那怎么办？这时候就可以把这个猫分类器学习的参数迁移到红绿灯分类器中，只要输出层的微调就行了。因为图像识别的神经网络，在前面的网络大多是进行一些特征提取，所以如果进行图像识别的迁移，还是很有帮助的！</p><p>但是迁移学习有限制：</p><ul><li>必须是相关的类型，比如都是图像识别，都是语音识别</li><li>A的数据远大于B，如果B的数据够多，那自己从头开始学不就好了</li></ul><h1 id="Muti-task多任务学习"><a href="#Muti-task多任务学习" class="headerlink" title="Muti-task多任务学习"></a>Muti-task多任务学习</h1><p>假设在自动驾驶中，需要同时检测很多物体，比如人、红绿灯，汽车等等。</p><p>那么就可以把这些都写到一个向量中：</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-3-1-2.png" alt=""></p><p>如图，$y = [0 1 1 0]$即表示同时<strong>有车和停车标志</strong>。</p><p>这个又和softmax不同，softmax一次只识别一种物体，而多任务学习一次可以识别多种物体。</p><p>这个时候的loss funtion 和logistic是一样的：</p><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-3-1-3.png" alt=""></p><p>如果在标注样本中，只标注了每张图片的一部分，比如说图片中有行人和车，只标注的行人，有没有车是不知道的，那么可以设为问号$y = [1 0 ? 0]$，这样也是可以训练的，但是在计算loss的时候，要把这个未标记的部分扣除，不要计算在内。</p><h1 id="端到端学习"><a href="#端到端学习" class="headerlink" title="端到端学习"></a>端到端学习</h1><p>假如我们进行公司门禁，需要刷脸进入，那么这时候算法需要分成两步，</p><ul><li>首先检测到你这个人，然后找到人脸的位置</li><li>把人脸图像方法，然后在放入模型中计算是否匹配</li></ul><p>而端到端学习则直接忽略的这个过程，直接拍一张照片放入模型，输出结果。</p><p>再比如说语音识别的时候，在数据少的情况下，我们可能需要</p><ul><li>提取声音</li><li>分析语法</li><li>切分成一个个发声字母</li><li>组成句子</li><li>翻译</li></ul><p>而端到端学习直接是：提取声音—&gt;翻译</p><p>就不需要人为的过多干预了，因为机器可以学到的比人为规定的还要好。</p><p>但是注意一点是，需要很大量的数据的时候才能进行端到端学习；如果数据很少，那么还是手动干预，设计一些组件效果会好一点。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://peu31tfv4.bkt.clouddn.com/dl.ai1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;这周继续讲了机器学习策略,包括误差分析、错误样本清楚、数据分布不同、迁移学习、多任务学习等。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="AI" scheme="http://fangzh.top/categories/AI/"/>
+    
+      <category term="Deep Learning" scheme="http://fangzh.top/categories/AI/Deep-Learning/"/>
+    
+    
+      <category term="dl.ai" scheme="http://fangzh.top/tags/dl-ai/"/>
+    
+  </entry>
   
   <entry>
     <title>DeepLearning.ai笔记:(3-1)-- 机器学习策略(1)(ML strategy)</title>
@@ -570,31 +595,6 @@
       <category term="blog" scheme="http://fangzh.top/tags/blog/"/>
     
       <category term="教程" scheme="http://fangzh.top/tags/%E6%95%99%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>开篇博客</title>
-    <link href="http://fangzh.top/2018/2018090413/"/>
-    <id>http://fangzh.top/2018/2018090413/</id>
-    <published>2018-09-04T05:38:44.000Z</published>
-    <updated>2018-09-10T12:58:01.887Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://peu31tfv4.bkt.clouddn.com/5bea20840a1e14bf.jpg" alt=""></p><p>开个博客，写写东西。<br><a id="more"></a></p><p>很早之前就想建一个博客来写点东西，毕竟已经很久没有写过文章了，所以现在再提笔显得十分生涩，不像几年前那样能随意自在。</p><p>花了三天时间搭建了这个博客，此前原以为很复杂的，没有想到这么快就能搭好，一方面是自己的技术水平提升，很多以前不懂的技术，在这半年的自学以来都慢慢入门，另一方面，其实这就是一层窗户纸，对于有勇气的人来说，很快就能搭好了，因为困难总是可以解决的，怕的是畏惧这些困难。</p><p>中国的教育总是让你好好学习，其他的都不要管，好好高考，考个好大学。然而并没有教你应该做一个什么样的人，长大了应该做什么。所以我们大多数人在高考填志愿的时候并不知道要填什么专业，就这样稀里糊涂的跟着大部队走了。再者上了大学，也没有人告诉你接下来要做什么，所以中国的大学教育是极其失败的，很多人都是白白浪费了4年的光阴。</p><p>有很长一段时间，我都不知道自己要做什么。看着眼前的一个个项目，啥事也不想干，只能水水手机，水水b站，根本就没有想要干活的欲望。加上老师也不管事，就这样又水过了很多时间。不过人生总是有这么些时候的，能够及时纠正自己，就能更远的前行。</p><p>自学人工智能，机器学习等知识也有半年了，我知道很多人都在往这方向转，我是觉得人工智能挺有趣的，能够拯救世界。而且很多半路转行的人，今年找工作的时候都被刷了，算法岗一抓一大把，每个人都想进来，就连我那些很厉害的CS同学也在为找工作而焦虑。</p><p>不过不管怎么样，好好提高自己的技术水平和能力，总是不错的，不管之后能找到什么样的工作，慢慢变成一个更厉害的人，不要惶惶然无所事事，就能对得起自己。</p><p>搭建博客是很简单的，但是想坚持下来就没那么容易了。立个flag，希望自己能够坚持写博客，发文章，不管是技术教程，还是解决了哪一些问题，亦或是旅途中的美景、人生感悟都可以，希望能坚持到毕业。</p><p>一起加油吧。年轻的时候，看到一座山，总想知道山后面是什么。其实翻过山后，山的后面并没有什么特别的，但是我依然会去越过山丘，因为在越过山丘的过程中看到的风景，才是最重要的。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://peu31tfv4.bkt.clouddn.com/5bea20840a1e14bf.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;开个博客，写写东西。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="生活" scheme="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-      <category term="随笔" scheme="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-      <category term="生活" scheme="http://fangzh.top/tags/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
