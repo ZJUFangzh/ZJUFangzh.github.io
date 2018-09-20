@@ -4,6 +4,29 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/2018092016/</loc>
+    <lastmod>2018-09-20T09:22:42.608Z</lastmod>
+    <data>
+        <display>
+        <title>DeepLearning.ai笔记:(3-1)-- 机器学习策略(1)(ML strategy)</title>
+        <pubTime>2018-09-20T08:48:41.000Z</pubTime>
+        
+        <tag>dl.ai</tag>
+         
+         
+           
+             
+              <breadCrumb title="AI" url="http://fangzh.top/categories/AI/"/>
+          
+             
+              <breadCrumb title="Deep Learning" url="http://fangzh.top/categories/AI/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/2018091810/</loc>
     <lastmod>2018-09-18T02:43:12.966Z</lastmod>
     <data>
@@ -100,14 +123,16 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/20180901513/</loc>
+    <loc>http://fangzh.top/2018/2018091515/</loc>
     <lastmod>2018-09-17T03:04:28.359Z</lastmod>
     <data>
         <display>
-        <title>DeepLearning.ai笔记:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</title>
-        <pubTime>2018-09-15T05:37:15.000Z</pubTime>
+        <title>DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</title>
+        <pubTime>2018-09-15T07:58:33.000Z</pubTime>
         
         <tag>dl.ai</tag>
+         
+        <tag>homework</tag>
          
          
            
@@ -123,16 +148,14 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018091515/</loc>
+    <loc>http://fangzh.top/2018/20180901513/</loc>
     <lastmod>2018-09-17T03:04:28.359Z</lastmod>
     <data>
         <display>
-        <title>DeepLearning.ai作业:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</title>
-        <pubTime>2018-09-15T07:58:33.000Z</pubTime>
+        <title>DeepLearning.ai笔记:(2-1)-- 深度学习的实践层面（Practical aspects of Deep Learning）</title>
+        <pubTime>2018-09-15T05:37:15.000Z</pubTime>
         
         <tag>dl.ai</tag>
-         
-        <tag>homework</tag>
          
          
            
@@ -296,33 +319,6 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090521/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>Linux安装anaconda</title>
-        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>install</tag>
-         
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://fangzh.top/2018/2018090514/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -343,33 +339,6 @@
           
              
               <breadCrumb title="博客搭建" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://fangzh.top/2018/2018090520/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>Linux安装selenium+chromedriver</title>
-        <pubTime>2018-09-05T13:51:41.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>install</tag>
-         
-        <tag>python</tag>
-         
-         
-           
-             
-              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
           
         </display>
     </data>
@@ -404,33 +373,6 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090715/</loc>
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    <data>
-        <display>
-        <title>hexo教程:基本配置+更换主题+多终端工作+coding page部署分流(2)</title>
-        <pubTime>2018-09-07T07:18:31.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-        <tag>blog</tag>
-         
-        <tag>教程</tag>
-         
-         
-           
-             
-              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
-          
-             
-              <breadCrumb title="博客搭建" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://fangzh.top/2018/2018091015/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -458,6 +400,60 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/2018090715/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>hexo教程:基本配置+更换主题+多终端工作+coding page部署分流(2)</title>
+        <pubTime>2018-09-07T07:18:31.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+        <tag>blog</tag>
+         
+        <tag>教程</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="博客搭建" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fangzh.top/2018/2018090521/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>Linux安装anaconda</title>
+        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>install</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/2018090413/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
@@ -474,6 +470,33 @@
           
              
               <breadCrumb title="随笔" url="http://fangzh.top/categories/%E7%94%9F%E6%B4%BB/%E9%9A%8F%E7%AC%94/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://fangzh.top/2018/2018090520/</loc>
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    <data>
+        <display>
+        <title>Linux安装selenium+chromedriver</title>
+        <pubTime>2018-09-05T13:51:41.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>install</tag>
+         
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="日常技术" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="Linux" url="http://fangzh.top/categories/%E6%97%A5%E5%B8%B8%E6%8A%80%E6%9C%AF/Linux/"/>
           
         </display>
     </data>
