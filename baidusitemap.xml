@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://fangzh.top/2018/cs231n-1h-5/</loc>
+    <lastmod>2018-09-27T09:32:56.930Z</lastmod>
+    <data>
+        <display>
+        <title>cs231n作业：assignment1 - features</title>
+        <pubTime>2018-09-27T09:25:31.000Z</pubTime>
+        
+        <tag>cs231n</tag>
+         
+        <tag>homework</tag>
+         
+         
+           
+             
+              <breadCrumb title="AI" url="http://fangzh.top/categories/AI/"/>
+          
+             
+              <breadCrumb title="Deep Learning" url="http://fangzh.top/categories/AI/Deep-Learning/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://fangzh.top/2018/cs231n-1h-4/</loc>
     <lastmod>2018-09-27T09:23:38.426Z</lastmod>
     <data>
@@ -442,18 +467,18 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090522/</loc>
+    <loc>http://fangzh.top/2018/2018090521/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
         <display>
-        <title>Linux安装shadowcocks</title>
-        <pubTime>2018-09-05T13:53:29.000Z</pubTime>
+        <title>Linux安装anaconda</title>
+        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
         
         <tag>Linux</tag>
          
         <tag>install</tag>
          
-        <tag>shadowsocks</tag>
+        <tag>python</tag>
          
          
            
@@ -523,12 +548,12 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090521/</loc>
+    <loc>http://fangzh.top/2018/2018090520/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
         <display>
-        <title>Linux安装anaconda</title>
-        <pubTime>2018-09-05T13:52:53.000Z</pubTime>
+        <title>Linux安装selenium+chromedriver</title>
+        <pubTime>2018-09-05T13:51:41.000Z</pubTime>
         
         <tag>Linux</tag>
          
@@ -550,18 +575,18 @@
 
     
   <url>
-    <loc>http://fangzh.top/2018/2018090520/</loc>
+    <loc>http://fangzh.top/2018/2018090522/</loc>
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     <data>
         <display>
-        <title>Linux安装selenium+chromedriver</title>
-        <pubTime>2018-09-05T13:51:41.000Z</pubTime>
+        <title>Linux安装shadowcocks</title>
+        <pubTime>2018-09-05T13:53:29.000Z</pubTime>
         
         <tag>Linux</tag>
          
         <tag>install</tag>
          
-        <tag>python</tag>
+        <tag>shadowsocks</tag>
          
          
            
