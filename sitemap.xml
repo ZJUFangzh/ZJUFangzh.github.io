@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://fangzh.top/2018/cs231n-1h-2/</loc>
+    
+    <lastmod>2018-09-27T07:39:51.462Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://fangzh.top/2018/cs231n-1h-1/</loc>
     
-    <lastmod>2018-09-26T05:32:28.767Z</lastmod>
+    <lastmod>2018-09-27T07:39:25.763Z</lastmod>
     
   </url>
   
@@ -107,7 +114,7 @@
   </url>
   
   <url>
-    <loc>http://fangzh.top/2018/2018090715/</loc>
+    <loc>http://fangzh.top/2018/2018090514/</loc>
     
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     
@@ -115,13 +122,6 @@
   
   <url>
     <loc>http://fangzh.top/2018/2018090521/</loc>
-    
-    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://fangzh.top/2018/2018091015/</loc>
     
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     
@@ -142,7 +142,14 @@
   </url>
   
   <url>
-    <loc>http://fangzh.top/2018/2018090514/</loc>
+    <loc>http://fangzh.top/2018/2018090715/</loc>
+    
+    <lastmod>2018-09-10T12:58:01.887Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://fangzh.top/2018/2018091015/</loc>
     
     <lastmod>2018-09-10T12:58:01.887Z</lastmod>
     

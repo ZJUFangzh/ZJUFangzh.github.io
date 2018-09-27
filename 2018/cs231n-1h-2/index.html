@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>cs231n作业:assignment1 - svm | Fangzh的个人博客 | 人工智能拯救世界</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="cs231n,homework" />
+    
+    <meta name="description" content="完成了一个基于SVM的损失函数。">
+<meta name="keywords" content="cs231n,homework">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs231n作业:assignment1 - svm">
+<meta property="og:url" content="http://fangzh.top/2018/cs231n-1h-2/index.html">
+<meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
+<meta property="og:description" content="完成了一个基于SVM的损失函数。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pexm7md4m.bkt.clouddn.com/lion.jpg">
+<meta property="og:updated_time" content="2018-09-27T07:39:51.462Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cs231n作业:assignment1 - svm">
+<meta name="twitter:description" content="完成了一个基于SVM的损失函数。">
+<meta name="twitter:image" content="http://pexm7md4m.bkt.clouddn.com/lion.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Fangzh的个人博客 | 人工智能拯救世界" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon_1.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+    <!--百度统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c48627a60135ae47d77a79844f7e5b04";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    <!--百度SEO-->
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+        </script>
+    <!--googleseo-->
+    <meta name="google-site-verification" content="p1u63jgcp2J7NsJHR_UxQX2Fzj_UY6Zwf8C1zTRpONM" />
+    
+    <meta name="google-site-verification" content="8ojU19tXQIB94wIY0cAPI5BKSsrqV-xxrlx46C_-WMg" />
+	<!--xiongzhang-->
+	<script src="https://xiongzhang.baidu.com/sdk/c.js?appid=1608109025415176"></script>
+	<!--shougou-->
+	<meta name="sogou_site_verification" content="tRwGjUhpuk"/>
+	<!--360-->
+	<meta name="360-site-verification" content="06663b5113fe8a05769074a579c4d4ea" />
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">人工智能、人生感悟</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/archives">归档</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/">日常技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/Linux/">Linux</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/博客搭建/">博客搭建</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/">生活</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/旅行/">旅行</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/随笔/">随笔</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">留言板</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-cs231n-1h-2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        cs231n作业:assignment1 - svm
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/cs231n-1h-2/" class="article-date">
+            <time datetime="2018-09-27T06:17:45.000Z" itemprop="datePublished">2018-09-27</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/cs231n/">cs231n</a>, <a class="tag-link" href="/tags/homework/">homework</a>
+    </div>
+
+                <!---cloud阅读量统计系统-->
+                阅读数量:<span id="/2018/cs231n-1h-2/" class="leancloud_visitors" data-flag-title="cs231n作业:assignment1 - svm"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="http://pexm7md4m.bkt.clouddn.com/lion.jpg" alt=""></p>
+<p>完成了一个基于SVM的损失函数。</p>
+<a id="more"></a>
+<h1 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h1><p>载入的数据集依旧是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Train data shape:  (49000, 32, 32, 3)</span><br><span class="line">Train labels shape:  (49000,)</span><br><span class="line">Validation data shape:  (1000, 32, 32, 3)</span><br><span class="line">Validation labels shape:  (1000,)</span><br><span class="line">Test data shape:  (1000, 32, 32, 3)</span><br><span class="line">Test labels shape:  (1000,)</span><br></pre></td></tr></table></figure>
+<p>而后进行32 <em> 32 </em> 3的图像拉伸，得到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Training data shape:  (49000, 3072)</span><br><span class="line">Validation data shape:  (1000, 3072)</span><br><span class="line">Test data shape:  (1000, 3072)</span><br><span class="line">dev data shape:  (500, 3072)</span><br></pre></td></tr></table></figure>
+<p>进行一下简单的预处理，减去图像的平均值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Preprocessing: subtract the mean image</span></span><br><span class="line"><span class="comment"># first: compute the image mean based on the training data</span></span><br><span class="line">mean_image = np.mean(X_train, axis=<span class="number">0</span>)</span><br><span class="line">print(mean_image[:<span class="number">10</span>]) <span class="comment"># print a few of the elements</span></span><br><span class="line">plt.figure(figsize=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line">plt.imshow(mean_image.reshape((<span class="number">32</span>,<span class="number">32</span>,<span class="number">3</span>)).astype(<span class="string">'uint8'</span>)) <span class="comment"># visualize the mean image</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># second: subtract the mean image from train and test data</span><br><span class="line">X_train -= mean_image</span><br><span class="line">X_val -= mean_image</span><br><span class="line">X_test -= mean_image</span><br><span class="line">X_dev -= mean_image</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># third: append the bias dimension of ones (i.e. bias trick) so that our SVM</span></span><br><span class="line"><span class="comment"># only has to worry about optimizing a single weight matrix W.</span></span><br><span class="line">X_train = np.hstack([X_train, np.ones((X_train.shape[<span class="number">0</span>], <span class="number">1</span>))])</span><br><span class="line">X_val = np.hstack([X_val, np.ones((X_val.shape[<span class="number">0</span>], <span class="number">1</span>))])</span><br><span class="line">X_test = np.hstack([X_test, np.ones((X_test.shape[<span class="number">0</span>], <span class="number">1</span>))])</span><br><span class="line">X_dev = np.hstack([X_dev, np.ones((X_dev.shape[<span class="number">0</span>], <span class="number">1</span>))])</span><br><span class="line"></span><br><span class="line">print(X_train.shape, X_val.shape, X_test.shape, X_dev.shape)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">49000</span>, <span class="number">3073</span>) (<span class="number">1000</span>, <span class="number">3073</span>) (<span class="number">1000</span>, <span class="number">3073</span>) (<span class="number">500</span>, <span class="number">3073</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="SVM分类器"><a href="#SVM分类器" class="headerlink" title="SVM分类器"></a>SVM分类器</h1><p>然后就可以开始来编写<code>cs231n/classifiers/linear_svm.py</code>的SVM分类器了。在这里先介绍一下SVM的基本公式和原理。</p>
+<p>参考<a href="https://www.tinymind.cn/articles/404" target="_blank" rel="noopener">CS231n:线性分类</a></p>
+<p>SVM损失函数想要SVM在正确分类上的比分始终比不正确的比分高出一个边界值$\triangle$</p>
+<p>第i个数据图像为$x_i$，正确分类为$y_i$，然后根据$f(x_i,W)$来计算不同分类的值，将分类简写为$s$，那么第j类的得分就是$s_j = f(x_i,W)_j$，针对第i个数据的多类SVM的损失函数定义为：</p>
+<p>$$L_i = \sum_{j \neq y_i} max(0, s_j - s_{y_i} + \triangle)$$</p>
+<p>如：假设有3个分类，$s = [ 13,-7,11]$，第一个分类是正确的，也就是$y_i = 0$，假设$\triangle=10$，那么把所有不正确的分类加起来($j \neq y_i$)，</p>
+<p>$$L_i = max(0,-7-13+10)+max(0,11-13+10)$$</p>
+<p>因为SVM只关心差距至少要大于10，所以$L_i = 8$</p>
+<p>那么把公式套入：</p>
+<p>$$L_i = \sum_{j \neq y_i} max(0, w_j x_i - w_{y_i} x_i + \triangle)$$</p>
+<p>加入正则后：</p>
+<p>$$L = \frac{1}{N} \sum_i \sum_{j \neq y_i}max(0, f(x_i ;W)_{j} - f(x_i ; W)_{y_i} + \triangle) + \lambda \sum_k \sum_l W^{2}_{k,l}$$</p>
+<p>到目前为止计算了loss，然后还需要计算梯度下降的grads，</p>
+<p>官方并没有给推导过程，这才是cs231n作业难的地方所在。。。</p>
+<p>详细可以看这一篇文章<a href="https://zhuanlan.zhihu.com/p/37068455" target="_blank" rel="noopener">CS 231 SVM 求导</a></p>
+<p>总之就是两个公式：</p>
+<p><img src="http://pexm7md4m.bkt.clouddn.com/cs231n-1h-2-1.png" alt=""></p>
+<p>而后开始编写<code>compute_loss_naive</code> 函数，先用循环来感受一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_naive</span><span class="params">(W, X, y, reg)</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  Structured SVM loss function, naive implementation (with loops).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Inputs have dimension D, there are C classes, and we operate on minibatches</span></span><br><span class="line"><span class="string">  of N examples.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Inputs:</span></span><br><span class="line"><span class="string">  - W: A numpy array of shape (D, C) containing weights.</span></span><br><span class="line"><span class="string">  - X: A numpy array of shape (N, D) containing a minibatch of data.</span></span><br><span class="line"><span class="string">  - y: A numpy array of shape (N,) containing training labels; y[i] = c means</span></span><br><span class="line"><span class="string">    that X[i] has label c, where 0 &lt;= c &lt; C.</span></span><br><span class="line"><span class="string">  - reg: (float) regularization strength</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Returns a tuple of:</span></span><br><span class="line"><span class="string">  - loss as single float</span></span><br><span class="line"><span class="string">  - gradient with respect to weights W; an array of same shape as W</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># compute the loss and the gradient</span></span><br><span class="line">  num_classes = W.shape[<span class="number">1</span>]</span><br><span class="line">  num_train = X.shape[<span class="number">0</span>]</span><br><span class="line">  loss = <span class="number">0.0</span></span><br><span class="line">  <span class="comment">#逐个计算每个样本的loss</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> xrange(num_train):</span><br><span class="line">    <span class="comment">#计算每个样本的各个分类得分</span></span><br><span class="line">    scores = X[i].dot(W)</span><br><span class="line">    correct_class_score = scores[y[i]]</span><br><span class="line">    <span class="comment">#计算每个分类的得分，计入loss中</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> xrange(num_classes):</span><br><span class="line">      <span class="comment"># 根据公式，j==y[i]的就是本身的分类，不用算了</span></span><br><span class="line">      <span class="keyword">if</span> j == y[i]:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">      margin = scores[j] - correct_class_score + <span class="number">1</span> <span class="comment"># note delta = 1</span></span><br><span class="line">      <span class="comment">#如果计算的margin &gt; 0，那么就要算入loss，</span></span><br><span class="line">      <span class="keyword">if</span> margin &gt; <span class="number">0</span>:</span><br><span class="line">        loss += margin</span><br><span class="line">        <span class="comment">#公式2</span></span><br><span class="line">        dW[:,y[i]] += -X[i,:].T</span><br><span class="line">        <span class="comment">#公式1</span></span><br><span class="line">        dW[:,j] += X[i, :].T</span><br><span class="line">  <span class="comment"># Right now the loss is a sum over all training examples, but we want it</span></span><br><span class="line">  <span class="comment"># to be an average instead so we divide by num_train.</span></span><br><span class="line">  loss /= num_train</span><br><span class="line">  dW /= num_train</span><br><span class="line">  <span class="comment"># Add regularization to the loss.</span></span><br><span class="line">  loss += reg * np.sum(W * W)</span><br><span class="line">  dW += reg * W</span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  <span class="comment"># <span class="doctag">TODO:</span>                                                                     #</span></span><br><span class="line">  <span class="comment"># Compute the gradient of the loss function and store it dW.                #</span></span><br><span class="line">  <span class="comment"># Rather that first computing the loss and then computing the derivative,   #</span></span><br><span class="line">  <span class="comment"># it may be simpler to compute the derivative at the same time that the     #</span></span><br><span class="line">  <span class="comment"># loss is being computed. As a result you may need to modify some of the    #</span></span><br><span class="line">  <span class="comment"># code above to compute the gradient.                                       #</span></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> loss, dW</span><br></pre></td></tr></table></figure>
+<p>写完后，用梯度检验检查一下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Once you've implemented the gradient, recompute it with the code below</span></span><br><span class="line"><span class="comment"># and gradient check it with the function we provided for you</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute the loss and its gradient at W.</span></span><br><span class="line">loss, grad = svm_loss_naive(W, X_dev, y_dev, <span class="number">0.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Numerically compute the gradient along several randomly chosen dimensions, and</span></span><br><span class="line"><span class="comment"># compare them with your analytically computed gradient. The numbers should match</span></span><br><span class="line"><span class="comment"># almost exactly along all dimensions.</span></span><br><span class="line"><span class="keyword">from</span> cs231n.gradient_check <span class="keyword">import</span> grad_check_sparse</span><br><span class="line">f = <span class="keyword">lambda</span> w: svm_loss_naive(w, X_dev, y_dev, <span class="number">0.0</span>)[<span class="number">0</span>]</span><br><span class="line">grad_numerical = grad_check_sparse(f, W, grad)</span><br><span class="line"></span><br><span class="line"><span class="comment"># do the gradient check once again with regularization turned on</span></span><br><span class="line"><span class="comment"># you didn't forget the regularization gradient did you?</span></span><br><span class="line">loss, grad = svm_loss_naive(W, X_dev, y_dev, <span class="number">5e1</span>)</span><br><span class="line">f = <span class="keyword">lambda</span> w: svm_loss_naive(w, X_dev, y_dev, <span class="number">5e1</span>)[<span class="number">0</span>]</span><br><span class="line">grad_numerical = grad_check_sparse(f, W, grad)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">numerical: 34.663598 analytic: 34.663598, relative error: 6.995024e-13</span><br><span class="line">numerical: 21.043334 analytic: 21.043334, relative error: 5.147242e-12</span><br><span class="line">numerical: 1.334055 analytic: 1.334055, relative error: 5.315420e-11</span><br><span class="line">numerical: 16.611704 analytic: 16.611704, relative error: 6.908581e-12</span><br><span class="line">numerical: 25.327188 analytic: 25.327188, relative error: 1.552987e-11</span><br><span class="line">numerical: -12.867717 analytic: -12.867717, relative error: 1.966004e-11</span><br><span class="line">numerical: 15.066285 analytic: 15.066285, relative error: 7.012975e-12</span><br><span class="line">numerical: -3.752014 analytic: -3.752014, relative error: 7.502607e-11</span><br><span class="line">numerical: 9.927043 analytic: 9.927043, relative error: 9.010584e-13</span><br><span class="line">numerical: 33.071345 analytic: 33.071345, relative error: 1.305438e-12</span><br><span class="line">numerical: -19.227144 analytic: -19.227851, relative error: 1.836495e-05</span><br><span class="line">numerical: 31.392728 analytic: 31.391611, relative error: 1.778034e-05</span><br><span class="line">numerical: -10.450509 analytic: -10.456860, relative error: 3.037629e-04</span><br><span class="line">numerical: -1.346690 analytic: -1.345625, relative error: 3.953276e-04</span><br><span class="line">numerical: 7.843501 analytic: 7.846486, relative error: 1.902216e-04</span><br><span class="line">numerical: 20.635011 analytic: 20.628368, relative error: 1.609761e-04</span><br><span class="line">numerical: 23.654254 analytic: 23.652696, relative error: 3.294745e-05</span><br><span class="line">numerical: 37.706709 analytic: 37.703260, relative error: 4.573495e-05</span><br><span class="line">numerical: 9.558804 analytic: 9.566079, relative error: 3.804143e-04</span><br><span class="line">numerical: 20.450011 analytic: 20.451451, relative error: 3.521650e-05</span><br></pre></td></tr></table></figure>
+<p><strong>向量化SVM</strong></p>
+<p>套循环肯定是最菜的做法，我们在处理图像的时候肯定都要用矩阵算的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_vectorized</span><span class="params">(W, X, y, reg)</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  Structured SVM loss function, vectorized implementation.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Inputs and outputs are the same as svm_loss_naive.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  loss = <span class="number">0.0</span></span><br><span class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  <span class="comment"># <span class="doctag">TODO:</span>                                                                     #</span></span><br><span class="line">  <span class="comment"># Implement a vectorized version of the structured SVM loss, storing the    #</span></span><br><span class="line">  <span class="comment"># result in loss.                                                           #</span></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  <span class="comment">#scores (N,C)</span></span><br><span class="line">  scores = X.dot(W)</span><br><span class="line">  <span class="comment">#num_classes = W.shape[1]</span></span><br><span class="line">  num_train = X.shape[<span class="number">0</span>]</span><br><span class="line">  <span class="comment">#利用np.arange(),correct_class_score变成了 (num_train,y)的矩阵</span></span><br><span class="line">  correct_class_score = scores[np.arange(num_train),y]</span><br><span class="line">  correct_class_score = np.reshape(correct_class_score,(num_train,<span class="number">-1</span>))</span><br><span class="line">  margins = scores - correct_class_score + <span class="number">1</span></span><br><span class="line">  margins = np.maximum(<span class="number">0</span>, margins)</span><br><span class="line">  <span class="comment">#然后这里计算了j=y[i]的情形，所以把他们置为0</span></span><br><span class="line">  margins[np.arange(num_train),y] = <span class="number">0</span></span><br><span class="line">  loss += np.sum(margins) / num_train</span><br><span class="line">  loss += reg * np.sum( W * W)</span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  <span class="comment">#                             END OF YOUR CODE                              #</span></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  <span class="comment"># <span class="doctag">TODO:</span>                                                                     #</span></span><br><span class="line">  <span class="comment"># Implement a vectorized version of the gradient for the structured SVM     #</span></span><br><span class="line">  <span class="comment"># loss, storing the result in dW.                                           #</span></span><br><span class="line">  <span class="comment">#                                                                           #</span></span><br><span class="line">  <span class="comment"># Hint: Instead of computing the gradient from scratch, it may be easier    #</span></span><br><span class="line">  <span class="comment"># to reuse some of the intermediate values that you used to compute the     #</span></span><br><span class="line">  <span class="comment"># loss.                                                                     #</span></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  margins[margins &gt; <span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">  <span class="comment">#因为j=y[i]的那一个元素的grad要计算 &gt;0 的那些次数次</span></span><br><span class="line">  row_sum = np.sum(margins,axis=<span class="number">1</span>)</span><br><span class="line">  margins[np.arange(num_train),y] = -row_sum.T</span><br><span class="line">  <span class="comment">#把公式1和2合到一起计算了</span></span><br><span class="line">  dW = np.dot(X.T,margins)</span><br><span class="line">  dW /= num_train</span><br><span class="line">  dW += reg * W</span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  <span class="comment">#                             END OF YOUR CODE                              #</span></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> loss, dW</span><br></pre></td></tr></table></figure>
+<p>计算一下两者的时间差：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Naive loss: 8.577034e+00 computed in 0.084761s</span><br><span class="line">Vectorized loss: 8.577034e+00 computed in 0.001029s</span><br><span class="line">difference: -0.000000</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Naive loss and gradient: computed in 0.082744s</span><br><span class="line">Vectorized loss and gradient: computed in 0.002027s</span><br><span class="line">difference: 0.000000</span><br></pre></td></tr></table></figure>
+<p><strong>Stochastic Gradient Descent</strong></p>
+<p>编辑一下<code>classifiers/linear_classifier/LinearClassifier.train()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinearClassifier</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">    self.W = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, X, y, learning_rate=<span class="number">1e-3</span>, reg=<span class="number">1e-5</span>, num_iters=<span class="number">100</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            batch_size=<span class="number">200</span>, verbose=False)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Train this linear classifier using stochastic gradient descent.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - X: A numpy array of shape (N, D) containing training data; there are N</span></span><br><span class="line"><span class="string">      training samples each of dimension D.</span></span><br><span class="line"><span class="string">    - y: A numpy array of shape (N,) containing training labels; y[i] = c</span></span><br><span class="line"><span class="string">      means that X[i] has label 0 &lt;= c &lt; C for C classes.</span></span><br><span class="line"><span class="string">    - learning_rate: (float) learning rate for optimization.</span></span><br><span class="line"><span class="string">    - reg: (float) regularization strength.</span></span><br><span class="line"><span class="string">    - num_iters: (integer) number of steps to take when optimizing</span></span><br><span class="line"><span class="string">    - batch_size: (integer) number of training examples to use at each step.</span></span><br><span class="line"><span class="string">    - verbose: (boolean) If true, print progress during optimization.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Outputs:</span></span><br><span class="line"><span class="string">    A list containing the value of the loss function at each training iteration.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    num_train, dim = X.shape</span><br><span class="line">    num_classes = np.max(y) + <span class="number">1</span> <span class="comment"># assume y takes values 0...K-1 where K is number of classes</span></span><br><span class="line">    <span class="keyword">if</span> self.W <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">      <span class="comment"># lazily initialize W</span></span><br><span class="line">      self.W = <span class="number">0.001</span> * np.random.randn(dim, num_classes)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Run stochastic gradient descent to optimize W</span></span><br><span class="line">    loss_history = []</span><br><span class="line">    <span class="keyword">for</span> it <span class="keyword">in</span> xrange(num_iters):</span><br><span class="line">      X_batch = <span class="keyword">None</span></span><br><span class="line">      y_batch = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment"># <span class="doctag">TODO:</span>                                                                 #</span></span><br><span class="line">      <span class="comment"># Sample batch_size elements from the training data and their           #</span></span><br><span class="line">      <span class="comment"># corresponding labels to use in this round of gradient descent.        #</span></span><br><span class="line">      <span class="comment"># Store the data in X_batch and their corresponding labels in           #</span></span><br><span class="line">      <span class="comment"># y_batch; after sampling X_batch should have shape (dim, batch_size)   #</span></span><br><span class="line">      <span class="comment"># and y_batch should have shape (batch_size,)                           #</span></span><br><span class="line">      <span class="comment">#                                                                       #</span></span><br><span class="line">      <span class="comment"># Hint: Use np.random.choice to generate indices. Sampling with         #</span></span><br><span class="line">      <span class="comment"># replacement is faster than sampling without replacement.              #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      batch_inx = np.random.choice(num_train,batch_size)</span><br><span class="line">      X_batch = X[batch_inx,:]</span><br><span class="line">      y_batch = y[batch_inx]</span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment">#                       END OF YOUR CODE                                #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line"></span><br><span class="line">      <span class="comment"># evaluate loss and gradient</span></span><br><span class="line">      loss, grad = self.loss(X_batch, y_batch, reg)</span><br><span class="line">      loss_history.append(loss)</span><br><span class="line"></span><br><span class="line">      <span class="comment"># perform parameter update</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment"># <span class="doctag">TODO:</span>                                                                 #</span></span><br><span class="line">      <span class="comment"># Update the weights using the gradient and the learning rate.          #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      self.W = self.W - learning_rate * grad</span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line">      <span class="comment">#                       END OF YOUR CODE                                #</span></span><br><span class="line">      <span class="comment">#########################################################################</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> verbose <span class="keyword">and</span> it % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">'iteration %d / %d: loss %f'</span> % (it, num_iters, loss))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> loss_history</span><br></pre></td></tr></table></figure>
+<p>再编辑一下<code>predict</code>函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Use the trained weights of this linear classifier to predict labels for</span></span><br><span class="line"><span class="string">    data points.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - X: A numpy array of shape (N, D) containing training data; there are N</span></span><br><span class="line"><span class="string">      training samples each of dimension D.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    - y_pred: Predicted labels for the data in X. y_pred is a 1-dimensional</span></span><br><span class="line"><span class="string">      array of length N, and each element is an integer giving the predicted</span></span><br><span class="line"><span class="string">      class.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    y_pred = np.zeros(X.shape[<span class="number">0</span>])</span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span>                                                                   #</span></span><br><span class="line">    <span class="comment"># Implement this method. Store the predicted labels in y_pred.            #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    score = X.dot(self.W)</span><br><span class="line">    y_pred = np.argmax(score,axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#                           END OF YOUR CODE                              #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="keyword">return</span> y_pred</span><br></pre></td></tr></table></figure>
+<p>得到预测值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">training accuracy: 0.376633</span><br><span class="line">validation accuracy: 0.384000</span><br></pre></td></tr></table></figure>
+<p>然后调一调learning_rate和regularization:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Use the validation set to tune hyperparameters (regularization strength and</span></span><br><span class="line"><span class="comment"># learning rate). You should experiment with different ranges for the learning</span></span><br><span class="line"><span class="comment"># rates and regularization strengths; if you are careful you should be able to</span></span><br><span class="line"><span class="comment"># get a classification accuracy of about 0.4 on the validation set.</span></span><br><span class="line">learning_rates = [<span class="number">1e-7</span>, <span class="number">3e-7</span>,<span class="number">5e-7</span>,<span class="number">9e-7</span>]</span><br><span class="line">regularization_strengths = [<span class="number">2.5e4</span>, <span class="number">1e4</span>,<span class="number">3e4</span>,<span class="number">2e4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># results is dictionary mapping tuples of the form</span></span><br><span class="line"><span class="comment"># (learning_rate, regularization_strength) to tuples of the form</span></span><br><span class="line"><span class="comment"># (training_accuracy, validation_accuracy). The accuracy is simply the fraction</span></span><br><span class="line"><span class="comment"># of data points that are correctly classified.</span></span><br><span class="line">results = &#123;&#125;</span><br><span class="line">best_val = <span class="number">-1</span>   <span class="comment"># The highest validation accuracy that we have seen so far.</span></span><br><span class="line">best_svm = <span class="keyword">None</span> <span class="comment"># The LinearSVM object that achieved the highest validation rate.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span>                                                                        #</span></span><br><span class="line"><span class="comment"># Write code that chooses the best hyperparameters by tuning on the validation #</span></span><br><span class="line"><span class="comment"># set. For each combination of hyperparameters, train a linear SVM on the      #</span></span><br><span class="line"><span class="comment"># training set, compute its accuracy on the training and validation sets, and  #</span></span><br><span class="line"><span class="comment"># store these numbers in the results dictionary. In addition, store the best   #</span></span><br><span class="line"><span class="comment"># validation accuracy in best_val and the LinearSVM object that achieves this  #</span></span><br><span class="line"><span class="comment"># accuracy in best_svm.                                                        #</span></span><br><span class="line"><span class="comment">#                                                                              #</span></span><br><span class="line"><span class="comment"># Hint: You should use a small value for num_iters as you develop your         #</span></span><br><span class="line"><span class="comment"># validation code so that the SVMs don't take much time to train; once you are #</span></span><br><span class="line"><span class="comment"># confident that your validation code works, you should rerun the validation   #</span></span><br><span class="line"><span class="comment"># code with a larger value for num_iters.                                      #</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="keyword">for</span> learning_rate <span class="keyword">in</span> learning_rates:</span><br><span class="line">    <span class="keyword">for</span> regularization_strength <span class="keyword">in</span> regularization_strengths:</span><br><span class="line">        svm = LinearSVM()</span><br><span class="line">        loss_hist = svm.train(X_train, y_train, learning_rate=learning_rate, reg=regularization_strength,</span><br><span class="line">                      num_iters=<span class="number">1500</span>, verbose=<span class="keyword">True</span>)</span><br><span class="line">        y_train_pred = svm.predict(X_train)</span><br><span class="line">        y_val_pred = svm.predict(X_val)</span><br><span class="line">        y_train_acc = np.mean(y_train_pred==y_train)</span><br><span class="line">        y_val_acc = np.mean(y_val_pred==y_val)</span><br><span class="line">        results[(learning_rate,regularization_strength)] = [y_train_acc, y_val_acc]</span><br><span class="line">        <span class="keyword">if</span> y_val_acc &gt; best_val:</span><br><span class="line">            best_val = y_val_acc</span><br><span class="line">            best_svm = svm</span><br><span class="line"></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line"><span class="comment">#                              END OF YOUR CODE                                #</span></span><br><span class="line"><span class="comment">################################################################################</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># Print out results.</span></span><br><span class="line"><span class="keyword">for</span> lr, reg <span class="keyword">in</span> sorted(results):</span><br><span class="line">    train_accuracy, val_accuracy = results[(lr, reg)]</span><br><span class="line">    print(<span class="string">'lr %e reg %e train accuracy: %f val accuracy: %f'</span> % (</span><br><span class="line">                lr, reg, train_accuracy, val_accuracy))</span><br><span class="line">    </span><br><span class="line">print(<span class="string">'best validation accuracy achieved during cross-validation: %f'</span> % best_val)</span><br></pre></td></tr></table></figure>
+<p><strong>小结</strong></p>
+<ul>
+<li>多看看cs231n的note文档</li>
+<li>多学习学习grad的推倒</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://fangzh.top/2018/cs231n-1h-2/" data-id="cjmk9qcgt000bgsu31ohga20r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+
+        </footer>
+    </div>
+</article>
+<!--
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+-->
+<!--来比力评论系统，在commetn/livebe.ejs中-->
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ4OC8xNjAxNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ZJUFangzh" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/cs231n-1h-1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">cs231n作业：assignment1 - knn</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/cs231n-1h-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业:assignment1 - svm" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/cs231n-1h-2/" class="title">cs231n作业:assignment1 - svm</a></p>
+                            <p class="item-date"><time datetime="2018-09-27T06:17:45.000Z" itemprop="datePublished">2018-09-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/cs231n-1h-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - knn" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/cs231n-1h-1/" class="title">cs231n作业：assignment1 - knn</a></p>
+                            <p class="item-date"><time datetime="2018-09-26T04:41:15.000Z" itemprop="datePublished">2018-09-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/2018092017/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)" alt="DeepLearning.ai笔记:(3-2)-- 机器学习策略(2)(ML strategy)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/2018092017/" class="title">DeepLearning.ai笔记:(3-2)-- 机器学习策略(2)(ML strategy)</a></p>
+                            <p class="item-date"><time datetime="2018-09-20T09:59:04.000Z" itemprop="datePublished">2018-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/2018092016/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)" alt="DeepLearning.ai笔记:(3-1)-- 机器学习策略(1)(ML strategy)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/2018092016/" class="title">DeepLearning.ai笔记:(3-1)-- 机器学习策略(1)(ML strategy)</a></p>
+                            <p class="item-date"><time datetime="2018-09-20T08:48:41.000Z" itemprop="datePublished">2018-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/2018091810/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)" alt="DeepLearning.ai作业:(2-3)-- 超参数调试（Hyperparameter tuning）" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/2018091810/" class="title">DeepLearning.ai作业:(2-3)-- 超参数调试（Hyperparameter tuning）</a></p>
+                            <p class="item-date"><time datetime="2018-09-18T02:35:32.000Z" itemprop="datePublished">2018-09-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">联系方式</h3>
+        <div class="widget">
+            <!--fangzhyx@foxmail.com-->
+		<p>fangzhyx@foxmail.com</p>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">14</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/Deep-Learning/">Deep Learning</a><span class="category-list-count">14</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/博客搭建/">博客搭建</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/生活/旅行/">旅行</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/随笔/">随笔</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">23</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cs231n/">cs231n</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dl-ai/">dl.ai</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/旅行/">旅行</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/航拍/">航拍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频/">视频</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/blog/" style="font-size: 16px;">blog</a> <a href="/tags/cs231n/" style="font-size: 12px;">cs231n</a> <a href="/tags/dl-ai/" style="font-size: 20px;">dl.ai</a> <a href="/tags/hexo/" style="font-size: 16px;">hexo</a> <a href="/tags/homework/" style="font-size: 18px;">homework</a> <a href="/tags/install/" style="font-size: 14px;">install</a> <a href="/tags/python/" style="font-size: 12px;">python</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/教程/" style="font-size: 14px;">教程</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/航拍/" style="font-size: 10px;">航拍</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://qhgong.com">Avalon</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://hfanss.com">幻凡ss</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://terrylovessmiles.cn/">terrylovessmiles</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://trhx.top">trhx</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Fangzh</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+
+				<!--coding pages and github-->
+                <p><span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span> and <span><a href="https://github.com" style="font-weight: bold">Github</a></span></p>
+                <!--这一段是不蒜子的访问量统计脚本-->
+                <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+                <span id="busuanzi_container_site_uv">
+                    访客数<span id="busuanzi_value_site_uv"></span>人次
+                  </span>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--往下是cloud的文章阅读量系统-->
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = 'YVSE8R91f8Qc6d6FwMTnwytk-gzGzoHsz';
+    var APP_KEY = 'ajFB9Ueh08Y5pIvkDsXSOW56';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://fangzh.top/2018/cs231n-1h-2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
