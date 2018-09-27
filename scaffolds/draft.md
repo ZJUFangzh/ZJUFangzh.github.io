@@ -1,7 +1,7 @@
 ---
 title: {{ title }}
 date: {{ date }}
-id:
+id: {{ title }}
 tags:
 - dl.ai
 categories:
