@@ -20,12 +20,12 @@
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
 <meta property="og:description" content="这周继续讲了机器学习策略,包括误差分析、错误样本清楚、数据分布不同、迁移学习、多任务学习等。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
-<meta property="og:updated_time" content="2018-09-20T10:35:27.879Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+<meta property="og:updated_time" content="2018-09-30T07:35:28.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepLearning.ai笔记:(3-2)-- 机器学习策略(2)(ML strategy)">
 <meta name="twitter:description" content="这周继续讲了机器学习策略,包括误差分析、错误样本清楚、数据分布不同、迁移学习、多任务学习等。">
-<meta name="twitter:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
     
 
     
@@ -221,7 +221,7 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png" alt=""></p>
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg" alt=""></p>
 <p>这周继续讲了机器学习策略,包括误差分析、错误样本清楚、数据分布不同、迁移学习、多任务学习等。</p>
 <a id="more"></a>
 <h1 id="误差分析"><a href="#误差分析" class="headerlink" title="误差分析"></a>误差分析</h1><p>对于训练后的模型，如果不进行误差分析，那么很难提升精度。所以应该在验证集中，找到标记错误的那些样本，统计一下都是因为什么原因出现的错误，如是不是照片模糊，还是本来是猫把它标记成狗了等等。</p>
@@ -249,11 +249,11 @@
 </ul>
 <h1 id="Muti-task多任务学习"><a href="#Muti-task多任务学习" class="headerlink" title="Muti-task多任务学习"></a>Muti-task多任务学习</h1><p>假设在自动驾驶中，需要同时检测很多物体，比如人、红绿灯，汽车等等。</p>
 <p>那么就可以把这些都写到一个向量中：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-3-1-2.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlrv0owzj211i0ky422.jpg" alt=""></p>
 <p>如图，$y = [0 1 1 0]$即表示同时<strong>有车和停车标志</strong>。</p>
 <p>这个又和softmax不同，softmax一次只识别一种物体，而多任务学习一次可以识别多种物体。</p>
 <p>这个时候的loss funtion 和logistic是一样的：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-3-1-3.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlruy2ndj20hy0250sn.jpg" alt=""></p>
 <p>如果在标注样本中，只标注了每张图片的一部分，比如说图片中有行人和车，只标注的行人，有没有车是不知道的，那么可以设为问号$y = [1 0 ? 0]$，这样也是可以训练的，但是在计算loss的时候，要把这个未标记的部分扣除，不要计算在内。</p>
 <h1 id="端到端学习"><a href="#端到端学习" class="headerlink" title="端到端学习"></a>端到端学习</h1><p>假如我们进行公司门禁，需要刷脸进入，那么这时候算法需要分成两步，</p>
 <ul>
@@ -279,7 +279,7 @@
 
 
 
-    <a data-url="http://fangzh.top/2018/2018092017/" data-id="cjmkdrq10001lpsu3lba79x94" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://fangzh.top/2018/2018092017/" data-id="cjmoauxkb002188u33arh1u2s" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

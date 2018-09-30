@@ -20,12 +20,12 @@
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
 <meta property="og:description" content="上次介绍了hexo的基本搭建和部署。但是还有很多事情没有解决，这次先来看看hexo的基本配置文件，还有如何在多平台部署实现国内外分流，以及换电脑后如何无缝的衔接工作。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://peu31tfv4.bkt.clouddn.com/1.jpg">
-<meta property="og:updated_time" content="2018-09-10T12:58:01.887Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstce5fj20ki0b4wey.jpg">
+<meta property="og:updated_time" content="2018-09-30T07:11:09.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo教程:基本配置+更换主题+多终端工作+coding page部署分流(2)">
 <meta name="twitter:description" content="上次介绍了hexo的基本搭建和部署。但是还有很多事情没有解决，这次先来看看hexo的基本配置文件，还有如何在多平台部署实现国内外分流，以及换电脑后如何无缝的衔接工作。">
-<meta name="twitter:image" content="http://peu31tfv4.bkt.clouddn.com/1.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstce5fj20ki0b4wey.jpg">
     
 
     
@@ -221,7 +221,7 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://peu31tfv4.bkt.clouddn.com/1.jpg" alt=""></p>
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstce5fj20ki0b4wey.jpg" alt=""></p>
 <p>上次介绍了hexo的基本搭建和部署。但是还有很多事情没有解决，这次先来看看hexo的基本配置文件，还有如何在多平台部署实现国内外分流，以及换电脑后如何无缝的衔接工作。</p>
 <a id="more"></a>
 <h1 id="1-hexo基本配置"><a href="#1-hexo基本配置" class="headerlink" title="1. hexo基本配置"></a>1. hexo基本配置</h1><p>在文件根目录下的<code>_config.yml</code>，就是整个hexo框架的配置文件了。可以在里面修改大部分的配置。详细可参考<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">官方的配置</a>描述。</p>
@@ -405,14 +405,14 @@
 <p>就会自动把newpage.md发送到post中。</p>
 <hr>
 <h1 id="2-更换主题"><a href="#2-更换主题" class="headerlink" title="2. 更换主题"></a>2. 更换主题</h1><p>到这一步，如果你觉得默认的<code>landscape</code>主题不好看，那么可以在官网的主题中，选择你喜欢的一个主题进行修改就可以啦。<a href="https://hexo.io/themes/" target="_blank" rel="noopener">点这里</a></p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo1.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkswpjhtj21fu0rhtp6.jpg" alt=""></p>
 <p>这里有200多个主题可以选。不过最受欢迎的就是那么几个，比如<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">NexT主题</a>，非常的简洁好看，大多数人都选择这个，关于这个的教程也比较多。不过我选择的是<a href="https://github.com/ppoffice/hexo-theme-hueman" target="_blank" rel="noopener">hueman</a>这个主题，好像是从WordPress移植过来的，展示效果如下：</p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo13.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksxvknrj21fc0q8tsl.jpg" alt=""></p>
 <p>不管怎么样，至少是符合我个人的审美。</p>
 <p>直接在github链接上下载下来，然后放到<code>theme</code>文件夹下就行了，然后再在刚才说的配置文件中把<code>theme</code>换成那个主题文件夹的名字，它就会自动在<code>theme</code>文件夹中搜索你配置的主题。</p>
 <p>而后进入<code>hueman</code>这个文件夹，可以看到里面也有一个配置文件<code>_config.xml</code>，貌似它默认是<code>_config.xml.example</code>，把它复制一份，重命名为<code>_config.xml</code>就可以了。这个配置文件是修改你整个主题的配置文件。</p>
 <h3 id="menu（菜单栏）"><a href="#menu（菜单栏）" class="headerlink" title="menu（菜单栏）"></a>menu（菜单栏）</h3><p>也就是上面菜单栏上的这些东西。</p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo2.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstfwjbj20jd0233ye.jpg" alt=""></p>
 <p>其中，About这个你是找不到网页的，因为你的文章中没有about这个东西。如果你想要的话，可以执行命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
 <p>它就会在根目录下<code>source</code>文件夹中新建了一个<code>about</code>文件夹，以及index.md，在index.md中写上你想要写的东西，就可以在网站上展示出来了。</p>
@@ -464,15 +464,15 @@
 <h1 id="3-git分支进行多终端工作"><a href="#3-git分支进行多终端工作" class="headerlink" title="3. git分支进行多终端工作"></a>3. git分支进行多终端工作</h1><p>问题来了，如果你现在在自己的笔记本上写的博客，部署在了网站上，那么你在家里用台式机，或者实验室的台式机，发现你电脑里面没有博客的文件，或者要换电脑了，最后不知道怎么移动文件，怎么办？</p>
 <p>在这里我们就可以利用git的分支系统进行多终端工作了，这样每次打开不一样的电脑，只需要进行简单的配置和在github上把文件同步下来，就可以无缝操作了。</p>
 <h3 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h3><p>机制是这样的，由于<code>hexo d</code>上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。</p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo4.png" alt="可以看到，并没有source等源文件在内"></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstj43xj20800d7glz.jpg" alt="可以看到，并没有source等源文件在内"></p>
 <p>也就是上传的是在本地目录里自动生成的<code>.deploy_git</code>里面。</p>
 <p>其他文件 ，包括我们写在source 里面的，和配置文件，主题文件，都没有上传到github</p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo3.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksthbryj20eb07swej.jpg" alt=""></p>
 <p>所以可以利用git的分支管理，将源文件上传到github的另一个分支即可。</p>
 <h3 id="上传分支"><a href="#上传分支" class="headerlink" title="上传分支"></a>上传分支</h3><p>首先，先在github上新建一个hexo分支，如图：</p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo8.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstkyz7j20cp0bgdg5.jpg" alt=""></p>
 <p>然后在这个仓库的settings中，选择默认分支为hexo分支（这样每次同步的时候就不用指定分支，比较方便）。</p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo9.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstl8uxj20ql0dsgmo.jpg" alt=""></p>
 <p>然后在本地的任意目录下，打开git bash，</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:ZJUFangzh/ZJUFangzh.github.io.git</span><br></pre></td></tr></table></figure>
 <p>将其克隆到本地，因为默认分支已经设成了hexo，所以clone时只clone了hexo。</p>
@@ -483,7 +483,7 @@
 <p>而后</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit –m "add branch"</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 <p>这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中<code>node_modules</code>、<code>public</code>、<code>db.json</code>已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 。</p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo7.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstk4k1j20yq0h9gmr.jpg" alt=""></p>
 <p>这样就上传完了。</p>
 <h3 id="更换电脑操作"><a href="#更换电脑操作" class="headerlink" title="更换电脑操作"></a>更换电脑操作</h3><p>一样的，跟之前的环境搭建一样，</p>
 <ul>
@@ -543,18 +543,18 @@
 <p>这样就可以在coding的项目上看到你部署的文件了。</p>
 <p><strong>5. 开启coding pages服务，绑定域名</strong></p>
 <p>如图：</p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo11.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstnswnj20xr0bugmj.jpg" alt=""></p>
 <p><strong>6. 阿里云添加解析</strong></p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo5.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstjxu6j20o709bdg1.jpg" alt=""></p>
 <p>这个时候就可以把之前github的解析改成境外，把coding的解析设为默认了。</p>
 <p><strong>7. 去除coding page的跳转广告</strong></p>
 <p>coding page的一个比较恶心人的地方就是，你只是银牌会员的话，访问会先跳转到一个广告，再到你自己的域名。那么它也给出了消除的办法。右上角切换到coding的旧版界面，默认新版是不行的。然后再来到<code>pages服务</code>这里。</p>
 <p>这里：</p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo10.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstmpshj20j80cbmxq.jpg" alt=""></p>
 <p>只要你在页面上添加一行文字，写<code>Hosted by Coding Pages</code>，然后点下面的小勾勾，两个工作日内它就会审核通过了。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Hosted by &lt;a href=&quot;https://pages.coding.me&quot; style=&quot;font-weight: bold&quot;&gt;Coding Pages&lt;/a&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
 <p>我的选择是把这一行代码放在主题文件夹<code>/layout/common/footer.ejs</code>里面，也就是本来在页面中看到的页脚部分。</p>
-<p><img src="http://peu31tfv4.bkt.clouddn.com/2hexo6.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstk1skj20lh0630su.jpg" alt=""></p>
 <p>当然，为了统一，我又在后面加上了and <strong>Github</strong>哈哈，可以不加。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&lt;span&gt;Hosted by &lt;a href=&quot;https://pages.coding.me&quot; style=&quot;font-weight: bold&quot;&gt;Coding Pages&lt;/a&gt;&lt;/span&gt; and &lt;span&gt;&lt;a href=&quot;https://github.com&quot; style=&quot;font-weight: bold&quot;&gt;Github&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
 <p>这是最终加上去的代码。</p>
@@ -567,7 +567,7 @@
 
 
 
-    <a data-url="http://fangzh.top/2018/2018090715/" data-id="cjmkdrq13001tpsu31mfhbwyt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://fangzh.top/2018/2018090715/" data-id="cjmoauxmb004588u31nxqljin" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

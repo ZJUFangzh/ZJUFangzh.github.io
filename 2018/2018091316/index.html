@@ -20,12 +20,12 @@
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
 <meta property="og:description" content="这一周主要讲了深层的神经网络搭建。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
-<meta property="og:updated_time" content="2018-09-17T03:04:28.353Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+<meta property="og:updated_time" content="2018-09-30T07:21:27.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepLearning.ai笔记:(1-4)-- 深层神经网络（Deep neural networks）">
 <meta name="twitter:description" content="这一周主要讲了深层的神经网络搭建。">
-<meta name="twitter:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
     
 
     
@@ -221,10 +221,10 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png" alt=""></p>
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg" alt=""></p>
 <p>这一周主要讲了深层的神经网络搭建。</p>
 <a id="more"></a>
-<h1 id="深层神经网络的符号表示"><a href="#深层神经网络的符号表示" class="headerlink" title="深层神经网络的符号表示"></a>深层神经网络的符号表示</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-1.jpg" alt=""></p>
+<h1 id="深层神经网络的符号表示"><a href="#深层神经网络的符号表示" class="headerlink" title="深层神经网络的符号表示"></a>深层神经网络的符号表示</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvgwahj20rq0dywi9.jpg" alt=""></p>
 <p>在深层的神经网络中，</p>
 <ul>
 <li>$L$表示神经网络的层数 $L = 4$</li>
@@ -249,17 +249,17 @@
 <p>input $da^{[l]}$</p>
 <p>output $da^{[l-1]} , dW^{[l]} , db^{[l]}$</p>
 <p>公式：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-5.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvdngjj207903ndfo.jpg" alt=""></p>
 <p>向量化：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-6.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvdr7oj20ea04lt8n.jpg" alt=""></p>
 <p>正向传播和反向传播如图：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-2.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwni9pj20v80fhjwe.jpg" alt=""></p>
 <p>具体过程为，第一层和第二层用Relu函数，第三层输出用sigmoid，这个时候的输出值是$a^{[3]}$</p>
 <p>而首先进行反向传播的时候先求得$da^{[3]} = - \frac{y}{a} - \frac{1-y}{1-a}$，然后再包括之前存在cache里面的$z^{[3]}$,反向传播可以得到$dw^{[3]}, db^{[3]},da^{[2]}$，然后继续反向，直到得到了$dw^{[1]},db^{[1]}$后，更新一下w，b的参数，然后继续做前向传播、反向传播，不断循环。</p>
-<h1 id="Why-Deep？"><a href="#Why-Deep？" class="headerlink" title="Why Deep？"></a>Why Deep？</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-3.jpg" alt=""></p>
+<h1 id="Why-Deep？"><a href="#Why-Deep？" class="headerlink" title="Why Deep？"></a>Why Deep？</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcw8gh7j20xs0eb0zr.jpg" alt=""></p>
 <p>如图直观上感觉，比如第一层，它会先识别出一些边缘信息；第二层则将这些边缘进行整合，得到一些五官信息，如眼睛、嘴巴等；到了第三层，就可以将这些信息整合起来，输出一张人脸了。</p>
 <p>如果网络层数不够深的话，可以组合的情况就很少，或者需要类似门电路那样，用单层很多个特征才能得到和深层神经网络类似的效果。</p>
-<h1 id="搭建深层神经网络块"><a href="#搭建深层神经网络块" class="headerlink" title="搭建深层神经网络块"></a>搭建深层神经网络块</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-4.jpg" alt=""></p>
+<h1 id="搭建深层神经网络块"><a href="#搭建深层神经网络块" class="headerlink" title="搭建深层神经网络块"></a>搭建深层神经网络块</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvs3orj20g90hsq69.jpg" alt=""></p>
 <p>和之前说的一样，一个网络块中包含了前向传播和反向传播。</p>
 <p>前向输入$a^{[l-1]}$，经过神经网络的计算，$g^{[l]}(w^{[l]}a^{[l-1]} + b^{[l]})$得到$a^{[l]}$</p>
 <p>反向传播，输入$da^{[l]}$，再有之前在cache的$z^{[l]}$,即可得到$dw^{[l]},db^{[l]}$还有上一层的$da^{[l-1]}$</p>
@@ -281,7 +281,7 @@
 
 
 
-    <a data-url="http://fangzh.top/2018/2018091316/" data-id="cjmkdrq0n000lpsu392i4mn5q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://fangzh.top/2018/2018091316/" data-id="cjmoauxk2001d88u3nwambfvc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

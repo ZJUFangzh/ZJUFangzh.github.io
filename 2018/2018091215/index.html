@@ -20,12 +20,12 @@
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
 <meta property="og:description" content="前面两周讲的是一些logistic和向量化的内容，以及numpy的基本使用，在他之前的机器学习课程中已经讲过了，这里就不再赘述。Week3主要讲了如何搭建两层的神经网络。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
-<meta property="og:updated_time" content="2018-09-13T03:02:42.857Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+<meta property="og:updated_time" content="2018-09-30T07:17:02.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepLearning.ai笔记:(1-3)-- 浅层神经网络（Shallow neural networks）">
 <meta name="twitter:description" content="前面两周讲的是一些logistic和向量化的内容，以及numpy的基本使用，在他之前的机器学习课程中已经讲过了，这里就不再赘述。Week3主要讲了如何搭建两层的神经网络。">
-<meta name="twitter:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
     
 
     
@@ -221,10 +221,10 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png" alt=""></p>
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg" alt=""></p>
 <p>前面两周讲的是一些logistic和向量化的内容，以及numpy的基本使用，在他之前的机器学习课程中已经讲过了，这里就不再赘述。Week3主要讲了如何搭建两层的神经网络。</p>
 <a id="more"></a>
-<h1 id="神经网络的表示"><a href="#神经网络的表示" class="headerlink" title="神经网络的表示"></a>神经网络的表示</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl1-3-1.png" alt=""></p>
+<h1 id="神经网络的表示"><a href="#神经网络的表示" class="headerlink" title="神经网络的表示"></a>神经网络的表示</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dbgfrj20zu0lq417.jpg" alt=""></p>
 <p>这周的内容就围绕着这一张图来讲。</p>
 <p>$$a_{j}^{[i]}$$</p>
 <p>这就是每一层神经元的表达方式，上标中括号[]，表示是第几层的神经元；下标表示这个是某一层的第几个神经元。</p>
@@ -234,7 +234,7 @@
 <p>而通常神经网络的层数一般不包括输入层。</p>
 <p>$w^{[i]}$：每一层的参数$w$的维度是（该层神经元个数，前面一层神经元个数）</p>
 <p>$b^{[i]}$：为（每一层的神经元个数，1）</p>
-<h1 id="计算单个数据的神经网络"><a href="#计算单个数据的神经网络" class="headerlink" title="计算单个数据的神经网络"></a>计算单个数据的神经网络</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl1-3-2.png" alt=""></p>
+<h1 id="计算单个数据的神经网络"><a href="#计算单个数据的神经网络" class="headerlink" title="计算单个数据的神经网络"></a>计算单个数据的神经网络</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8duohej20f606zaby.jpg" alt=""></p>
 <p>由此得到，计算单个数据的神经网络只需要4步：</p>
 <p>$$z^{[1]} = W^{[1]}a^{[0]} + b^{[1]}$$</p>
 <p>$$a^{[1]} = \sigma(z^{[1]})$$</p>
@@ -242,7 +242,7 @@
 <p>$$a^{[2]} = \sigma(z^{[2]})$$</p>
 <h1 id="多数据的向量化表示"><a href="#多数据的向量化表示" class="headerlink" title="多数据的向量化表示"></a>多数据的向量化表示</h1><p>我们知道，多个数据的表示就是$x^{(i)}$，使用小括号的上标。神经元也是一样。</p>
 <p>如$a^{[1] (i)}$表示第1层神经元的第i个样本。</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl1-3-3.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8e35jlj214a0mmq5j.jpg" alt=""></p>
 <p>那么如果有m个样本，一直做for循环来计算出这些神经元的值，实在是太慢了，所以跟logistic一样，可以直接用向量化来表示，这个时候用大写字母来表示。</p>
 <p>$$Z^{[1]} = W^{[1]}A^{[0]} + b^{[1]}$$</p>
 <p>$$A^{[1]} = \sigma(Z^{[1]})$$</p>
@@ -251,7 +251,7 @@
 <p>这个时候，例如$A^{[1]}$是一个$(n,m)$的矩阵，m是样本数，每一列表示一个样本，n是该层的神经元个数。</p>
 <p>从水平上看，矩阵 A代表了各个训练样本。竖直上看，A的不同索引对应不用的隐藏单元。</p>
 <p>对矩阵Z和X也是类似，水平方向对应不同的样本，竖直方向上对应不同的输入特征，也就是神经网络输入层的各个节点。</p>
-<h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl1-3-4.png" alt=""></p>
+<h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dbh36j212k0lamyg.jpg" alt=""></p>
 <p>在此前都是用sigmoid作为激活函数的。但是激活函数不只有这一种，常用的有4种，分别是：sigmoid, tanh, ReLu, Leaky ReLu。</p>
 <ul>
 <li>sigmoid: $a =  \frac{1}{1 + e^{-z}}$<ul>
@@ -280,7 +280,7 @@
 <li>ReLu：默认使用这个，如果不确定你要用哪个激活函数，那就选ReLu或者Leaky ReLu</li>
 </ul>
 <h1 id="为什么要使用非线性的激活函数"><a href="#为什么要使用非线性的激活函数" class="headerlink" title="为什么要使用非线性的激活函数"></a>为什么要使用非线性的激活函数</h1><p>如果不用激励函数（其实相当于激励函数是f(x) = x），在这种情况下你每一层输出都是上层输入的线性函数，很容易验证，无论你神经网络有多少层，输出都是输入的线性组合，与只有一个隐藏层效果相当，这种情况就是多层感知机（MLP）了。<br>正因为上面的原因，我们决定引入非线性函数作为激励函数，这样深层神经网络就有意义了（不再是输入的线性组合，可以逼近任意函数）。</p>
-<h1 id="梯度下降法公式"><a href="#梯度下降法公式" class="headerlink" title="梯度下降法公式"></a>梯度下降法公式</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl1-3-5.png" alt=""></p>
+<h1 id="梯度下降法公式"><a href="#梯度下降法公式" class="headerlink" title="梯度下降法公式"></a>梯度下降法公式</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dka8aj21260l6wgh.jpg" alt=""></p>
 <p>这里给出了浅层神经网络的梯度下降法公式。其中$g^{[1]’}(Z^{[1]})$表示你的激活函数的导数。</p>
 <h1 id="参数随机初始化"><a href="#参数随机初始化" class="headerlink" title="参数随机初始化"></a>参数随机初始化</h1><p>在神经网络中,如果将参数全部初始化为0 会导致一个问题，例如对于上面的神经网络的例子，如果将参数全部初始化为0，在每轮参数更新的时候，与输入单元相关的两个隐藏单元的结果将是相同的。</p>
 <p>所以初始化时，W要随机初始化，b不存在对称性问题，所以可以设置为0</p>
@@ -295,7 +295,7 @@
 
 
 
-    <a data-url="http://fangzh.top/2018/2018091215/" data-id="cjmkdrq0m000kpsu30girwmo5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://fangzh.top/2018/2018091215/" data-id="cjmoauxjp000n88u366rchcmb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {

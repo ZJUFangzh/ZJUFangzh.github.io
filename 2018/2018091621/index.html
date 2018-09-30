@@ -20,12 +20,12 @@
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
 <meta property="og:description" content="这周学习了优化算法，可以让神经网络运行的更快。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
-<meta property="og:updated_time" content="2018-09-17T03:18:34.061Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+<meta property="og:updated_time" content="2018-09-30T07:24:35.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepLearning.ai笔记:(2-2)-- 优化算法（Optimization algorithms）">
 <meta name="twitter:description" content="这周学习了优化算法，可以让神经网络运行的更快。">
-<meta name="twitter:image" content="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
     
 
     
@@ -221,7 +221,7 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://peu31tfv4.bkt.clouddn.com/dl.ai1.png" alt=""></p>
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg" alt=""></p>
 <p>这周学习了优化算法，可以让神经网络运行的更快。</p>
 <a id="more"></a>
 <p>主要有:</p>
@@ -235,7 +235,7 @@
 <h1 id="mini-batch-小批量"><a href="#mini-batch-小批量" class="headerlink" title="mini-batch(小批量)"></a>mini-batch(小批量)</h1><p>原本的梯度下降算法，在每一次的迭代中，要把所有的数据都进行计算再取平均，那如果你的数据量特别大的话，每进行一次迭代就会耗费大量的时间。</p>
 <p>所以就有了mini-batch，做小批量的计算迭代。也就是把训练集划分成n等分，比如数据量有500万个的时候，以1000为单位，将数据集划分为5000份，<br>$$x =  {x^{\lbrace 1 \rbrace},x^{\lbrace 2 \rbrace},x^{\lbrace 3 \rbrace},…..,x^{\lbrace 5000 \rbrace}}$$</p>
 <p>用大括弧表示每一份的mini-batch，其中每一份$x^{\lbrace t \rbrace}$都是1000个样本。</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-1.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwyt0fj214t0cjai8.jpg" alt=""></p>
 <p>这个时候引入epoch的概念，1个epoch相当于是遍历了一次数据集，比如用mini-batch，1个epoch就可以进行5000次迭代，而传统的batch把数据集都一起计算，相当于1个epoch只进行了1次迭代。</p>
 <p>具体计算步骤是：</p>
 <ul>
@@ -249,16 +249,16 @@
 </li>
 </ul>
 <p>batch和mini-batch的对比如图：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-2.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwqxv7j214t0moabs.jpg" alt=""></p>
 <ul>
 <li>如果mini-batch的样本为m的话，其实就是<strong>batch gradient descent</strong>，缺点是如果样本量太大的话，每一次迭代的时间会比较长，但是优点是每一次迭代的损失函数都是下降的，比较平稳。</li>
 <li>mini-batch样本为1的话，那就是<strong>随机梯度下降（Stochastic gradient descent）</strong>,也就是每次迭代只选择其中一个样本进行迭代，但是这样会失去了样本向量化带来的计算加速效果，损失函数总体是下降的，但是局部会很抖动，很可能无法达到全局最小点。</li>
 <li>所以选择一个合适的size很重要，$1 &lt; size &lt; m$，可以实现快速的计算效果，也能够享受向量化带来的加速。</li>
 </ul>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-3.png" alt="三种下降对比，蓝色为batch，紫色为Stochastic，绿色为mini-batch"></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcw7jxgj20dt0bu753.jpg" alt="三种下降对比，蓝色为batch，紫色为Stochastic，绿色为mini-batch"></p>
 <p><strong>mini-batch size的选择</strong></p>
 <p>因为电脑的内存和使用方式都是二进制的，而且是2的n次方，所以之前选1000也不太合理，可以选1024，但是1024也比较少见，一般是从64到512。也就是$64、128、256、512$</p>
-<h1 id="指数加权平均-Exponentially-weighted-averages"><a href="#指数加权平均-Exponentially-weighted-averages" class="headerlink" title="指数加权平均(Exponentially weighted averages )"></a>指数加权平均(Exponentially weighted averages )</h1><p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-4.png" alt=""></p>
+<h1 id="指数加权平均-Exponentially-weighted-averages"><a href="#指数加权平均-Exponentially-weighted-averages" class="headerlink" title="指数加权平均(Exponentially weighted averages )"></a>指数加权平均(Exponentially weighted averages )</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwqhxmj20jk0avjsj.jpg" alt=""></p>
 <p>蓝色的点是每一天的气温，可以看到是非常抖动的，那如果可以把它平均一下，比如把10天内的气温平均一下，就可以得到如红色的曲线。</p>
 <p>但是如果是单纯的把前面的10天气温一起平均的话，那么这样你就需要把前10天的气温全部储存记录下来，这样子虽然会更准一点，但是很浪费储存空间，所以就有了<strong>指数加权平均</strong>这样的概念。方法如下：</p>
 <p>$$V_0 = 0$$</p>
@@ -266,7 +266,7 @@
 <p>$……$</p>
 <p>$$V_t = \beta * V_{t-1} + (1 - \beta) \theta_t$$</p>
 <p>其中，$\theta_t$表示第t天的温度，而$V_t$表示指数加权平均后的第t天温度，$\beta$这个参数表示$\frac{1}{1-\beta}$天的平均，也就是，$\beta = 0.9$，表示10天内的平均，$\beta = 0.98$，表示50天内的平均。</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-5.png" alt="黄、红、绿线依次表示$\beta = 0.5,0.9,0.98，即2、10、50天的平均$"></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwl09ij20mo0b6tai.jpg" alt="黄、红、绿线依次表示$\beta = 0.5,0.9,0.98，即2、10、50天的平均$"></p>
 <h1 id="理解指数加权平均"><a href="#理解指数加权平均" class="headerlink" title="理解指数加权平均"></a>理解指数加权平均</h1><p>我们再来看一下公式：</p>
 <p>$$v_t = \beta v_{t-1} + (1 - \beta) \theta_t$$</p>
 <p>假设$\beta = 0.9$，那么</p>
@@ -283,14 +283,14 @@
 <p>$……$</p>
 <p>$$V_t = \beta * V_{t-1} + (1 - \beta) \theta_t$$</p>
 <p>如果第一天的温度是40摄氏度，那么$V_1 = 0.1 * 40 = 4$，显然是不合理的。因为初始值$V_0 = 0$，也就是前面几天的数据都会普遍偏低。所以特别是在估测初期，需要进行一些修正，这个时候就不要用$v_t$了，而是用$\frac{v_t}{1-\beta^t}$来代表第t天的温度平均，你会发现随着t的增加，$\beta^t$接近于0，所以偏差修正几乎就没有用了，而t比较小的时候，就非常有效果。</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-6.png" alt="紫色线为修正前，绿色线为修正后的效果"></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwbrumj20n509mdht.jpg" alt="紫色线为修正前，绿色线为修正后的效果"></p>
 <p>不过在大部分机器学习中，一般也不需要修正，因为只是前面的初始时期比较有偏差而已，到后面就基本不会有偏差了，所以也不太用。</p>
 <h1 id="动量梯度下降法-Gradient-descent-with-Momentum"><a href="#动量梯度下降法-Gradient-descent-with-Momentum" class="headerlink" title="动量梯度下降法 (Gradient descent with Momentum )"></a>动量梯度下降法 (Gradient descent with Momentum )</h1><p>用动量梯度下降法运行速度总是比标准的梯度下降法要来的快。它的基本思想是计算梯度的指数加权平均数，然后用该梯度来更新权重。</p>
 <p>效果如图：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-7.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcw27khj21370an40d.jpg" alt=""></p>
 <p>使用动量梯度下降法后，在竖直方向上的抖动减少了，而在水平方向上的运动反而加速了。</p>
 <p>算法公式：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-8.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcven8cj20uo0cvt97.jpg" alt=""></p>
 <p>可以发现，就是根据指数平均计算出了$v_{dW}$，然后更新参数时把$dW$换成了$v_{dw}$，$\beta$一般的取值是0.9。可以发现，在纵向的波动经过平均以后，变得非常小了，而因为在横向上，每一次的微分分量都是指向低点，所以平均后的值一直朝着低点前进。</p>
 <p>物理意义：</p>
 <ul>
@@ -300,7 +300,7 @@
 <h1 id="RMSprop（root-mean-square-prop）"><a href="#RMSprop（root-mean-square-prop）" class="headerlink" title="RMSprop（root mean square prop）"></a>RMSprop（root mean square prop）</h1><p>均方根传播。这是另一种梯度下降的优化算法。</p>
 <p>顾名思义，先平方再开根号。</p>
 <p>其实和动量梯度下降法公式差不多：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-9.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwcla5j20qm0cmq3x.jpg" alt=""></p>
 <p>在更新参数的分母项加了一项$\epsilon = 10^{-8}$,来确保算法不会除以0</p>
 <h1 id="Adam算法"><a href="#Adam算法" class="headerlink" title="Adam算法"></a>Adam算法</h1><p>Adam算法其实就是结合了Momentum和RMSprop ，注意这个时候要加上偏差修正：</p>
 <ul>
@@ -328,7 +328,7 @@
 
 
 
-    <a data-url="http://fangzh.top/2018/2018091621/" data-id="cjmkdrq0s000xpsu3ur9gk3kd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://fangzh.top/2018/2018091621/" data-id="cjmoauxk6001n88u3om0yo17h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
