@@ -20,12 +20,12 @@
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
 <meta property="og:description" content="搭建一个两层的神经网络。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pexm7md4m.bkt.clouddn.com/lion.jpg">
-<meta property="og:updated_time" content="2018-09-27T09:23:38.426Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg">
+<meta property="og:updated_time" content="2018-09-30T07:41:08.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs231n作业：assignment1 - two_layer_net">
 <meta name="twitter:description" content="搭建一个两层的神经网络。">
-<meta name="twitter:image" content="http://pexm7md4m.bkt.clouddn.com/lion.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg">
     
 
     
@@ -221,7 +221,7 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://pexm7md4m.bkt.clouddn.com/lion.jpg" alt=""></p>
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg" alt=""></p>
 <p>搭建一个两层的神经网络。</p>
 <a id="more"></a>
 <h1 id="Forward-pass"><a href="#Forward-pass" class="headerlink" title="Forward pass"></a>Forward pass</h1><p>先计算前向传播过程，编辑<code>cs231n/classifiers/neural_net.py</code>的<code>TwoLayerNet.loss</code>函数</p>
@@ -231,7 +231,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">loss, _ = net.loss(X, y, reg=0.05)</span><br><span class="line">correct_loss = 1.30378789133</span><br><span class="line"></span><br><span class="line"># should be very small, we get &lt; 1e-12</span><br><span class="line">print(&apos;Difference between your loss and correct loss:&apos;)</span><br><span class="line">print(np.sum(np.abs(loss - correct_loss)))</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Difference between your loss and correct loss:</span><br><span class="line">1.7985612998927536e-13</span><br></pre></td></tr></table></figure>
 <h1 id="Backword-pass"><a href="#Backword-pass" class="headerlink" title="Backword pass"></a>Backword pass</h1><p>依旧是这个loss函数里面，根据W1,b1,W2,b2，求出grads，求导的公式课程里没给，不过NG老师给了，<a href="http://fangzh.top/2018/2018091216/">shallow neural networks</a>，但是表示的维度不太一样，需要做稍微的修改:</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/dl1-3-8.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8euz8cj21to0z4wwp.jpg" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># Backward pass: compute gradients</span></span><br><span class="line">grads = &#123;&#125;</span><br><span class="line"><span class="comment">#############################################################################</span></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Compute the backward pass, computing the derivatives of the weights #</span></span><br><span class="line"><span class="comment"># and biases. Store the results in the grads dictionary. For example,       #</span></span><br><span class="line"><span class="comment"># grads['W1'] should store the gradient on W1, and be a matrix of same size #</span></span><br><span class="line"><span class="comment">#############################################################################</span></span><br><span class="line">dZ2 = probs-y_label</span><br><span class="line">dW2 = A1.T.dot(dZ2)</span><br><span class="line">dW2 /= N</span><br><span class="line">dW2 += <span class="number">2</span> * reg*W2</span><br><span class="line">db2 = np.sum(dZ2,axis=<span class="number">0</span>) / N</span><br><span class="line">dZ1 = (dZ2).dot(W2.T) * (A1 &gt; <span class="number">0</span>)</span><br><span class="line">dW1 = X.T.dot(dZ1) / N + <span class="number">2</span> * reg * W1</span><br><span class="line">db1 = np.sum(dZ1,axis=<span class="number">0</span>) / N</span><br><span class="line">grads[<span class="string">'W2'</span>] = dW2</span><br><span class="line">grads[<span class="string">'b2'</span>] = db2</span><br><span class="line">grads[<span class="string">'W1'</span>] = dW1</span><br><span class="line">grads[<span class="string">'b1'</span>] = db1</span><br><span class="line"><span class="comment">#############################################################################</span></span><br><span class="line"><span class="comment">#                              END OF YOUR CODE                             #</span></span><br><span class="line"><span class="comment">#############################################################################</span></span><br></pre></td></tr></table></figure>
 <p>检验一下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">W2 max relative error: 3.440708e-09</span><br><span class="line">b2 max relative error: 3.865091e-11</span><br><span class="line">W1 max relative error: 3.561318e-09</span><br><span class="line">b1 max relative error: 1.555471e-09</span><br></pre></td></tr></table></figure>
@@ -241,11 +241,11 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Implement this function; it should be VERY simple!                #</span></span><br><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line">score = self.loss(X)</span><br><span class="line">y_pred = np.argmax(score,axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment">###########################################################################</span></span><br><span class="line"><span class="comment">#                              END OF YOUR CODE                           #</span></span><br><span class="line"><span class="comment">###########################################################################</span></span><br></pre></td></tr></table></figure>
 <p>然后可以计算画图了：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">net = init_toy_model()</span><br><span class="line">stats = net.train(X, y, X, y,</span><br><span class="line">            learning_rate=<span class="number">1e-1</span>, reg=<span class="number">5e-6</span>,</span><br><span class="line">            num_iters=<span class="number">100</span>, verbose=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'Final training loss: '</span>, stats[<span class="string">'loss_history'</span>][<span class="number">-1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot the loss history</span></span><br><span class="line">plt.plot(stats[<span class="string">'loss_history'</span>])</span><br><span class="line">plt.xlabel(<span class="string">'iteration'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'training loss'</span>)</span><br><span class="line">plt.title(<span class="string">'Training Loss history'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/cs231n-1h-4-1.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvns9izj20at07q3yi.jpg" alt=""></p>
 <h1 id="载入数据集"><a href="#载入数据集" class="headerlink" title="载入数据集"></a>载入数据集</h1><p>接下来就可以载入大的数据集，进行训练了，代码都写好了，</p>
 <p>得到的准确度是:0.287</p>
 <p>画个图：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/cs231n-1h-4-2.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvnshkcj20at07qdg5.jpg" alt=""></p>
 <h1 id="调超参数"><a href="#调超参数" class="headerlink" title="调超参数"></a>调超参数</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">best_net = <span class="keyword">None</span> <span class="comment"># store the best model into this </span></span><br><span class="line">results = &#123;&#125;</span><br><span class="line">best_val = <span class="number">-1</span></span><br><span class="line">learning_rates = [<span class="number">1.2e-3</span>, <span class="number">1.5e-3</span>, <span class="number">1.75e-3</span>]</span><br><span class="line">regularization_strengths = [<span class="number">1</span>, <span class="number">1.25</span>, <span class="number">1.5</span> , <span class="number">2</span>]</span><br><span class="line"><span class="comment">#################################################################################</span></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> Tune hyperparameters using the validation set. Store your best trained  #</span></span><br><span class="line"><span class="comment"># model in best_net.                                                            #</span></span><br><span class="line"><span class="comment">#                                                                               #</span></span><br><span class="line"><span class="comment"># To help debug your network, it may help to use visualizations similar to the  #</span></span><br><span class="line"><span class="comment"># ones we used above; these visualizations will have significant qualitative    #</span></span><br><span class="line"><span class="comment"># differences from the ones we saw above for the poorly tuned network.          #</span></span><br><span class="line"><span class="comment">#                                                                               #</span></span><br><span class="line"><span class="comment"># Tweaking hyperparameters by hand can be fun, but you might find it useful to  #</span></span><br><span class="line"><span class="comment"># write code to sweep through possible combinations of hyperparameters          #</span></span><br><span class="line"><span class="comment"># automatically like we did on the previous exercises.                          #</span></span><br><span class="line"><span class="comment">#################################################################################</span></span><br><span class="line"><span class="keyword">for</span> lr <span class="keyword">in</span> learning_rates:</span><br><span class="line">    <span class="keyword">for</span> reg <span class="keyword">in</span> regularization_strengths:</span><br><span class="line">        net = TwoLayerNet(input_size, hidden_size, num_classes)</span><br><span class="line">        loss_hist = net.train(X_train, y_train, X_val, y_val,</span><br><span class="line">                    num_iters=<span class="number">1000</span>, batch_size=<span class="number">200</span>,</span><br><span class="line">                    learning_rate=lr, learning_rate_decay=<span class="number">0.95</span>,</span><br><span class="line">                    reg=reg, verbose=<span class="keyword">False</span>)</span><br><span class="line">        y_train_pred = net.predict(X_train)</span><br><span class="line">        y_val_pred = net.predict(X_val)</span><br><span class="line">        y_train_acc = np.mean(y_train_pred==y_train)</span><br><span class="line">        y_val_acc = np.mean(y_val_pred==y_val)</span><br><span class="line">        results[(lr,reg)] = [y_train_acc, y_val_acc]</span><br><span class="line">        <span class="keyword">if</span> y_val_acc &gt; best_val:</span><br><span class="line">            best_val = y_val_acc</span><br><span class="line">            best_net = net</span><br><span class="line"><span class="keyword">for</span> lr, reg <span class="keyword">in</span> sorted(results):</span><br><span class="line">    train_accuracy, val_accuracy = results[(lr, reg)]</span><br><span class="line">    print(<span class="string">'lr %e reg %e train accuracy: %f val accuracy: %f'</span> % (</span><br><span class="line">                lr, reg, train_accuracy, val_accuracy))</span><br><span class="line">    </span><br><span class="line">print(<span class="string">'best validation accuracy achieved during cross-validation: %f'</span> % best_val)</span><br><span class="line"><span class="comment">#################################################################################</span></span><br><span class="line"><span class="comment">#                               END OF YOUR CODE                                #</span></span><br><span class="line"><span class="comment">#################################################################################</span></span><br></pre></td></tr></table></figure>
 
         </div>
@@ -418,7 +418,7 @@
                             <a href="/2018/cs231n-1h-5/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - features" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - features" class="thumbnail-image"></span>
     
     
 </a>
@@ -438,7 +438,7 @@
                             <a href="/2018/cs231n-1h-4/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - two_layer_net" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - two_layer_net" class="thumbnail-image"></span>
     
     
 </a>
@@ -458,7 +458,7 @@
                             <a href="/2018/cs231n-1h-3/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - softmax" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - softmax" class="thumbnail-image"></span>
     
     
 </a>
@@ -478,7 +478,7 @@
                             <a href="/2018/cs231n-1h-2/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - svm" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - svm" class="thumbnail-image"></span>
     
     
 </a>
@@ -498,7 +498,7 @@
                             <a href="/2018/cs231n-1h-1/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - knn" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - knn" class="thumbnail-image"></span>
     
     
 </a>

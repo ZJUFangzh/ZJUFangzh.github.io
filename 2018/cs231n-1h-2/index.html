@@ -20,12 +20,12 @@
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
 <meta property="og:description" content="完成了一个基于SVM的损失函数。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pexm7md4m.bkt.clouddn.com/lion.jpg">
-<meta property="og:updated_time" content="2018-09-27T07:44:26.507Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg">
+<meta property="og:updated_time" content="2018-09-30T07:39:45.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs231n作业：assignment1 - svm">
 <meta name="twitter:description" content="完成了一个基于SVM的损失函数。">
-<meta name="twitter:image" content="http://pexm7md4m.bkt.clouddn.com/lion.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg">
     
 
     
@@ -221,7 +221,7 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://pexm7md4m.bkt.clouddn.com/lion.jpg" alt=""></p>
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg" alt=""></p>
 <p>完成了一个基于SVM的损失函数。</p>
 <a id="more"></a>
 <h1 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h1><p>载入的数据集依旧是:</p>
@@ -249,7 +249,7 @@
 <p>官方并没有给推导过程，这才是cs231n作业难的地方所在。。。</p>
 <p>详细可以看这一篇文章<a href="https://zhuanlan.zhihu.com/p/37068455" target="_blank" rel="noopener">CS 231 SVM 求导</a></p>
 <p>总之就是两个公式：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/cs231n-1h-2-1.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvntajfj20kb0kadgn.jpg" alt=""></p>
 <p>而后开始编写<code>compute_loss_naive</code> 函数，先用循环来感受一下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_naive</span><span class="params">(W, X, y, reg)</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  Structured SVM loss function, naive implementation (with loops).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Inputs have dimension D, there are C classes, and we operate on minibatches</span></span><br><span class="line"><span class="string">  of N examples.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Inputs:</span></span><br><span class="line"><span class="string">  - W: A numpy array of shape (D, C) containing weights.</span></span><br><span class="line"><span class="string">  - X: A numpy array of shape (N, D) containing a minibatch of data.</span></span><br><span class="line"><span class="string">  - y: A numpy array of shape (N,) containing training labels; y[i] = c means</span></span><br><span class="line"><span class="string">    that X[i] has label c, where 0 &lt;= c &lt; C.</span></span><br><span class="line"><span class="string">  - reg: (float) regularization strength</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Returns a tuple of:</span></span><br><span class="line"><span class="string">  - loss as single float</span></span><br><span class="line"><span class="string">  - gradient with respect to weights W; an array of same shape as W</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># compute the loss and the gradient</span></span><br><span class="line">  num_classes = W.shape[<span class="number">1</span>]</span><br><span class="line">  num_train = X.shape[<span class="number">0</span>]</span><br><span class="line">  loss = <span class="number">0.0</span></span><br><span class="line">  <span class="comment">#逐个计算每个样本的loss</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> xrange(num_train):</span><br><span class="line">    <span class="comment">#计算每个样本的各个分类得分</span></span><br><span class="line">    scores = X[i].dot(W)</span><br><span class="line">    correct_class_score = scores[y[i]]</span><br><span class="line">    <span class="comment">#计算每个分类的得分，计入loss中</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> xrange(num_classes):</span><br><span class="line">      <span class="comment"># 根据公式，j==y[i]的就是本身的分类，不用算了</span></span><br><span class="line">      <span class="keyword">if</span> j == y[i]:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">      margin = scores[j] - correct_class_score + <span class="number">1</span> <span class="comment"># note delta = 1</span></span><br><span class="line">      <span class="comment">#如果计算的margin &gt; 0，那么就要算入loss，</span></span><br><span class="line">      <span class="keyword">if</span> margin &gt; <span class="number">0</span>:</span><br><span class="line">        loss += margin</span><br><span class="line">        <span class="comment">#公式2</span></span><br><span class="line">        dW[:,y[i]] += -X[i,:].T</span><br><span class="line">        <span class="comment">#公式1</span></span><br><span class="line">        dW[:,j] += X[i, :].T</span><br><span class="line">  <span class="comment"># Right now the loss is a sum over all training examples, but we want it</span></span><br><span class="line">  <span class="comment"># to be an average instead so we divide by num_train.</span></span><br><span class="line">  loss /= num_train</span><br><span class="line">  dW /= num_train</span><br><span class="line">  <span class="comment"># Add regularization to the loss.</span></span><br><span class="line">  loss += reg * np.sum(W * W)</span><br><span class="line">  dW += reg * W</span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  <span class="comment"># <span class="doctag">TODO:</span>                                                                     #</span></span><br><span class="line">  <span class="comment"># Compute the gradient of the loss function and store it dW.                #</span></span><br><span class="line">  <span class="comment"># Rather that first computing the loss and then computing the derivative,   #</span></span><br><span class="line">  <span class="comment"># it may be simpler to compute the derivative at the same time that the     #</span></span><br><span class="line">  <span class="comment"># loss is being computed. As a result you may need to modify some of the    #</span></span><br><span class="line">  <span class="comment"># code above to compute the gradient.                                       #</span></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> loss, dW</span><br></pre></td></tr></table></figure>
 <p>写完后，用梯度检验检查一下:</p>
@@ -446,7 +446,7 @@
                             <a href="/2018/cs231n-1h-5/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - features" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - features" class="thumbnail-image"></span>
     
     
 </a>
@@ -466,7 +466,7 @@
                             <a href="/2018/cs231n-1h-4/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - two_layer_net" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - two_layer_net" class="thumbnail-image"></span>
     
     
 </a>
@@ -486,7 +486,7 @@
                             <a href="/2018/cs231n-1h-3/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - softmax" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - softmax" class="thumbnail-image"></span>
     
     
 </a>
@@ -506,7 +506,7 @@
                             <a href="/2018/cs231n-1h-2/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - svm" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - svm" class="thumbnail-image"></span>
     
     
 </a>
@@ -526,7 +526,7 @@
                             <a href="/2018/cs231n-1h-1/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - knn" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - knn" class="thumbnail-image"></span>
     
     
 </a>

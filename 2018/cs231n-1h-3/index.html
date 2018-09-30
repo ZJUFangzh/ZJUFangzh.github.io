@@ -20,12 +20,12 @@
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
 <meta property="og:description" content="softmax是最常用的分类器之一。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://pexm7md4m.bkt.clouddn.com/lion.jpg">
-<meta property="og:updated_time" content="2018-09-27T08:36:49.667Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg">
+<meta property="og:updated_time" content="2018-09-30T07:40:22.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cs231n作业：assignment1 - softmax">
 <meta name="twitter:description" content="softmax是最常用的分类器之一。">
-<meta name="twitter:image" content="http://pexm7md4m.bkt.clouddn.com/lion.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg">
     
 
     
@@ -221,7 +221,7 @@
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://pexm7md4m.bkt.clouddn.com/lion.jpg" alt=""></p>
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg" alt=""></p>
 <p>softmax是最常用的分类器之一。</p>
 <a id="more"></a>
 <p>softmax和svm都是常用的分类器，而softmax更为常用。</p>
@@ -232,12 +232,12 @@
 <p>可以看到，计算的公式也就是cross-entropy，即</p>
 <p>$$H(p,q) = - \sum_i y_i log(y_{i}^{hat})$$</p>
 <p>但是，这样有一个缺点，就是指数$e^{f_{y_i}}$可能会特别大，这样可能导致内存不足，计算不稳定等问题。那么可以在分子分母同乘一个常数C，一般C取为$logC = -max f_j$</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/cs231n-1h-3-1.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvnrx2tj20at02s3yf.jpg" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f = np.array([<span class="number">123</span>, <span class="number">456</span>, <span class="number">789</span>]) <span class="comment"># 例子中有3个分类，每个评分的数值都很大</span></span><br><span class="line">p = np.exp(f) / np.sum(np.exp(f)) <span class="comment"># 不妙：数值问题，可能导致数值爆炸</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 那么将f中的值平移到最大值为0：</span></span><br><span class="line">f -= np.max(f) <span class="comment"># f becomes [-666, -333, 0]</span></span><br><span class="line">p = np.exp(f) / np.sum(np.exp(f)) <span class="comment"># 现在OK了，将给出正确结果</span></span><br></pre></td></tr></table></figure>
 <p>精确地说，SVM分类器使用的是<em>折叶损失（hinge loss）</em>，有时候又被称为<em>最大边界损失（max-margin loss）</em>。Softmax分类器使用的是<em>交叉熵损失（corss-entropy loss）</em>。Softmax分类器的命名是从<em>softmax函数</em>那里得来的，softmax函数将原始分类评分变成正的归一化数值，所有数值和为1，这样处理后交叉熵损失才能应用。注意从技术上说“softmax损失（softmax loss）”是没有意义的，因为softmax只是一个压缩数值的函数。但是在这个说法常常被用来做简称。</p>
 <p>求导过程参考：<a href="https://zhuanlan.zhihu.com/p/37416115" target="_blank" rel="noopener">cs231n softmax求导</a></p>
 <p>最终得到的公式是：</p>
-<p><img src="http://pexm7md4m.bkt.clouddn.com/cs231n-1h-3-2.png" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvnsbaoj20al07kaae.jpg" alt=""></p>
 <p><strong>softmax代码实现</strong></p>
 <p>编辑<code>cs231n/classifiers/softmax.py</code>,先写一下<code>softmax_loss_naive</code>函数，依旧是循环：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax_loss_naive</span><span class="params">(W, X, y, reg)</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  Softmax loss function, naive implementation (with loops)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Inputs have dimension D, there are C classes, and we operate on minibatches</span></span><br><span class="line"><span class="string">  of N examples.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Inputs:</span></span><br><span class="line"><span class="string">  - W: A numpy array of shape (D, C) containing weights.</span></span><br><span class="line"><span class="string">  - X: A numpy array of shape (N, D) containing a minibatch of data.</span></span><br><span class="line"><span class="string">  - y: A numpy array of shape (N,) containing training labels; y[i] = c means</span></span><br><span class="line"><span class="string">    that X[i] has label c, where 0 &lt;= c &lt; C.</span></span><br><span class="line"><span class="string">  - reg: (float) regularization strength</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Returns a tuple of:</span></span><br><span class="line"><span class="string">  - loss as single float</span></span><br><span class="line"><span class="string">  - gradient with respect to weights W; an array of same shape as W</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  <span class="comment"># Initialize the loss and gradient to zero.</span></span><br><span class="line">  loss = <span class="number">0.0</span></span><br><span class="line">  dW = np.zeros_like(W)</span><br><span class="line"></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  <span class="comment"># <span class="doctag">TODO:</span> Compute the softmax loss and its gradient using explicit loops.     #</span></span><br><span class="line">  <span class="comment"># Store the loss in loss and the gradient in dW. If you are not careful     #</span></span><br><span class="line">  <span class="comment"># here, it is easy to run into numeric instability. Don't forget the        #</span></span><br><span class="line">  <span class="comment"># regularization!                                                           #</span></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  (N, D) = X.shape</span><br><span class="line">  C = W.shape[<span class="number">1</span>]</span><br><span class="line">  <span class="comment">#遍历每个样本</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">    f_i = X[i].dot(W)</span><br><span class="line">    <span class="comment">#进行公式的指数修正</span></span><br><span class="line">    f_i -= np.max(f_i)</span><br><span class="line">    sum_j = np.sum(np.exp(f_i))</span><br><span class="line">    <span class="comment">#得到样本中每个类别的概率</span></span><br><span class="line">    p = <span class="keyword">lambda</span> k : np.exp(f_i[k]) / sum_j</span><br><span class="line">    loss += - np.log(p(y[i]))</span><br><span class="line">    <span class="comment">#根据softmax求导公式</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(C):</span><br><span class="line">      p_k = p(k)</span><br><span class="line">      dW[:, k] += (p_k - (k == y[i])) * X[i]</span><br><span class="line">  </span><br><span class="line">  loss /= N</span><br><span class="line">  loss += <span class="number">0.5</span> * reg * np.sum(W * W)</span><br><span class="line">  dW /= N</span><br><span class="line">  dW += reg*W</span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line">  <span class="comment">#                          END OF YOUR CODE                                 #</span></span><br><span class="line">  <span class="comment">#############################################################################</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> loss, dW</span><br></pre></td></tr></table></figure>
@@ -421,7 +421,7 @@
                             <a href="/2018/cs231n-1h-5/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - features" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - features" class="thumbnail-image"></span>
     
     
 </a>
@@ -441,7 +441,7 @@
                             <a href="/2018/cs231n-1h-4/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - two_layer_net" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - two_layer_net" class="thumbnail-image"></span>
     
     
 </a>
@@ -461,7 +461,7 @@
                             <a href="/2018/cs231n-1h-3/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - softmax" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - softmax" class="thumbnail-image"></span>
     
     
 </a>
@@ -481,7 +481,7 @@
                             <a href="/2018/cs231n-1h-2/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - svm" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - svm" class="thumbnail-image"></span>
     
     
 </a>
@@ -501,7 +501,7 @@
                             <a href="/2018/cs231n-1h-1/" class="thumbnail">
     
     
-        <span style="background-image:url(http://pexm7md4m.bkt.clouddn.com/lion.jpg)" alt="cs231n作业：assignment1 - knn" class="thumbnail-image"></span>
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - knn" class="thumbnail-image"></span>
     
     
 </a>
