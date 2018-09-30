@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN） | Fangzh的个人博客 | 人工智能拯救世界</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="dl.ai" />
+    
+    <meta name="description" content="本周的作业分为了两部分：  卷积神经网络的模型搭建 用TensorFlow来训练卷积神经网络">
+<meta name="keywords" content="dl.ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN）">
+<meta property="og:url" content="http://fangzh.top/2018/dl-ai-4-1h/index.html">
+<meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
+<meta property="og:description" content="本周的作业分为了两部分：  卷积神经网络的模型搭建 用TensorFlow来训练卷积神经网络">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+<meta property="og:updated_time" content="2018-09-30T09:27:19.208Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN）">
+<meta name="twitter:description" content="本周的作业分为了两部分：  卷积神经网络的模型搭建 用TensorFlow来训练卷积神经网络">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Fangzh的个人博客 | 人工智能拯救世界" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon_1.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+    <!--百度统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c48627a60135ae47d77a79844f7e5b04";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    <!--百度SEO-->
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+        </script>
+    <!--googleseo-->
+    <meta name="google-site-verification" content="p1u63jgcp2J7NsJHR_UxQX2Fzj_UY6Zwf8C1zTRpONM" />
+    
+    <meta name="google-site-verification" content="8ojU19tXQIB94wIY0cAPI5BKSsrqV-xxrlx46C_-WMg" />
+	<!--xiongzhang-->
+	<script src="https://xiongzhang.baidu.com/sdk/c.js?appid=1608109025415176"></script>
+	<!--shougou-->
+	<meta name="sogou_site_verification" content="tRwGjUhpuk"/>
+	<!--360-->
+	<meta name="360-site-verification" content="06663b5113fe8a05769074a579c4d4ea" />
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">人工智能、人生感悟</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/archives">归档</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/">日常技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/Linux/">Linux</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/博客搭建/">博客搭建</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/">生活</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/旅行/">旅行</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/随笔/">随笔</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">留言板</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-dl-ai-4-1h" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN）
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/dl-ai-4-1h/" class="article-date">
+            <time datetime="2018-09-30T08:07:23.000Z" itemprop="datePublished">2018-09-30</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/dl-ai/">dl.ai</a>
+    </div>
+
+                <!---cloud阅读量统计系统-->
+                阅读数量:<span id="/2018/dl-ai-4-1h/" class="leancloud_visitors" data-flag-title="DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN）"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg" alt=""></p>
+<p>本周的作业分为了两部分：</p>
+<ul>
+<li>卷积神经网络的模型搭建</li>
+<li>用TensorFlow来训练卷积神经网络</li>
+</ul>
+<a id="more"></a>
+<h1 id="Part1：Convolutional-Neural-Networks-Step-by-Step"><a href="#Part1：Convolutional-Neural-Networks-Step-by-Step" class="headerlink" title="Part1：Convolutional Neural Networks: Step by Step"></a>Part1：Convolutional Neural Networks: Step by Step</h1><p>主要内容：</p>
+<ul>
+<li>convolution funtions:<ul>
+<li>Zero Padding</li>
+<li>Convolve window</li>
+<li>Convolution forward</li>
+<li>Convolution backward (optional)</li>
+</ul>
+</li>
+<li>Pooling functions：<ul>
+<li>Pooling forward</li>
+<li>Create mask</li>
+<li>Distribute value</li>
+<li>Pooling backward (optional)</li>
+</ul>
+</li>
+</ul>
+<h2 id="Convolutional-Neural-Networks"><a href="#Convolutional-Neural-Networks" class="headerlink" title="Convolutional Neural Networks"></a>Convolutional Neural Networks</h2><p>创建CNN的主要函数</p>
+<p><strong>1. Zero Padding</strong></p>
+<p>先创建一个padding函数，用来输入图像X，输出padding后的图像，这里使用的是<code>np.pad()</code>函数，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.pad(a, ((<span class="number">0</span>,<span class="number">0</span>), (<span class="number">1</span>,<span class="number">1</span>), (<span class="number">0</span>,<span class="number">0</span>), (<span class="number">3</span>,<span class="number">3</span>), (<span class="number">0</span>,<span class="number">0</span>)), <span class="string">'constant'</span>, constant_values = (..,..))</span><br><span class="line">表示a有<span class="number">5</span>个维度，在第<span class="number">1</span>维的两边都填上<span class="number">1</span>个pad，和第<span class="number">3</span>维的两边都填上<span class="number">3</span>个pad，constant_values表示两边要填充的值</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zero_pad</span><span class="params">(X, pad)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Pad with zeros all images of the dataset X. The padding is applied to the height and width of an image, </span></span><br><span class="line"><span class="string">    as illustrated in Figure 1.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Argument:</span></span><br><span class="line"><span class="string">    X -- python numpy array of shape (m, n_H, n_W, n_C) representing a batch of m images</span></span><br><span class="line"><span class="string">    pad -- integer, amount of padding around each image on vertical and horizontal dimensions</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    X_pad -- padded image of shape (m, n_H + 2*pad, n_W + 2*pad, n_C)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ### (≈ 1 line)</span></span><br><span class="line">    X_pad = np.pad(X, ((<span class="number">0</span>,<span class="number">0</span>),(pad,pad),(pad,pad),(<span class="number">0</span>,<span class="number">0</span>)), <span class="string">'constant'</span>, constant_values=(<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> X_pad</span><br></pre></td></tr></table></figure>
+<p><strong>2.Single step of convolution</strong></p>
+<p>创建一个单步的卷积运算，也就是一次输入一个切片，大小和卷积核相同，对应元素相乘再求和，最后再加个bias项。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: conv_single_step</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_single_step</span><span class="params">(a_slice_prev, W, b)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Apply one filter defined by parameters W on a single slice (a_slice_prev) of the output activation </span></span><br><span class="line"><span class="string">    of the previous layer.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    a_slice_prev -- slice of input data of shape (f, f, n_C_prev)</span></span><br><span class="line"><span class="string">    W -- Weight parameters contained in a window - matrix of shape (f, f, n_C_prev)</span></span><br><span class="line"><span class="string">    b -- Bias parameters contained in a window - matrix of shape (1, 1, 1)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    Z -- a scalar value, result of convolving the sliding window (W, b) on a slice x of the input data</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">### START CODE HERE ### (≈ 2 lines of code)</span></span><br><span class="line">    <span class="comment"># Element-wise product between a_slice and W. Do not add the bias yet.</span></span><br><span class="line">    s = a_slice_prev * W</span><br><span class="line">    <span class="comment"># Sum over all entries of the volume s.</span></span><br><span class="line">    Z = np.sum(s)</span><br><span class="line">    <span class="comment"># Add bias b to Z. Cast b to a float() so that Z results in a scalar value.</span></span><br><span class="line">    Z = Z + float(b)</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Z</span><br></pre></td></tr></table></figure>
+<p><strong>3.Convolutional Neural Networks - Forward pass</strong></p>
+<p>创建一次完整的卷积过程，也就是利用上面的一次卷积，进行for循环。进行切片的时候，注意边界<code>vert_start, vert_end, horiz_start and horiz_end</code></p>
+<p>这一步应该先弄清楚A_prev，A，W，b的维度，超参数项包括了stride和pad</p>
+<p>$$ n_H = \lfloor \frac{n_{H_{prev}} - f + 2 \times pad}{stride} \rfloor +1 $$<br>$$ n_W = \lfloor \frac{n_{W_{prev}} - f + 2 \times pad}{stride} \rfloor +1 $$<br>$$ n_C = \text{number of filters used in the convolution}$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: conv_forward</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_forward</span><span class="params">(A_prev, W, b, hparameters)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements the forward propagation for a convolution function</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    A_prev -- output activations of the previous layer, numpy array of shape (m, n_H_prev, n_W_prev, n_C_prev)</span></span><br><span class="line"><span class="string">    W -- Weights, numpy array of shape (f, f, n_C_prev, n_C)</span></span><br><span class="line"><span class="string">    b -- Biases, numpy array of shape (1, 1, 1, n_C)</span></span><br><span class="line"><span class="string">    hparameters -- python dictionary containing "stride" and "pad"</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    Z -- conv output, numpy array of shape (m, n_H, n_W, n_C)</span></span><br><span class="line"><span class="string">    cache -- cache of values needed for the conv_backward() function</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ###</span></span><br><span class="line">    <span class="comment"># Retrieve dimensions from A_prev's shape (≈1 line)  </span></span><br><span class="line">    (m, n_H_prev, n_W_prev, n_C_prev) = A_prev.shape</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve dimensions from W's shape (≈1 line)</span></span><br><span class="line">    (f, f, n_C_prev, n_C) = W.shape</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve information from "hparameters" (≈2 lines)</span></span><br><span class="line">    stride = hparameters[<span class="string">'stride'</span>]</span><br><span class="line">    pad = hparameters[<span class="string">'pad'</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Compute the dimensions of the CONV output volume using the formula given above. Hint: use int() to floor. (≈2 lines)</span></span><br><span class="line">    n_H = int((n_H_prev + <span class="number">2</span> * pad - f) / stride + <span class="number">1</span>)</span><br><span class="line">    n_W = int((n_W_prev + <span class="number">2</span> * pad - f) / stride + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize the output volume Z with zeros. (≈1 line)</span></span><br><span class="line">    Z = np.zeros((m, n_H, n_W, n_C))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Create A_prev_pad by padding A_prev</span></span><br><span class="line">    A_prev_pad = zero_pad(A_prev, pad)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):                               <span class="comment"># loop over the batch of training examples</span></span><br><span class="line">        a_prev_pad = A_prev_pad[i]                               <span class="comment"># Select ith training example's padded activation</span></span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> range(n_H):                           <span class="comment"># loop over vertical axis of the output volume</span></span><br><span class="line">            <span class="keyword">for</span> w <span class="keyword">in</span> range(n_W):                       <span class="comment"># loop over horizontal axis of the output volume</span></span><br><span class="line">                <span class="keyword">for</span> c <span class="keyword">in</span> range(n_C):                   <span class="comment"># loop over channels (= #filters) of the output volume</span></span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># Find the corners of the current "slice" (≈4 lines)</span></span><br><span class="line">                    vert_start = h * stride</span><br><span class="line">                    vert_end = h * stride + f</span><br><span class="line">                    horiz_start = w * stride</span><br><span class="line">                    horiz_end = w * stride + f</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># Use the corners to define the (3D) slice of a_prev_pad (See Hint above the cell). (≈1 line)</span></span><br><span class="line">                    a_slice_prev = a_prev_pad[vert_start : vert_end, horiz_start : horiz_end]</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># Convolve the (3D) slice with the correct filter W and bias b, to get back one output neuron. (≈1 line)</span></span><br><span class="line">                    Z[i, h, w, c] = conv_single_step(a_slice_prev,W[:,:,:,c],b[:,:,:,c])</span><br><span class="line">                                        </span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Making sure your output shape is correct</span></span><br><span class="line">    <span class="keyword">assert</span>(Z.shape == (m, n_H, n_W, n_C))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Save information in "cache" for the backprop</span></span><br><span class="line">    cache = (A_prev, W, b, hparameters)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> Z, cache</span><br></pre></td></tr></table></figure>
+<h2 id="Pooling-layer"><a href="#Pooling-layer" class="headerlink" title="Pooling layer"></a>Pooling layer</h2><p>创建池化层，注意得到的维度需要向下取整，用int()对float()进行转换</p>
+<p>$$ n_H = \lfloor \frac{n_{H_{prev}} - f}{stride} \rfloor +1 $$<br>$$ n_W = \lfloor \frac{n_{W_{prev}} - f}{stride} \rfloor +1 $$<br>$$ n_C = n_{C_{prev}}$$</p>
+<p>同样需要先进行切边，而后分为max和average两种，分别用np.max和np.mean</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pool_forward</span><span class="params">(A_prev, hparameters, mode = <span class="string">"max"</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements the forward pass of the pooling layer</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    A_prev -- Input data, numpy array of shape (m, n_H_prev, n_W_prev, n_C_prev)</span></span><br><span class="line"><span class="string">    hparameters -- python dictionary containing "f" and "stride"</span></span><br><span class="line"><span class="string">    mode -- the pooling mode you would like to use, defined as a string ("max" or "average")</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    A -- output of the pool layer, a numpy array of shape (m, n_H, n_W, n_C)</span></span><br><span class="line"><span class="string">    cache -- cache used in the backward pass of the pooling layer, contains the input and hparameters </span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve dimensions from the input shape</span></span><br><span class="line">    (m, n_H_prev, n_W_prev, n_C_prev) = A_prev.shape</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve hyperparameters from "hparameters"</span></span><br><span class="line">    f = hparameters[<span class="string">"f"</span>]</span><br><span class="line">    stride = hparameters[<span class="string">"stride"</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Define the dimensions of the output</span></span><br><span class="line">    n_H = int(<span class="number">1</span> + (n_H_prev - f) / stride)</span><br><span class="line">    n_W = int(<span class="number">1</span> + (n_W_prev - f) / stride)</span><br><span class="line">    n_C = n_C_prev</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Initialize output matrix A</span></span><br><span class="line">    A = np.zeros((m, n_H, n_W, n_C))              </span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ###</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):                         <span class="comment"># loop over the training examples</span></span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> range(n_H):                     <span class="comment"># loop on the vertical axis of the output volume</span></span><br><span class="line">            <span class="keyword">for</span> w <span class="keyword">in</span> range(n_W):                 <span class="comment"># loop on the horizontal axis of the output volume</span></span><br><span class="line">                <span class="keyword">for</span> c <span class="keyword">in</span> range (n_C):            <span class="comment"># loop over the channels of the output volume</span></span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># Find the corners of the current "slice" (≈4 lines)</span></span><br><span class="line">                    vert_start = h * stride</span><br><span class="line">                    vert_end = vert_start + f</span><br><span class="line">                    horiz_start = w * stride</span><br><span class="line">                    horiz_end = horiz_start + f</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># Use the corners to define the current slice on the ith training example of A_prev, channel c. (≈1 line)</span></span><br><span class="line">                    a_prev_slice = A_prev[i, vert_start : vert_end, horiz_start : horiz_end, c]</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># Compute the pooling operation on the slice. Use an if statment to differentiate the modes. Use np.max/np.mean.</span></span><br><span class="line">                    <span class="keyword">if</span> mode == <span class="string">"max"</span>:</span><br><span class="line">                        A[i, h, w, c] = np.max(a_prev_slice)</span><br><span class="line">                    <span class="keyword">elif</span> mode == <span class="string">"average"</span>:</span><br><span class="line">                        A[i, h, w, c] = np.mean(a_prev_slice)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Store the input and hparameters in "cache" for pool_backward()</span></span><br><span class="line">    cache = (A_prev, hparameters)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Making sure your output shape is correct</span></span><br><span class="line">    <span class="keyword">assert</span>(A.shape == (m, n_H, n_W, n_C))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> A, cache</span><br></pre></td></tr></table></figure>
+<h2 id="Backpropagation-in-convolutional-neural-networks"><a href="#Backpropagation-in-convolutional-neural-networks" class="headerlink" title="Backpropagation in convolutional neural networks"></a>Backpropagation in convolutional neural networks</h2><p>卷积神经网络的求导是比较难以理解的，这里有卷积层的求导和池化层的求导。</p>
+<h3 id="1-Convolutional-layer-backward-pass"><a href="#1-Convolutional-layer-backward-pass" class="headerlink" title="1.Convolutional layer backward pass"></a>1.Convolutional layer backward pass</h3><p>假设经过卷积层后我们的输出$Z = W \times A +b$</p>
+<p>那么反向传播过程中需要求的就是$dA,dW,db$，其中$dA$是原输入的数据，包含了原图像中的每一个像素，</p>
+<p>而这个时候假设从后面传过来的$dZ$是已经知道的。</p>
+<p><strong>1.计算dA</strong></p>
+<p>从公式可以看出，$dA = W \times dZ$，具体一点，$dA$的每一个切片就是$W_c$乘上$dZ$在输出图片的<strong>每一个像素</strong>的求和结果，从矩阵的角度，每一次$W_c\times dZ_{hw}$得到的就是从<strong>单个输出的图片像素到输入图片切片（大小为W）</strong>的映射。因此公式为：</p>
+<p>$$ dA += \sum _{h=0} ^{n_H} \sum_{w=0} ^{n_W} W_c \times dZ_{hw} $$</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">da_prev_pad[vert_start:vert_end, horiz_start:horiz_end, :] += W[:,:,:,c] * dZ[i, h, w, c]</span><br></pre></td></tr></table></figure>
+<p><strong>2.计算dW</strong></p>
+<p>$dW = A \times dZ$，而更具体一点，因为<strong>W对Z的每一个像素都是有作用的</strong>，所以就等于每一个输入图片的切片乘以对应输出图片像素的导数，然后再求和！</p>
+<p>$$ dW_c  += \sum _{h=0} ^{n_H} \sum_{w=0} ^ {n_W} a_{slice} \times dZ_{hw}  $$</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dW[:,:,:,c] += a_slice * dZ[i, h, w, c]</span><br></pre></td></tr></table></figure>
+<p><strong>3.计算db</strong></p>
+<p>$$ db = \sum_h \sum_w dZ_{hw} $$</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db[:,:,:,c] += dZ[i, h, w, c]</span><br></pre></td></tr></table></figure>
+<p>所以得到以下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_backward</span><span class="params">(dZ, cache)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implement the backward propagation for a convolution function</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    dZ -- gradient of the cost with respect to the output of the conv layer (Z), numpy array of shape (m, n_H, n_W, n_C)</span></span><br><span class="line"><span class="string">    cache -- cache of values needed for the conv_backward(), output of conv_forward()</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    dA_prev -- gradient of the cost with respect to the input of the conv layer (A_prev),</span></span><br><span class="line"><span class="string">               numpy array of shape (m, n_H_prev, n_W_prev, n_C_prev)</span></span><br><span class="line"><span class="string">    dW -- gradient of the cost with respect to the weights of the conv layer (W)</span></span><br><span class="line"><span class="string">          numpy array of shape (f, f, n_C_prev, n_C)</span></span><br><span class="line"><span class="string">    db -- gradient of the cost with respect to the biases of the conv layer (b)</span></span><br><span class="line"><span class="string">          numpy array of shape (1, 1, 1, n_C)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ###</span></span><br><span class="line">    <span class="comment"># Retrieve information from "cache"</span></span><br><span class="line">    (A_prev, W, b, hparameters) = cache</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve dimensions from A_prev's shape</span></span><br><span class="line">    (m, n_H_prev, n_W_prev, n_C_prev) = A_prev.shape</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve dimensions from W's shape</span></span><br><span class="line">    (f, f, n_C_prev, n_C) = W.shape</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve information from "hparameters"</span></span><br><span class="line">    stride = hparameters[<span class="string">'stride'</span>]</span><br><span class="line">    pad = hparameters[<span class="string">'pad'</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve dimensions from dZ's shape</span></span><br><span class="line">    (m, n_H, n_W, n_C) = dZ.shape</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Initialize dA_prev, dW, db with the correct shapes</span></span><br><span class="line">    dA_prev = np.zeros(A_prev.shape)                           </span><br><span class="line">    dW = np.zeros(W.shape)</span><br><span class="line">    db = np.zeros(b.shape)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Pad A_prev and dA_prev</span></span><br><span class="line">    A_prev_pad = zero_pad(A_prev, pad)</span><br><span class="line">    dA_prev_pad = zero_pad(dA_prev, pad)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):                       <span class="comment"># loop over the training examples</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># select ith training example from A_prev_pad and dA_prev_pad</span></span><br><span class="line">        a_prev_pad = A_prev_pad[i]</span><br><span class="line">        da_prev_pad = dA_prev_pad[i]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> range(n_H):                   <span class="comment"># loop over vertical axis of the output volume</span></span><br><span class="line">            <span class="keyword">for</span> w <span class="keyword">in</span> range(n_W):               <span class="comment"># loop over horizontal axis of the output volume</span></span><br><span class="line">                <span class="keyword">for</span> c <span class="keyword">in</span> range(n_C):           <span class="comment"># loop over the channels of the output volume</span></span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># Find the corners of the current "slice"</span></span><br><span class="line">                    vert_start = h * stride</span><br><span class="line">                    vert_end = h * stride + f</span><br><span class="line">                    horiz_start = w * stride</span><br><span class="line">                    horiz_end = w * stride + f</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># Use the corners to define the slice from a_prev_pad</span></span><br><span class="line">                    a_slice = a_prev_pad[vert_start : vert_end, horiz_start : horiz_end, : ]</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Update gradients for the window and the filter's parameters using the code formulas given above</span></span><br><span class="line">                    da_prev_pad[vert_start:vert_end, horiz_start:horiz_end, :] += W[:,:,:,c] * dZ[ i, h, w ,c]</span><br><span class="line"></span><br><span class="line">                    dW[:,:,:,c] += a_slice * dZ[ i, h, w ,c]</span><br><span class="line">                    db[:,:,:,c] += dZ[ i, h, w ,c]</span><br><span class="line">                    </span><br><span class="line">        <span class="comment"># Set the ith training example's dA_prev to the unpaded da_prev_pad (Hint: use X[pad:-pad, pad:-pad, :])</span></span><br><span class="line">        dA_prev[i, :, :, :] = da_prev_pad[pad:-pad, pad:-pad, :]</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Making sure your output shape is correct</span></span><br><span class="line">    <span class="keyword">assert</span>(dA_prev.shape == (m, n_H_prev, n_W_prev, n_C_prev))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dA_prev, dW, db</span><br></pre></td></tr></table></figure>
+<h3 id="Pooling-layer-backward-pass"><a href="#Pooling-layer-backward-pass" class="headerlink" title="Pooling layer - backward pass"></a>Pooling layer - backward pass</h3><p>这里max pooling和average poolling要分开处理。</p>
+<p><strong>1. Max pooling - backward pass</strong></p>
+<p>假设pool size是$2 \times 2$的，那么，4个像素中只有1个留下来了，其余的都没有效果了，所以在max pooling中，从后面传递过来的导数值，<strong>只作用在max的那个元素，而且继续往前传递，不做任何改动，在其余3个元素的导数都是0</strong>。</p>
+<p>创建一个mask矩阵，让最大值为1，其余的都为0，这样子就可以作为一个映射矩阵向前映射了。</p>
+<p>$$ X = \begin{bmatrix}1 &amp;&amp; 3  \\ 4 &amp;&amp; 2 \end{bmatrix} \quad \rightarrow  \quad M =\begin{bmatrix}<br>0 &amp;&amp; 0 \\<br>1 &amp;&amp; 0<br>\end{bmatrix}$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_mask_from_window</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Creates a mask from an input matrix x, to identify the max entry of x.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    x -- Array of shape (f, f)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    mask -- Array of the same shape as window, contains a True at the position corresponding to the max entry of x.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ### (≈1 line)</span></span><br><span class="line">    mask = (x == np.max(x))</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> mask</span><br></pre></td></tr></table></figure>
+<p><strong>2.  Average pooling - backward pass</strong></p>
+<p>和max不同，average pooling相当于把backward传过来的值分成了$n_H \times n_W$等分。所以要计算的参数就比max pooling多很多了，这也就是为什么一般都用max pooling，不用average pooling</p>
+<p>$$ dZ = 1 \quad \rightarrow  \quad dZ =\begin{bmatrix}<br>1/4 &amp;&amp; 1/4 \\<br>1/4 &amp;&amp; 1/4<br>\end{bmatrix}$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">distribute_value</span><span class="params">(dz, shape)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Distributes the input value in the matrix of dimension shape</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    dz -- input scalar</span></span><br><span class="line"><span class="string">    shape -- the shape (n_H, n_W) of the output matrix for which we want to distribute the value of dz</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    a -- Array of size (n_H, n_W) for which we distributed the value of dz</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ###</span></span><br><span class="line">    <span class="comment"># Retrieve dimensions from shape (≈1 line)</span></span><br><span class="line">    (n_H, n_W) = shape</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Compute the value to distribute on the matrix (≈1 line)</span></span><br><span class="line">    average = n_H * n_W</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Create a matrix where every entry is the "average" value (≈1 line)</span></span><br><span class="line">    a = dz / average * np.ones((n_H, n_W))</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+<p>结合两种方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pool_backward</span><span class="params">(dA, cache, mode = <span class="string">"max"</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements the backward pass of the pooling layer</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    dA -- gradient of cost with respect to the output of the pooling layer, same shape as A</span></span><br><span class="line"><span class="string">    cache -- cache output from the forward pass of the pooling layer, contains the layer's input and hparameters </span></span><br><span class="line"><span class="string">    mode -- the pooling mode you would like to use, defined as a string ("max" or "average")</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    dA_prev -- gradient of cost with respect to the input of the pooling layer, same shape as A_prev</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve information from cache (≈1 line)</span></span><br><span class="line">    (A_prev, hparameters) = cache</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve hyperparameters from "hparameters" (≈2 lines)</span></span><br><span class="line">    stride = hparameters[<span class="string">'stride'</span>]</span><br><span class="line">    f = hparameters[<span class="string">'f'</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve dimensions from A_prev's shape and dA's shape (≈2 lines)</span></span><br><span class="line">    m, n_H_prev, n_W_prev, n_C_prev = A_prev.shape</span><br><span class="line">    m, n_H, n_W, n_C = dA.shape</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Initialize dA_prev with zeros (≈1 line)</span></span><br><span class="line">    dA_prev = np.zeros(A_prev.shape)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):                       <span class="comment"># loop over the training examples</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># select training example from A_prev (≈1 line)</span></span><br><span class="line">        a_prev = A_prev[i]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> range(n_H):                   <span class="comment"># loop on the vertical axis</span></span><br><span class="line">            <span class="keyword">for</span> w <span class="keyword">in</span> range(n_W):               <span class="comment"># loop on the horizontal axis</span></span><br><span class="line">                <span class="keyword">for</span> c <span class="keyword">in</span> range(n_C):           <span class="comment"># loop over the channels (depth)</span></span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># Find the corners of the current "slice" (≈4 lines)</span></span><br><span class="line">                    vert_start = h * stride</span><br><span class="line">                    vert_end = vert_start + f</span><br><span class="line">                    horiz_start = w * stride</span><br><span class="line">                    horiz_end = horiz_start + f</span><br><span class="line">                    </span><br><span class="line">                    <span class="comment"># Compute the backward propagation in both modes.</span></span><br><span class="line">                    <span class="keyword">if</span> mode == <span class="string">"max"</span>:</span><br><span class="line">                        </span><br><span class="line">                        <span class="comment"># Use the corners and "c" to define the current slice from a_prev (≈1 line)</span></span><br><span class="line">                        a_prev_slice = a_prev[vert_start : vert_end, horiz_start : horiz_end, c]</span><br><span class="line">                        <span class="comment"># Create the mask from a_prev_slice (≈1 line)</span></span><br><span class="line">                        mask = create_mask_from_window(a_prev_slice)</span><br><span class="line">                        <span class="comment"># Set dA_prev to be dA_prev + (the mask multiplied by the correct entry of dA) (≈1 line)</span></span><br><span class="line">                        dA_prev[i, vert_start: vert_end, horiz_start: horiz_end, c] += mask * dA[i, h, w, c]</span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">elif</span> mode == <span class="string">"average"</span>:</span><br><span class="line">                        </span><br><span class="line">                        <span class="comment"># Get the value a from dA (≈1 line)</span></span><br><span class="line">                        da = dA[i, h, w, c]</span><br><span class="line">                        <span class="comment"># Define the shape of the filter as fxf (≈1 line)</span></span><br><span class="line">                        shape = (f, f)</span><br><span class="line">                        <span class="comment"># Distribute it to get the correct slice of dA_prev. i.e. Add the distributed value of da. (≈1 line)</span></span><br><span class="line">                        dA_prev[i, vert_start: vert_end, horiz_start: horiz_end, c] += distribute_value(da, shape)</span><br><span class="line">                        </span><br><span class="line">    <span class="comment">### END CODE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Making sure your output shape is correct</span></span><br><span class="line">    <span class="keyword">assert</span>(dA_prev.shape == A_prev.shape)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dA_prev</span><br></pre></td></tr></table></figure>
+<h1 id="Part2：Convolutional-Neural-Networks-Application"><a href="#Part2：Convolutional-Neural-Networks-Application" class="headerlink" title="Part2：Convolutional Neural Networks: Application"></a>Part2：Convolutional Neural Networks: Application</h1><p>用TensorFlow来搭建卷积神经网络。</p>
+<h2 id="1-Create-placeholders"><a href="#1-Create-placeholders" class="headerlink" title="1.Create placeholders"></a>1.Create placeholders</h2><p>先创建placeholders，用来训练中传递X,Y</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_placeholders</span><span class="params">(n_H0, n_W0, n_C0, n_y)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Creates the placeholders for the tensorflow session.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    n_H0 -- scalar, height of an input image</span></span><br><span class="line"><span class="string">    n_W0 -- scalar, width of an input image</span></span><br><span class="line"><span class="string">    n_C0 -- scalar, number of channels of the input</span></span><br><span class="line"><span class="string">    n_y -- scalar, number of classes</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    X -- placeholder for the data input, of shape [None, n_H0, n_W0, n_C0] and dtype "float"</span></span><br><span class="line"><span class="string">    Y -- placeholder for the input labels, of shape [None, n_y] and dtype "float"</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">### START CODE HERE ### (≈2 lines)</span></span><br><span class="line">    X = tf.placeholder(tf.float32, shape=(<span class="keyword">None</span>,n_H0, n_W0, n_C0))</span><br><span class="line">    Y = tf.placeholder(tf.float32, shape=(<span class="keyword">None</span>,n_y))</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> X, Y</span><br></pre></td></tr></table></figure>
+<h2 id="2-Initialize-parameters"><a href="#2-Initialize-parameters" class="headerlink" title="2.Initialize parameters"></a>2.Initialize parameters</h2><p>用来初始化参数，主要是W1,W2,在这里就没有用b了</p>
+<p>用<code>W = tf.get_variable(&quot;W&quot;, [1,2,3,4], initializer = ...)</code></p>
+<p>initializer 用<code>tf.contrib.layers.xavier_initializer</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: initialize_parameters</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Initializes weight parameters to build a neural network with tensorflow. The shapes are:</span></span><br><span class="line"><span class="string">                        W1 : [4, 4, 3, 8]</span></span><br><span class="line"><span class="string">                        W2 : [2, 2, 8, 16]</span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    parameters -- a dictionary of tensors containing W1, W2</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    tf.set_random_seed(<span class="number">1</span>)                              <span class="comment"># so that your "random" numbers match ours</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment">### START CODE HERE ### (approx. 2 lines of code)</span></span><br><span class="line">    W1 = tf.get_variable(<span class="string">'W1'</span>, [<span class="number">4</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">8</span>],initializer= tf.contrib.layers.xavier_initializer(seed = <span class="number">0</span> ))</span><br><span class="line">    W2 = tf.get_variable(<span class="string">'W2'</span>, [<span class="number">2</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">16</span>],initializer= tf.contrib.layers.xavier_initializer(seed = <span class="number">0</span>))</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line"></span><br><span class="line">    parameters = &#123;<span class="string">"W1"</span>: W1,</span><br><span class="line">                  <span class="string">"W2"</span>: W2&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+<p>记得这只是创建了图而已，并没有真正的初始化参数，在执行中还需要</p>
+<p><code>init = tf.global_variables_initializer()</code>    </p>
+<p><code>sess_test.run(init)</code></p>
+<h2 id="3-Forward-propagation"><a href="#3-Forward-propagation" class="headerlink" title="3. Forward propagation"></a>3. Forward propagation</h2><p>模型为：CONV2D -&gt; RELU -&gt; MAXPOOL -&gt; CONV2D -&gt; RELU -&gt; MAXPOOL -&gt; FLATTEN -&gt; FULLYCONNECTED</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- Conv2D: stride 1, padding is &quot;SAME&quot;</span><br><span class="line">- ReLU</span><br><span class="line">- Max pool: Use an 8 by 8 filter size and an 8 by 8 stride, padding is &quot;SAME&quot;</span><br><span class="line">- Conv2D: stride 1, padding is &quot;SAME&quot;</span><br><span class="line">- ReLU</span><br><span class="line">- Max pool: Use a 4 by 4 filter size and a 4 by 4 stride, padding is &quot;SAME&quot;</span><br><span class="line">- Flatten the previous output.</span><br><span class="line">- FULLYCONNECTED (FC) layer：这里全连接层不需要有激活函数，因为后面计算cost的时候会加上softmax，因此这里不需要加</span><br></pre></td></tr></table></figure>
+<p>用到的函数：</p>
+<ul>
+<li><p><strong>tf.nn.conv2d(X,W1, strides = [1,s,s,1], padding = ‘SAME’):</strong> given an input $X$ and a group of filters $W1$, this function convolves $W1$’s filters on X. The third input ([1,f,f,1]) represents the strides for each dimension of the input (m, n_H_prev, n_W_prev, n_C_prev). You can read the full documentation <a href="https://www.tensorflow.org/api_docs/python/tf/nn/conv2d" target="_blank" rel="noopener">here</a></p>
+</li>
+<li><p><strong>tf.nn.max_pool(A, ksize = [1,f,f,1], strides = [1,s,s,1], padding = ‘SAME’):</strong> given an input A, this function uses a window of size (f, f) and strides of size (s, s) to carry out max pooling over each window. You can read the full documentation <a href="https://www.tensorflow.org/api_docs/python/tf/nn/max_pool" target="_blank" rel="noopener">here</a></p>
+</li>
+<li><p><strong>tf.nn.relu(Z1):</strong> computes the elementwise ReLU of Z1 (which can be any shape). You can read the full documentation <a href="https://www.tensorflow.org/api_docs/python/tf/nn/relu" target="_blank" rel="noopener">here.</a></p>
+</li>
+<li><p><strong>tf.contrib.layers.flatten(P)</strong>: given an input P, this function flattens each example into a 1D vector it while maintaining the batch-size. It returns a flattened tensor with shape [batch_size, k]. You can read the full documentation <a href="https://www.tensorflow.org/api_docs/python/tf/contrib/layers/flatten" target="_blank" rel="noopener">here.</a></p>
+</li>
+<li><p><strong>tf.contrib.layers.fully_connected(F, num_outputs):</strong> given a the flattened input F, it returns the output computed using a fully connected layer. You can read the full documentation <a href="https://www.tensorflow.org/api_docs/python/tf/contrib/layers/fully_connected" target="_blank" rel="noopener">here.</a></p>
+</li>
+</ul>
+<p>In the last function above (<code>tf.contrib.layers.fully_connected</code>), the fully connected layer automatically initializes weights in the graph and keeps on training them as you train the model. Hence, you did not need to initialize those weights when initializing the parameters. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: forward_propagation</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward_propagation</span><span class="params">(X, parameters)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements the forward propagation for the model:</span></span><br><span class="line"><span class="string">    CONV2D -&gt; RELU -&gt; MAXPOOL -&gt; CONV2D -&gt; RELU -&gt; MAXPOOL -&gt; FLATTEN -&gt; FULLYCONNECTED</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X -- input dataset placeholder, of shape (input size, number of examples)</span></span><br><span class="line"><span class="string">    parameters -- python dictionary containing your parameters "W1", "W2"</span></span><br><span class="line"><span class="string">                  the shapes are given in initialize_parameters</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    Z3 -- the output of the last LINEAR unit</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Retrieve the parameters from the dictionary "parameters" </span></span><br><span class="line">    W1 = parameters[<span class="string">'W1'</span>]</span><br><span class="line">    W2 = parameters[<span class="string">'W2'</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ###</span></span><br><span class="line">    <span class="comment"># CONV2D: stride of 1, padding 'SAME'</span></span><br><span class="line">    Z1 = tf.nn.conv2d(X, filter=W1, strides=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],padding=<span class="string">'SAME'</span>)</span><br><span class="line">    <span class="comment"># RELU</span></span><br><span class="line">    A1 = tf.nn.relu(Z1)</span><br><span class="line">    <span class="comment"># MAXPOOL: window 8x8, sride 8, padding 'SAME'</span></span><br><span class="line">    P1 = tf.nn.max_pool(A1,ksize=[<span class="number">1</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">1</span>], strides=[<span class="number">1</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">1</span>],padding=<span class="string">'SAME'</span>)</span><br><span class="line">    <span class="comment"># CONV2D: filters W2, stride 1, padding 'SAME'</span></span><br><span class="line">    Z2 = tf.nn.conv2d(P1, filter=W2, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],padding=<span class="string">'SAME'</span>)</span><br><span class="line">    <span class="comment"># RELU</span></span><br><span class="line">    A2 = tf.nn.relu(Z2)</span><br><span class="line">    <span class="comment"># MAXPOOL: window 4x4, stride 4, padding 'SAME'</span></span><br><span class="line">    P2 = tf.nn.max_pool(A2,ksize=[<span class="number">1</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">1</span>], strides=[<span class="number">1</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">1</span>],padding=<span class="string">'SAME'</span>)</span><br><span class="line">    <span class="comment"># FLATTEN</span></span><br><span class="line">    P2 = tf.contrib.layers.flatten(P2)</span><br><span class="line">    <span class="comment"># FULLY-CONNECTED without non-linear activation function (not not call softmax).</span></span><br><span class="line">    <span class="comment"># 6 neurons in output layer. Hint: one of the arguments should be "activation_fn=None" </span></span><br><span class="line">    Z3 = tf.contrib.layers.fully_connected(P2, <span class="number">6</span>,activation_fn=<span class="keyword">None</span>)</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Z3</span><br></pre></td></tr></table></figure>
+<h2 id="4-Compute-cost"><a href="#4-Compute-cost" class="headerlink" title="4. Compute cost"></a>4. Compute cost</h2><ul>
+<li><strong>tf.nn.softmax_cross_entropy_with_logits(logits = Z3, labels = Y):</strong> computes the softmax entropy loss. This function both computes the softmax activation function as well as the resulting loss. You can check the full documentation  <a href="https://www.tensorflow.org/api_docs/python/tf/nn/softmax_cross_entropy_with_logits" target="_blank" rel="noopener">here.</a>这个函数已经包含了计算softmax，还有求cross-entropy两件事了。</li>
+<li><strong>tf.reduce_mean:</strong> computes the mean of elements across dimensions of a tensor. Use this to sum the losses over all the examples to get the overall cost. You can check the full documentation <a href="https://www.tensorflow.org/api_docs/python/tf/reduce_mean" target="_blank" rel="noopener">here.</a></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: compute_cost </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_cost</span><span class="params">(Z3, Y)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Computes the cost</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    Z3 -- output of forward propagation (output of the last LINEAR unit), of shape (6, number of examples)</span></span><br><span class="line"><span class="string">    Y -- "true" labels vector placeholder, same shape as Z3</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    cost - Tensor of the cost function</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ### (1 line of code)</span></span><br><span class="line">    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=Z3,labels=Y))</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cost</span><br></pre></td></tr></table></figure>
+<h2 id="5-Model"><a href="#5-Model" class="headerlink" title="5. Model"></a>5. Model</h2><p>把前面的函数都结合起来，创建一个完整的模型。</p>
+<p>其中<code>random_mini_batches()</code>已经给我们了，优化器使用了</p>
+<p><code>optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: model</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(X_train, Y_train, X_test, Y_test, learning_rate = <span class="number">0.009</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">          num_epochs = <span class="number">100</span>, minibatch_size = <span class="number">64</span>, print_cost = True)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements a three-layer ConvNet in Tensorflow:</span></span><br><span class="line"><span class="string">    CONV2D -&gt; RELU -&gt; MAXPOOL -&gt; CONV2D -&gt; RELU -&gt; MAXPOOL -&gt; FLATTEN -&gt; FULLYCONNECTED</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X_train -- training set, of shape (None, 64, 64, 3)</span></span><br><span class="line"><span class="string">    Y_train -- test set, of shape (None, n_y = 6)</span></span><br><span class="line"><span class="string">    X_test -- training set, of shape (None, 64, 64, 3)</span></span><br><span class="line"><span class="string">    Y_test -- test set, of shape (None, n_y = 6)</span></span><br><span class="line"><span class="string">    learning_rate -- learning rate of the optimization</span></span><br><span class="line"><span class="string">    num_epochs -- number of epochs of the optimization loop</span></span><br><span class="line"><span class="string">    minibatch_size -- size of a minibatch</span></span><br><span class="line"><span class="string">    print_cost -- True to print the cost every 100 epochs</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    train_accuracy -- real number, accuracy on the train set (X_train)</span></span><br><span class="line"><span class="string">    test_accuracy -- real number, testing accuracy on the test set (X_test)</span></span><br><span class="line"><span class="string">    parameters -- parameters learnt by the model. They can then be used to predict.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    ops.reset_default_graph()                         <span class="comment"># to be able to rerun the model without overwriting tf variables</span></span><br><span class="line">    tf.set_random_seed(<span class="number">1</span>)                             <span class="comment"># to keep results consistent (tensorflow seed)</span></span><br><span class="line">    seed = <span class="number">3</span>                                          <span class="comment"># to keep results consistent (numpy seed)</span></span><br><span class="line">    (m, n_H0, n_W0, n_C0) = X_train.shape             </span><br><span class="line">    n_y = Y_train.shape[<span class="number">1</span>]                            </span><br><span class="line">    costs = []                                        <span class="comment"># To keep track of the cost</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Create Placeholders of the correct shape</span></span><br><span class="line">    <span class="comment">### START CODE HERE ### (1 line)</span></span><br><span class="line">    X, Y = create_placeholders(n_H0, n_W0,n_C0,n_y)</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize parameters</span></span><br><span class="line">    <span class="comment">### START CODE HERE ### (1 line)</span></span><br><span class="line">    parameters = initialize_parameters()</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Forward propagation: Build the forward propagation in the tensorflow graph</span></span><br><span class="line">    <span class="comment">### START CODE HERE ### (1 line)</span></span><br><span class="line">    Z3 = forward_propagation(X,parameters)</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Cost function: Add cost function to tensorflow graph</span></span><br><span class="line">    <span class="comment">### START CODE HERE ### (1 line)</span></span><br><span class="line">    cost = compute_cost(Z3, Y)</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Backpropagation: Define the tensorflow optimizer. Use an AdamOptimizer that minimizes the cost.</span></span><br><span class="line">    <span class="comment">### START CODE HERE ### (1 line)</span></span><br><span class="line">    optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Initialize all the variables globally</span></span><br><span class="line">    init = tf.global_variables_initializer()</span><br><span class="line">     </span><br><span class="line">    <span class="comment"># Start the session to compute the tensorflow graph</span></span><br><span class="line">    <span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Run the initialization</span></span><br><span class="line">        sess.run(init)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Do the training loop</span></span><br><span class="line">        <span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line"></span><br><span class="line">            minibatch_cost = <span class="number">0.</span></span><br><span class="line">            num_minibatches = int(m / minibatch_size) <span class="comment"># number of minibatches of size minibatch_size in the train set</span></span><br><span class="line">            seed = seed + <span class="number">1</span></span><br><span class="line">            minibatches = random_mini_batches(X_train, Y_train, minibatch_size, seed)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> minibatch <span class="keyword">in</span> minibatches:</span><br><span class="line"></span><br><span class="line">                <span class="comment"># Select a minibatch</span></span><br><span class="line">                (minibatch_X, minibatch_Y) = minibatch</span><br><span class="line">                <span class="comment"># IMPORTANT: The line that runs the graph on a minibatch.</span></span><br><span class="line">                <span class="comment"># Run the session to execute the optimizer and the cost, the feedict should contain a minibatch for (X,Y).</span></span><br><span class="line">                <span class="comment">### START CODE HERE ### (1 line)</span></span><br><span class="line">                _ , temp_cost = sess.run([optimizer,cost],feed_dict=&#123;X:minibatch_X,Y:minibatch_Y&#125;)</span><br><span class="line">                <span class="comment">### END CODE HERE ###</span></span><br><span class="line">                </span><br><span class="line">                minibatch_cost += temp_cost / num_minibatches</span><br><span class="line">                </span><br><span class="line"></span><br><span class="line">            <span class="comment"># Print the cost every epoch</span></span><br><span class="line">            <span class="keyword">if</span> print_cost == <span class="keyword">True</span> <span class="keyword">and</span> epoch % <span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">print</span> (<span class="string">"Cost after epoch %i: %f"</span> % (epoch, minibatch_cost))</span><br><span class="line">            <span class="keyword">if</span> print_cost == <span class="keyword">True</span> <span class="keyword">and</span> epoch % <span class="number">1</span> == <span class="number">0</span>:</span><br><span class="line">                costs.append(minibatch_cost)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment"># plot the cost</span></span><br><span class="line">        plt.plot(np.squeeze(costs))</span><br><span class="line">        plt.ylabel(<span class="string">'cost'</span>)</span><br><span class="line">        plt.xlabel(<span class="string">'iterations (per tens)'</span>)</span><br><span class="line">        plt.title(<span class="string">"Learning rate ="</span> + str(learning_rate))</span><br><span class="line">        plt.show()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Calculate the correct predictions</span></span><br><span class="line">        predict_op = tf.argmax(Z3, <span class="number">1</span>)</span><br><span class="line">        correct_prediction = tf.equal(predict_op, tf.argmax(Y, <span class="number">1</span>))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Calculate accuracy on the test set</span></span><br><span class="line">        accuracy = tf.reduce_mean(tf.cast(correct_prediction, <span class="string">"float"</span>))</span><br><span class="line">        print(accuracy)</span><br><span class="line">        train_accuracy = accuracy.eval(&#123;X: X_train, Y: Y_train&#125;)</span><br><span class="line">        test_accuracy = accuracy.eval(&#123;X: X_test, Y: Y_test&#125;)</span><br><span class="line">        print(<span class="string">"Train Accuracy:"</span>, train_accuracy)</span><br><span class="line">        print(<span class="string">"Test Accuracy:"</span>, test_accuracy)</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> train_accuracy, test_accuracy, parameters</span><br></pre></td></tr></table></figure>
+<p>得到效果如图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrot3vuucj20b007qdfx.jpg" alt=""></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://fangzh.top/2018/dl-ai-4-1h/" data-id="cjmonw1nb001gmgu35q6o6v1y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+
+        </footer>
+    </div>
+</article>
+<!--
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+-->
+<!--来比力评论系统，在commetn/livebe.ejs中-->
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ4OC8xNjAxNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ZJUFangzh" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/dl-ai-4-1/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">DeepLearning.ai笔记:(4-1)-- 卷积神经网络（Foundations of CNN）</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-4-1h/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN）" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-4-1h/" class="title">DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN）</a></p>
+                            <p class="item-date"><time datetime="2018-09-30T08:07:23.000Z" itemprop="datePublished">2018-09-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-4-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai笔记:(4-1)-- 卷积神经网络（Foundations of CNN）" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-4-1/" class="title">DeepLearning.ai笔记:(4-1)-- 卷积神经网络（Foundations of CNN）</a></p>
+                            <p class="item-date"><time datetime="2018-09-30T02:20:54.000Z" itemprop="datePublished">2018-09-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/cs231n-1h-5/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - features" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/cs231n-1h-5/" class="title">cs231n作业：assignment1 - features</a></p>
+                            <p class="item-date"><time datetime="2018-09-27T09:25:31.000Z" itemprop="datePublished">2018-09-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/cs231n-1h-4/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - two_layer_net" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/cs231n-1h-4/" class="title">cs231n作业：assignment1 - two_layer_net</a></p>
+                            <p class="item-date"><time datetime="2018-09-27T09:05:59.000Z" itemprop="datePublished">2018-09-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/cs231n-1h-3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - softmax" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/cs231n-1h-3/" class="title">cs231n作业：assignment1 - softmax</a></p>
+                            <p class="item-date"><time datetime="2018-09-27T08:02:57.000Z" itemprop="datePublished">2018-09-27</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">联系方式</h3>
+        <div class="widget">
+            <!--fangzhyx@foxmail.com-->
+		<p>fangzhyx@foxmail.com</p>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/Deep-Learning/">Deep Learning</a><span class="category-list-count">19</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/博客搭建/">博客搭建</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/生活/旅行/">旅行</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/随笔/">随笔</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cs231n/">cs231n</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dl-ai/">dl.ai</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/旅行/">旅行</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/航拍/">航拍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频/">视频</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/cs231n/" style="font-size: 16.67px;">cs231n</a> <a href="/tags/dl-ai/" style="font-size: 20px;">dl.ai</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/homework/" style="font-size: 18.33px;">homework</a> <a href="/tags/install/" style="font-size: 13.33px;">install</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/教程/" style="font-size: 13.33px;">教程</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/航拍/" style="font-size: 10px;">航拍</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://qhgong.com">Avalon</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://hfanss.com">幻凡ss</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://trhx.top">trhx</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Fangzh</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+
+				<!--coding pages and github-->
+                <p><span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span> and <span><a href="https://github.com" style="font-weight: bold">Github</a></span></p>
+                <!--这一段是不蒜子的访问量统计脚本-->
+                <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+                <span id="busuanzi_container_site_uv">
+                    访客数<span id="busuanzi_value_site_uv"></span>人次
+                  </span>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--往下是cloud的文章阅读量系统-->
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = 'YVSE8R91f8Qc6d6FwMTnwytk-gzGzoHsz';
+    var APP_KEY = 'ajFB9Ueh08Y5pIvkDsXSOW56';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://fangzh.top/2018/dl-ai-4-1h/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
