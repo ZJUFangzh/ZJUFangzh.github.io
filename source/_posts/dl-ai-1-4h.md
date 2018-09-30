@@ -10,7 +10,7 @@ date: 2018-09-13 17:59:43
 id: 2018091318
 ---
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 
 
@@ -617,7 +617,7 @@ def update_parameters(parameters, grads, learning_rate):
 
 依旧是识别猫猫的图片。
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-1-4-7.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcxcn0yj21540miwok.jpg)
 
 
 

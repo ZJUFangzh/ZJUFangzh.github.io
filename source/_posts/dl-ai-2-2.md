@@ -10,7 +10,7 @@ date: 2018-09-16 21:42:33
 ---
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 
 
@@ -37,7 +37,7 @@ $$x =  {x^{\lbrace 1 \rbrace},x^{\lbrace 2 \rbrace},x^{\lbrace 3 \rbrace},.....,
 
 用大括弧表示每一份的mini-batch，其中每一份$x^{\lbrace t \rbrace}$都是1000个样本。
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwyt0fj214t0cjai8.jpg)
 
 这个时候引入epoch的概念，1个epoch相当于是遍历了一次数据集，比如用mini-batch，1个epoch就可以进行5000次迭代，而传统的batch把数据集都一起计算，相当于1个epoch只进行了1次迭代。
 
@@ -54,7 +54,7 @@ $$x =  {x^{\lbrace 1 \rbrace},x^{\lbrace 2 \rbrace},x^{\lbrace 3 \rbrace},.....,
 
 batch和mini-batch的对比如图：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-2.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwqxv7j214t0moabs.jpg)
 
 
 
@@ -62,7 +62,7 @@ batch和mini-batch的对比如图：
 - mini-batch样本为1的话，那就是**随机梯度下降（Stochastic gradient descent）**,也就是每次迭代只选择其中一个样本进行迭代，但是这样会失去了样本向量化带来的计算加速效果，损失函数总体是下降的，但是局部会很抖动，很可能无法达到全局最小点。
 - 所以选择一个合适的size很重要，$1 < size < m$，可以实现快速的计算效果，也能够享受向量化带来的加速。
 
-![三种下降对比，蓝色为batch，紫色为Stochastic，绿色为mini-batch](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-3.png)
+![三种下降对比，蓝色为batch，紫色为Stochastic，绿色为mini-batch](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcw7jxgj20dt0bu753.jpg)
 
 **mini-batch size的选择**
 
@@ -74,7 +74,7 @@ batch和mini-batch的对比如图：
 
 
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-4.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwqhxmj20jk0avjsj.jpg)
 
 
 
@@ -92,7 +92,7 @@ $$V_t = \beta * V_{t-1} + (1 - \beta) \theta_t$$
 
 其中，$\theta_t$表示第t天的温度，而$V_t$表示指数加权平均后的第t天温度，$\beta$这个参数表示$\frac{1}{1-\beta}$天的平均，也就是，$\beta = 0.9$，表示10天内的平均，$\beta = 0.98$，表示50天内的平均。
 
-![黄、红、绿线依次表示$\beta = 0.5,0.9,0.98，即2、10、50天的平均$](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-5.png)
+![黄、红、绿线依次表示$\beta = 0.5,0.9,0.98，即2、10、50天的平均$](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwl09ij20mo0b6tai.jpg)
 
 
 
@@ -132,7 +132,7 @@ $$V_t = \beta * V_{t-1} + (1 - \beta) \theta_t$$
 
 如果第一天的温度是40摄氏度，那么$V_1 = 0.1 * 40 = 4$，显然是不合理的。因为初始值$V_0 = 0$，也就是前面几天的数据都会普遍偏低。所以特别是在估测初期，需要进行一些修正，这个时候就不要用$v_t$了，而是用$\frac{v_t}{1-\beta^t}$来代表第t天的温度平均，你会发现随着t的增加，$\beta^t$接近于0，所以偏差修正几乎就没有用了，而t比较小的时候，就非常有效果。
 
-![紫色线为修正前，绿色线为修正后的效果](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-6.png)
+![紫色线为修正前，绿色线为修正后的效果](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwbrumj20n509mdht.jpg)
 
 
 
@@ -148,7 +148,7 @@ $$V_t = \beta * V_{t-1} + (1 - \beta) \theta_t$$
 
 效果如图：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-7.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcw27khj21370an40d.jpg)
 
 
 
@@ -156,7 +156,7 @@ $$V_t = \beta * V_{t-1} + (1 - \beta) \theta_t$$
 
 算法公式：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-8.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcven8cj20uo0cvt97.jpg)
 
 
 
@@ -177,7 +177,7 @@ $$V_t = \beta * V_{t-1} + (1 - \beta) \theta_t$$
 
 其实和动量梯度下降法公式差不多：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-9.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwcla5j20qm0cmq3x.jpg)
 
 在更新参数的分母项加了一项$\epsilon = 10^{-8}$,来确保算法不会除以0
 

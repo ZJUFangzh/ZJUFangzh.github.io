@@ -10,7 +10,7 @@ date: 2018-09-20 17:59:04
 ---
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 这周继续讲了机器学习策略,包括误差分析、错误样本清楚、数据分布不同、迁移学习、多任务学习等。
 
@@ -92,7 +92,7 @@ date: 2018-09-20 17:59:04
 
 那么就可以把这些都写到一个向量中：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-3-1-2.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlrv0owzj211i0ky422.jpg)
 
 如图，$y = [0 1 1 0]$即表示同时**有车和停车标志**。
 
@@ -100,7 +100,7 @@ date: 2018-09-20 17:59:04
 
 这个时候的loss funtion 和logistic是一样的：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-3-1-3.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlruy2ndj20hy0250sn.jpg)
 
 如果在标注样本中，只标注了每张图片的一部分，比如说图片中有行人和车，只标注的行人，有没有车是不知道的，那么可以设为问号$y = [1 0 ? 0]$，这样也是可以训练的，但是在计算loss的时候，要把这个未标记的部分扣除，不要计算在内。
 

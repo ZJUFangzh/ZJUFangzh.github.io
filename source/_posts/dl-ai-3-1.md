@@ -10,7 +10,7 @@ date: 2018-09-20 16:48:41
 ---
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 第三门课主要讲了机器学习的一些策略，也就是在你做项目的时候，应该要具体根据什么来改进你的模型。
 
@@ -76,7 +76,7 @@ $$F1-Score = \frac{2}{\frac{1}{p} + \frac{1}{r}}$$
 
 我们训练出来的结果，应该和人类表现作比较，如果差距比较小，那么说明很接近了，如果差距比较大，应该着重优化缩小这个可避免的偏差。
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-3-1-1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlruzuroj20tu0dedhl.jpg)
 
 
 

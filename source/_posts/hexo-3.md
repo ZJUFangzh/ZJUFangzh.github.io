@@ -12,7 +12,7 @@ date: 2018-09-10 18:09:38
 ---
 
 
-![](http://peu31tfv4.bkt.clouddn.com/1.jpg)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstce5fj20ki0b4wey.jpg)
 
 
 
@@ -57,7 +57,7 @@ npm install hexo-generator-baidu-sitemap --save
 
 这时候你需要在你的根目录下`_config.xml`中看看url有没有改成你自己的：
 
-![](http://peu31tfv4.bkt.clouddn.com/3hexo-url.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstpzd9j20ar03b749.jpg)
 
 
 
@@ -67,7 +67,7 @@ npm install hexo-generator-baidu-sitemap --save
 
 这里建议使用自动提交。
 
-![](http://peu31tfv4.bkt.clouddn.com/3hexo-commit2.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstwp4pj20fc0kyq4n.jpg)
 
 自动提交又分为三种：主动推送、自动推送、sitemap。
 
@@ -76,7 +76,7 @@ npm install hexo-generator-baidu-sitemap --save
 - 自动推送：把百度生成的自动推送代码，放在主题文件`/layout/common/head.ejs`的适当位置，然后验证一下就可以了。
 - sitemap：把两个sitemap地址，提交上去，看到状态正常就OK了。
 
-![](http://peu31tfv4.bkt.clouddn.com/3hexo-sitemap.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksu9fa6j20v60m4404.jpg)
 
 
 
@@ -94,7 +94,7 @@ npm install hexo-generator-baidu-sitemap --save
 
 不出意外的话一天内google就能收录你的网站了。
 
-![](http://peu31tfv4.bkt.clouddn.com/3hexo-google.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkswrucmj20q30lkq72.jpg)
 
 
 
@@ -112,7 +112,7 @@ npm install hexo-generator-baidu-sitemap --save
 
 [来比力官网](https://livere.com/)，注册好后，点击管理页面，在`代码管理`中找到安装代码：
 
-![](http://peu31tfv4.bkt.clouddn.com/3hexo-livebe.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksu93vyj20tk0m440w.jpg)
 
 
 
@@ -126,7 +126,7 @@ npm install hexo-generator-baidu-sitemap --save
 
 然后可以自己设置一些东西：
 
-![](http://peu31tfv4.bkt.clouddn.com/3hexo-livebe2.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksufavtj20v70o9mzw.jpg)
 
 还可以设置评论提醒，这样别人评论你的时候就可以及时知道了。
 
@@ -142,7 +142,7 @@ npm install hexo-generator-baidu-sitemap --save
 
 
 
-![](http://peu31tfv4.bkt.clouddn.com/3hexo-baidutongji2.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksvbdmwj20lf0kx78n.jpg)
 
 照样把代码复制到`head.ejs`文件中，然后再进行一下安装检查，半小时左右就可以在百度统计里面看到自己的网站信息了。
 
@@ -154,11 +154,11 @@ npm install hexo-generator-baidu-sitemap --save
 
 [leanCloud](https://leancloud.cn/)，进去后注册一下，进入后创建一个应用：
 
-![](http://peu31tfv4.bkt.clouddn.com/3hexo-leancloud.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstp8rdj20h30cimxt.jpg)
 
 在`存储`中创建Class，命名为Counter,
 
-![](http://peu31tfv4.bkt.clouddn.com/3hexo-leancloudcouter.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstygbpj20gq0k0abm.jpg)
 
 
 

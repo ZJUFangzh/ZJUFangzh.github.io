@@ -10,7 +10,7 @@ date: 2018-09-12 15:34:23
 ---
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 
 
@@ -22,7 +22,7 @@ date: 2018-09-12 15:34:23
 
 #  神经网络的表示
 
-![](http://pexm7md4m.bkt.clouddn.com/dl1-3-1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dbgfrj20zu0lq417.jpg)
 
 
 
@@ -50,7 +50,7 @@ $b^{[i]}$：为（每一层的神经元个数，1）
 
 # 计算单个数据的神经网络
 
-![](http://pexm7md4m.bkt.clouddn.com/dl1-3-2.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8duohej20f606zaby.jpg)
 
 由此得到，计算单个数据的神经网络只需要4步：
 
@@ -72,7 +72,7 @@ $$a^{[2]} = \sigma(z^{[2]})$$
 
 如$a^{[1] (i)}$表示第1层神经元的第i个样本。
 
-![](http://pexm7md4m.bkt.clouddn.com/dl1-3-3.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8e35jlj214a0mmq5j.jpg)
 
 
 
@@ -98,7 +98,7 @@ $$A^{[2]} = \sigma(Z^{[2]})$$
 
 
 
-![](http://pexm7md4m.bkt.clouddn.com/dl1-3-4.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dbh36j212k0lamyg.jpg)
 
 
 
@@ -136,7 +136,7 @@ tips:
 
 # 梯度下降法公式
 
-![](http://pexm7md4m.bkt.clouddn.com/dl1-3-5.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dka8aj21260l6wgh.jpg)
 
 这里给出了浅层神经网络的梯度下降法公式。其中$g^{[1]'}(Z^{[1]})$表示你的激活函数的导数。
 

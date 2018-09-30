@@ -10,7 +10,7 @@ categories:
 - 日常技术
 - Linux
 ---
-![](http://peu31tfv4.bkt.clouddn.com/ss2.jpg)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstv140j20zk0nmaar.jpg)
 
 
 
@@ -96,7 +96,7 @@ sudo sslocal -c /home/xx/Software/ShadowsocksConfig/shadowsocks.json -d start
 
 配置好后，还需要在chrome浏览器中配置switchomega（插件），如果没有，自己去下一个。因为我们肯定是希望在指定的国外网站进行科学上网，而在国内的网站，就不需要用shadowsocks做转发了，这样很慢。所以配置一个有一定规则的列表，是很有必要的。详细的switchomega配置过程网上一大堆，这里就不详细说明了。
 
-![](http://peu31tfv4.bkt.clouddn.com/ss1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksts6ifj21060gtwfj.jpg)
 
 ---
 

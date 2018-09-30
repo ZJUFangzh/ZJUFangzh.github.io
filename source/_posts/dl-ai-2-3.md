@@ -10,7 +10,7 @@ date: 2018-09-17 20:19:55
 ---
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 
 
@@ -38,7 +38,7 @@ date: 2018-09-17 20:19:55
 
 在调参中，常用的方式是在网格中取不同的点，然后计算这些点中的最佳值，
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlon02u9j20uf0bydjm.jpg)
 
 但是左边是均匀的选点，这样有可能导致在某一个参数上变化很小，浪费计算时间，所以应该更推荐右边的选点方法，即随机选点。
 
@@ -46,7 +46,7 @@ date: 2018-09-17 20:19:55
 
 而后，当随机选点选到几个结果比较好的点时，逐步缩小范围，进行更精细的选取。
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-2.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlonce5cj20ms0gvjy9.jpg)
 
 
 
@@ -77,7 +77,7 @@ a = 10**r
 
 公式是：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-3.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlomk9bzj207g04mglj.jpg)
 
 加上$\epsilon$是为了不至于除以0
 
@@ -85,7 +85,7 @@ a = 10**r
 
 而一般标准化后还会加上两个参数，来表示新的方差$\gamma$和均值$\beta$：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-4.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlomk1hzj208002b744.jpg)
 
 $\gamma$和$\beta$也是参数，和$w,b$一样，可以在学习中进行更新。
 
@@ -95,7 +95,7 @@ $\gamma$和$\beta$也是参数，和$w,b$一样，可以在学习中进行更新
 
 
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-5.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrloml6ckj20jp0auq3x.jpg)
 
 
 
@@ -115,7 +115,7 @@ batch norm同样适用于Momentum、RMSprop 、Adam的梯度下降法来进行�
 
 
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-6.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlomo21ej20wy0asdl4.jpg)
 
 
 
@@ -151,7 +151,7 @@ batch norm是在训练集上得到的，那么怎么把它应用在测试集呢�
 
 这个时候，最后一层的activation function就变成了：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-7.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrloml9ztj20bd04ggm5.jpg)
 
 $a^{[l]}_i$就表示了每一个分类的概率。
 
@@ -159,19 +159,19 @@ $a^{[l]}_i$就表示了每一个分类的概率。
 
 计算例子如图：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-8.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlomm1xrj20dn07swff.jpg)
 
 
 
 而它的损失函数用的也是cross-entropy：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-9.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlomoq3hj20m907lacn.jpg)
 
 
 
 最终得到一个关于Y的矩阵：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-3-10.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlomna9wj20i404lq3m.jpg)
 
 
 

@@ -12,7 +12,7 @@ date: 2018-09-10 15:21:32
 ---
 
 
-![](http://peu31tfv4.bkt.clouddn.com/DeepinScreenshot_select-area_20180910183243.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksz5k6bj213p0laqv5.jpg)
 
 花了三年时间做的家乡的航拍视频，有点生涩，顺便放上来试试hexo的视频嵌入。
 
@@ -20,11 +20,11 @@ date: 2018-09-10 15:21:32
 
 <iframe 
 
-​	height=300 width=510 
+	height=300 width=510 
 
 ​	src='http://player.youku.com/embed/XMzc4NzA3Njg0MA==' 
 
-​	frameborder=0  allowfullscreen>
+	frameborder=0  allowfullscreen>
 
 </iframe>
 

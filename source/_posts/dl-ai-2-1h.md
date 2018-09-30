@@ -10,7 +10,7 @@ date: 2018-09-15 15:58:33
 id: 2018091515
 ---
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 1. 不要抄作业！
 2. 我只是把思路整理了，供个人学习。
@@ -135,7 +135,7 @@ def initialize_parameters_random(layers_dims):
 
 结果一般般
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-13.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9k3eij20cj07q74b.jpg)
 
 
 
@@ -172,7 +172,7 @@ def initialize_parameters_he(layers_dims):
 ```
 结果非常理想。
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-12.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9nqx1j20cd07qdfw.jpg)
 
 
 # Part 2：Regularization
@@ -181,7 +181,7 @@ def initialize_parameters_he(layers_dims):
 
 数据集：
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-14.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9mwpvj20c70700tk.jpg)
 
 模型函数：
 
@@ -260,7 +260,7 @@ def model(X, Y, learning_rate = 0.3, num_iterations = 30000, print_cost = True, 
 
 没有使用正则化时，效果：
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-15.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9inhkj20cq07q3z5.jpg)
 
 
 
@@ -369,7 +369,7 @@ def backward_propagation_with_regularization(X, Y, cache, lambd):
 
 加上L2正则项后，效果很明显：
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-16.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9g1msj20cq07qq3k.jpg)
 
 
 
@@ -511,7 +511,7 @@ def backward_propagation_with_dropout(X, Y, cache, keep_prob):
 
 最终结果,也还不错：
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-17.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9fw05j20cq07qdgg.jpg)
 
 
 
@@ -728,7 +728,7 @@ dictionary_to_vector()
 vector_to_dictionary()
 ```
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-18.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9zz8vj20yu0hqq61.jpg)
 
 
 

@@ -10,7 +10,7 @@ date: 2018-09-12 15:49:22
 id: 2018091216
 ---
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 
 
@@ -24,13 +24,13 @@ id: 2018091216
 
 数据集是一个类似花的数据集。
 
-![](http://pexm7md4m.bkt.clouddn.com/dl1-3-6.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dg7xxj20eb09pwg3.jpg)
 
 
 
 而如果用传统的logistic regression，做出来的就是一个二分类问题，简单粗暴的划出了一条线，
 
-![](http://pexm7md4m.bkt.clouddn.com/dl1-3-7.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dbmcdj20es0avgmy.jpg)
 
 
 
@@ -238,7 +238,7 @@ def compute_cost(A2, Y, parameters):
 
 NG说神经网络中最难理解的是这个，但是现在公式已经帮我们推倒好了。
 
-![](http://pexm7md4m.bkt.clouddn.com/dl1-3-8.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8euz8cj21to0z4wwp.jpg)
 
 
 
@@ -465,7 +465,7 @@ plt.title("Decision Boundary for hidden layer size " + str(4))
 
 可以看到，训练后神经网络得到的分界线更为合理。
 
-![](http://pexm7md4m.bkt.clouddn.com/dl1-3-9.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dm7coj20es0av0u6.jpg)
 
 ```python
 # Print accuracy
@@ -506,7 +506,7 @@ Accuracy for 20 hidden units: 90.0 %
 Accuracy for 50 hidden units: 90.25 %
 ```
 
-![](http://pexm7md4m.bkt.clouddn.com/dl1-3-10.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8ea5imj210a1kwdt2.jpg)
 
 
 

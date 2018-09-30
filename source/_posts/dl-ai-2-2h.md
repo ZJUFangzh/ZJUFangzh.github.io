@@ -11,7 +11,7 @@ date: 2018-09-17 11:06:06
 ---
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 
 
@@ -411,9 +411,9 @@ def model(X, Y, layers_dims, optimizer, learning_rate = 0.0007, mini_batch_size 
 
 **gradient descent**
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-10.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvrk09j20cj07qgm0.jpg)
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-11.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvx6npj20cq07qdgm.jpg)
 
 
 
@@ -421,11 +421,11 @@ def model(X, Y, layers_dims, optimizer, learning_rate = 0.0007, mini_batch_size 
 
 **gradient descent with momentum**
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-12a.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvl2gcj20cj07qjrs.jpg)
 
 
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-13.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvoql7j20cq07qwf9.jpg)
 
 
 
@@ -433,11 +433,11 @@ def model(X, Y, layers_dims, optimizer, learning_rate = 0.0007, mini_batch_size 
 
 **Adam mode**
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-14.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvxk5xj20cd07q0t1.jpg)
 
 
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-15a.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvnv7lj20cq07qq3o.jpg)
 
 
 
@@ -445,4 +445,4 @@ def model(X, Y, layers_dims, optimizer, learning_rate = 0.0007, mini_batch_size 
 
 效果还是很明显的：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-2-2-16.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwdv3uj209u03ljr8.jpg)

@@ -12,7 +12,7 @@ date: 2018-09-07 15:18:31
 ---
 
 
-![](http://peu31tfv4.bkt.clouddn.com/1.jpg)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstce5fj20ki0b4wey.jpg)
 
 
 
@@ -201,11 +201,11 @@ hexo publish draft newpage
 
 到这一步，如果你觉得默认的`landscape`主题不好看，那么可以在官网的主题中，选择你喜欢的一个主题进行修改就可以啦。[点这里](https://hexo.io/themes/)
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkswpjhtj21fu0rhtp6.jpg)
 
 这里有200多个主题可以选。不过最受欢迎的就是那么几个，比如[NexT主题](https://github.com/theme-next/hexo-theme-next)，非常的简洁好看，大多数人都选择这个，关于这个的教程也比较多。不过我选择的是[hueman](https://github.com/ppoffice/hexo-theme-hueman)这个主题，好像是从WordPress移植过来的，展示效果如下：
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo13.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksxvknrj21fc0q8tsl.jpg)
 
 
 
@@ -223,7 +223,7 @@ hexo publish draft newpage
 
 也就是上面菜单栏上的这些东西。
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo2.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstfwjbj20jd0233ye.jpg)
 
 其中，About这个你是找不到网页的，因为你的文章中没有about这个东西。如果你想要的话，可以执行命令
 
@@ -380,7 +380,7 @@ rss: /atom.xml
 
 机制是这样的，由于`hexo d`上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。
 
-![可以看到，并没有source等源文件在内](http://peu31tfv4.bkt.clouddn.com/2hexo4.png)
+![可以看到，并没有source等源文件在内](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstj43xj20800d7glz.jpg)
 
 
 
@@ -388,7 +388,7 @@ rss: /atom.xml
 
 其他文件 ，包括我们写在source 里面的，和配置文件，主题文件，都没有上传到github
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo3.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrksthbryj20eb07swej.jpg)
 
 
 
@@ -402,13 +402,13 @@ rss: /atom.xml
 
 首先，先在github上新建一个hexo分支，如图：
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo8.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstkyz7j20cp0bgdg5.jpg)
 
 
 
 然后在这个仓库的settings中，选择默认分支为hexo分支（这样每次同步的时候就不用指定分支，比较方便）。
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo9.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstl8uxj20ql0dsgmo.jpg)
 
 
 
@@ -448,7 +448,7 @@ git push
 
 这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中`node_modules`、`public`、`db.json`已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 。
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo7.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstk4k1j20yq0h9gmr.jpg)
 
 
 
@@ -607,11 +607,11 @@ hexo d
 
 如图：
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo11.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstnswnj20xr0bugmj.jpg)
 
 **6. 阿里云添加解析**
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo5.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstjxu6j20o709bdg1.jpg)
 
 这个时候就可以把之前github的解析改成境外，把coding的解析设为默认了。
 
@@ -621,7 +621,7 @@ coding page的一个比较恶心人的地方就是，你只是银牌会员的话
 
 这里：
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo10.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstmpshj20j80cbmxq.jpg)
 
 只要你在页面上添加一行文字，写`Hosted by Coding Pages`，然后点下面的小勾勾，两个工作日内它就会审核通过了。
 
@@ -631,7 +631,7 @@ coding page的一个比较恶心人的地方就是，你只是银牌会员的话
 
 我的选择是把这一行代码放在主题文件夹`/layout/common/footer.ejs`里面，也就是本来在页面中看到的页脚部分。
 
-![](http://peu31tfv4.bkt.clouddn.com/2hexo6.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstk1skj20lh0630su.jpg)
 
 当然，为了统一，我又在后面加上了and **Github**哈哈，可以不加。
 

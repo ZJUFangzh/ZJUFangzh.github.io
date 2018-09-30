@@ -9,7 +9,7 @@ date: 2018-09-15 13:37:15
 id: 20180901513
 ---
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 第二门课主要讲的是如何改善神经网络，通过超参数的调试、正则化以及优化。
 
@@ -39,7 +39,7 @@ id: 20180901513
 
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9c7wej21440b6q46.jpg)
 
 
 
@@ -60,7 +60,7 @@ high variance表示高方差，一般出现在overfitting情况下。
 
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-2.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9dz6uj20n306y761.jpg)
 
 
 
@@ -88,7 +88,7 @@ L1正则：$\frac{\lambda}{2m}||w||_{1} = \frac{\lambda}{2m}\sum_{j=1}^{n_{x}}{|
 
 在neural network中，
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-3.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9c3lgj20sj07iq3i.jpg)
 
 
 
@@ -96,7 +96,7 @@ L1正则：$\frac{\lambda}{2m}||w||_{1} = \frac{\lambda}{2m}\sum_{j=1}^{n_{x}}{|
 
 而我们知道这个W是一个$n^{[l]} * n^{[l-1]}$的矩阵，那么
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-4.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9bolcj20nh02v0st.jpg)
 
 它表示矩阵中所有元素的平方和。也就这一项嵌套了3层的$\sum$。
 
@@ -116,7 +116,7 @@ $$W^{[l]} = W^{[l]} - \alpha dW^{[l]}$$
 
 得到：
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-5.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9ktwij20hb05jmxc.jpg)
 
 可以看到，$(1 - \frac{\alpha \lambda}{m}) < 1$，所以每一次都会让W变小，因此L2范数正则化也成为“权重衰减”
 
@@ -126,7 +126,7 @@ $$W^{[l]} = W^{[l]} - \alpha dW^{[l]}$$
 
 直观理解是在代价函数加入正则项后，如果$\lambda$非常大，为了满足代价函数最小化，那么$w^{[l]}$这一项必须非常接近于0，所以就等价于很多神经元都没有作用了，从原本的非线性结构变成了近似的线性结构，自然就不会过拟合了。
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-6.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9cnavj20to0dqwfw.jpg)
 
 
 
@@ -134,7 +134,7 @@ $$W^{[l]} = W^{[l]} - \alpha dW^{[l]}$$
 
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-7.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9bx7jj20dg06fgll.jpg)
 
 
 
@@ -150,7 +150,7 @@ $$W^{[l]} = W^{[l]} - \alpha dW^{[l]}$$
 
 dropout(随机失活)，也是正则化的一种，顾名思义，是让神经网络中的神经元按照一定的概率随机失活。
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-8.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9rth2j20qs0ae753.jpg)
 
 **实现dropout：inverted dropout（反向随机失活）**
 
@@ -213,13 +213,13 @@ a3 /= keepprob
 
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-9.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9itq1j20u50fct9t.jpg)
 
 
 
 这样子在gradient的时候就会走的顺畅一点：
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-10.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9ildoj20tu0gpacs.jpg)
 
 
 
@@ -267,7 +267,7 @@ $$ \frac{\partial J}{\partial \theta} = \lim_{\varepsilon \to 0} \frac{J(\theta 
 
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl-ai-2-4-11.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlk9f9tnj20t70gqwfq.jpg)
 
 再对每一个$d\theta_{approx}[i]$求上面的双边梯度逼近，然后也用导数求得每一个$d\theta[i]$，然后根据图上的cheak公式。求梯度逼近的时候，设置两边的$\varepsilon = 10^{-7}$，最终求得的值如果是$10^{-7}$，那么很正常，$10^{-3}$就是错了的，如果是$10^{-5}$，那么就需要斟酌一下了。
 

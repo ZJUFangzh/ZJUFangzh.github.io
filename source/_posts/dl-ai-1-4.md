@@ -10,7 +10,7 @@ date: 2018-09-13 16:54:18
 ---
 
 
-![](http://peu31tfv4.bkt.clouddn.com/dl.ai1.png)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)
 
 这一周主要讲了深层的神经网络搭建。
 
@@ -20,7 +20,7 @@ date: 2018-09-13 16:54:18
 
 # 深层神经网络的符号表示
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-1.jpg)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvgwahj20rq0dywi9.jpg)
 
 
 
@@ -71,17 +71,17 @@ output $da^{[l-1]} , dW^{[l]} , db^{[l]}$
 
 公式：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-5.jpg)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvdngjj207903ndfo.jpg)
 
 向量化：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-6.jpg)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvdr7oj20ea04lt8n.jpg)
 
 
 
 正向传播和反向传播如图：
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-2.jpg)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcwni9pj20v80fhjwe.jpg)
 
 
 
@@ -97,7 +97,7 @@ output $da^{[l-1]} , dW^{[l]} , db^{[l]}$
 
 
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-3.jpg)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcw8gh7j20xs0eb0zr.jpg)
 
 如图直观上感觉，比如第一层，它会先识别出一些边缘信息；第二层则将这些边缘进行整合，得到一些五官信息，如眼睛、嘴巴等；到了第三层，就可以将这些信息整合起来，输出一张人脸了。
 
@@ -107,7 +107,7 @@ output $da^{[l-1]} , dW^{[l]} , db^{[l]}$
 
 
 
-![](http://pexm7md4m.bkt.clouddn.com/dl-ai-1-4-4.jpg)
+![](http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlcvs3orj20g90hsq69.jpg)
 
 
 
