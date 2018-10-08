@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://fangzh.top/2018/cs231n-1h-1/</loc>
+    
+    <lastmod>2018-09-30T12:00:35.681Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://fangzh.top/2018/cs231n-1h-5/</loc>
     
     <lastmod>2018-09-30T10:21:09.494Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://fangzh.top/2018/cs231n-1h-2/</loc>
     
     <lastmod>2018-09-30T10:20:51.363Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://fangzh.top/2018/cs231n-1h-1/</loc>
-    
-    <lastmod>2018-09-30T10:20:40.613Z</lastmod>
     
   </url>
   
