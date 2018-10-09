@@ -6,26 +6,26 @@
     
 
     
-    <title>Linux安装selenium+chromedriver | Fangzh的个人博客 | 人工智能拯救世界</title>
+    <title>DeepLearning.ai笔记:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies） | Fangzh的个人博客 | 人工智能拯救世界</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="Linux,install,python" />
+        <meta name="keywords" content="dl.ai" />
     
-    <meta name="description" content="Selenium是爬虫中用来模拟JS的利器。 下面介绍一下Linux安装selenium和chromedriver的具体做法。">
-<meta name="keywords" content="Linux,install,python">
+    <meta name="description" content="本周主要讲了深度卷积网络的一些模型：LeNet,AlexNet,VGGNet,ResNet,Inception,1×1卷积，迁移学习等。">
+<meta name="keywords" content="dl.ai">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux安装selenium+chromedriver">
-<meta property="og:url" content="http://fangzh.top/2018/2018090520/index.html">
+<meta property="og:title" content="DeepLearning.ai笔记:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies）">
+<meta property="og:url" content="http://fangzh.top/2018/dl-ai-4-2/index.html">
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta property="og:description" content="Selenium是爬虫中用来模拟JS的利器。 下面介绍一下Linux安装selenium和chromedriver的具体做法。">
+<meta property="og:description" content="本周主要讲了深度卷积网络的一些模型：LeNet,AlexNet,VGGNet,ResNet,Inception,1×1卷积，迁移学习等。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstrje1j20xc0himxw.jpg">
-<meta property="og:updated_time" content="2018-09-30T07:04:51.555Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+<meta property="og:updated_time" content="2018-10-09T11:49:06.379Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux安装selenium+chromedriver">
-<meta name="twitter:description" content="Selenium是爬虫中用来模拟JS的利器。 下面介绍一下Linux安装selenium和chromedriver的具体做法。">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstrje1j20xc0himxw.jpg">
+<meta name="twitter:title" content="DeepLearning.ai笔记:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies）">
+<meta name="twitter:description" content="本周主要讲了深度卷积网络的一些模型：LeNet,AlexNet,VGGNet,ResNet,Inception,1×1卷积，迁移学习等。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
     
 
     
@@ -180,19 +180,19 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/日常技术/Linux/">Linux</a>
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-Linux安装selenium-chromedriver" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-dl-ai-4-2" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Linux安装selenium+chromedriver
+        DeepLearning.ai笔记:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies）
         </h1>
     
 
@@ -202,8 +202,8 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2018/2018090520/" class="article-date">
-            <time datetime="2018-09-05T13:51:41.000Z" itemprop="datePublished">2018-09-05</time>
+        <a href="/2018/dl-ai-4-2/" class="article-date">
+            <time datetime="2018-10-09T09:17:04.000Z" itemprop="datePublished">2018-10-09</time>
         </a>
     </div>
 
@@ -212,34 +212,92 @@
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/install/">install</a>, <a class="tag-link" href="/tags/python/">python</a>
+        <a class="tag-link" href="/tags/dl-ai/">dl.ai</a>
     </div>
 
                 <!---cloud阅读量统计系统-->
-                阅读数量:<span id="/2018/2018090520/" class="leancloud_visitors" data-flag-title="Linux安装selenium+chromedriver"></span>次
+                阅读数量:<span id="/2018/dl-ai-4-2/" class="leancloud_visitors" data-flag-title="DeepLearning.ai笔记:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies）"></span>次
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstrje1j20xc0himxw.jpg" alt=""></p>
-<p>Selenium是爬虫中用来模拟JS的利器。</p>
-<p>下面介绍一下Linux安装selenium和chromedriver的具体做法。</p>
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg" alt=""></p>
+<p>本周主要讲了深度卷积网络的一些模型：LeNet,AlexNet,VGGNet,ResNet,Inception,1×1卷积，迁移学习等。</p>
 <a id="more"></a>
-<h2 id="1-install-selenium"><a href="#1-install-selenium" class="headerlink" title="1. install selenium"></a>1. install selenium</h2><p>首先确保已经安装了pip命令，接下来：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install -U selenium</span><br></pre></td></tr></table></figure>
-<h2 id="2-install-chromedriver"><a href="#2-install-chromedriver" class="headerlink" title="2. install chromedriver"></a>2. install chromedriver</h2><p>在<a href="http://chromedriver.storage.googleapis.com/index.html" target="_blank" rel="noopener">Chromedriver网站</a>上找到对应的版本，一般是最新版，如果你选的版本和电脑上的Chrome不互相匹配的话，在运行爬虫的时候会报错。（在网站里面的LATEST_RELEASE中可以找到最新版，不一定按那个序号来的）</p>
-<p>找到后，把下面的<code>2.41</code>改成你要安装的版本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N http://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip</span><br></pre></td></tr></table></figure></p>
-<p>然后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">unzip chromedriver_linux64.zip #解压你下载的那个包</span><br><span class="line">chmod +x chromedriver   #修改用户权限为可执行</span><br><span class="line">sudo mv -f chromedriver /usr/local/share/chromedriver #将解压后的文件移动到指定目录</span><br><span class="line"></span><br><span class="line">#在指定目录link到别的目录</span><br><span class="line">sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver </span><br><span class="line">sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver</span><br></pre></td></tr></table></figure>
-<p>一通操作后，你的selenium和chromedriver应该可以正常使用了。</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">'https://www.baidu.com/'</span>)</span><br><span class="line">print(<span class="string">'打开浏览器'</span>)</span><br><span class="line">print(driver.title)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+<h1 id="经典的卷积网络"><a href="#经典的卷积网络" class="headerlink" title="经典的卷积网络"></a>经典的卷积网络</h1><p>经典的卷及网络有三种：LeNet、AlexNet、VGGNet。</p>
+<p><strong>LeNet-5</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgc3e4j20ox0c5t9k.jpg" alt=""></p>
+<p>LeNet-5主要是单通道的手写字体的识别，这是80年代提出的算法，当时没有用padding，而且pooling用的是average pooling，但是现在大家都用max pooling了。</p>
+<p>论文中的最后预测用的是sigmoid和tanh，而现在都用了softmax。</p>
+<p><strong>AlexNet</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgltf9j20p20d9q3w.jpg" alt=""></p>
+<p>AlexNet是2012年提出的算法。用来对彩色的图片进行处理，其实大致的结构和LeNet-5是很相似的，但是网络更大，参数更多了。</p>
+<p>这个时候已经用Relu来作为激活函数了，而且用了多GPU进行计算。</p>
+<p><strong>VGG-16</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgmomwj217i0n4di7.jpg" alt=""></p>
+<p>VGG-16是2015的论文，比较简化的是，卷积层和池化层都是用相同的卷积核大小，卷积核都是3×3，stride=1，same padding，池化层用的maxpooling，为2×2，stride=2。只是在卷积的时候改变了每一层的通道数。</p>
+<p>网络很大，参数有1.38亿个参数。</p>
+<p><strong>建议阅读论文顺序：AlexNet-&gt;VGG-&gt;LeNet</strong></p>
+<h1 id="Residual-Network-残差网络"><a href="#Residual-Network-残差网络" class="headerlink" title="Residual Network(残差网络)"></a>Residual Network(残差网络)</h1><p>残差网络是由若干个残差块组成的。</p>
+<p>因为在非常深的网络中会存在梯度消失和梯度爆炸的问题，为此，引入了<strong>Skip Connection</strong>来解决，也就是残差网络的实现。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgavrvj20bc05sdfw.jpg" alt=""></p>
+<p>上图即为一个残差块的基本原理，在原本的传播过程(称为主线)中，加上了$a^{[l]}$到$z^{[l+2]}$的连接，成为’short cut’或者’skip connetction’。</p>
+<p>所以输出的表达式变成了:$a^{[l+2]} = g(z^{[l+2]} + a^{[l]})$</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgcjiqj20yv0c7gml.jpg" alt=""></p>
+<p>残差网络是由多个残差块组成的：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgdlpfj20xc08gq3p.jpg" alt=""></p>
+<p>没有残差网络和加上残差网络的效果对比，可以看到，随着layers的增加，ResNet表现的更好：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgd9gaj20yo0anq3e.jpg" alt=""></p>
+<h1 id="ResNet为何有用？"><a href="#ResNet为何有用？" class="headerlink" title="ResNet为何有用？"></a>ResNet为何有用？</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgwuudj20io05vq50.jpg" alt=""></p>
+<p>假设我们已经经过了一个很大的神经网络Big NN,得到了$a^{[l]}$</p>
+<p>那么这个时候再经过两层的神经网络得到$a^{[l+2]}$,那么表达式为：</p>
+<p>$$a^{[l+2]} = g(z^{[l+2]} + a^{[l]}) = g(W^{[l+2]} a^{[l+2]} + b^{[l+2]} + a^{[l]})$$</p>
+<p>如果加上正则化，那么权值就会很小，假设$W^{[l+2]},b^{[l+2]} = 0$， 因为激活函数是Relu，所以</p>
+<p>$$a^{[l+2]} = g(a^{[l]}) = a^{[l]}$$</p>
+<p>所以可以看到，加上残差块以后，更深的网络最差也只是和前面的效果一样，何况还有可能更好。</p>
+<p>如果只是普通的两层网络，那么结果可能更好，也可能更差。</p>
+<p>注意的是$a^{[l+2]}$要和$a^{[l]}$的维度一样，可以使用same padding，来保持维度。</p>
+<h1 id="1×1卷积"><a href="#1×1卷积" class="headerlink" title="1×1卷积"></a>1×1卷积</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgeo2fj20hs09vq2z.jpg" alt=""></p>
+<p>用1×1的卷积核可以来减少通道数，从而减少参数个数。</p>
+<h1 id="Inception-Network"><a href="#Inception-Network" class="headerlink" title="Inception Network"></a>Inception Network</h1><p>Inception的主要好处就是不需要人工来选择filter的大小和是否要添加池化层的问题。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgr815j20nj0bo756.jpg" alt=""></p>
+<p>如图可以一次性把各个卷积核的大小和max pool一起加进去，然后让机器自己学习里面的参数。</p>
+<p>但是这样有一个问题，就是计算量太大了，假设是上面的$5 \times 5 \times 192$的卷积核，有32个，这样一共要进行$28\times\28\times32\times5\times5\times192=120M$的乘法次数，运算量是很大的。</p>
+<p>如何解决这个问题呢？就需要用到前面的1×1的卷积核了。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgtwmtj20og0dqgmd.jpg" alt=""></p>
+<p>可以看到经过维度压缩，计算次数少了十倍。</p>
+<h1 id="Inception-网络"><a href="#Inception-网络" class="headerlink" title="Inception 网络"></a>Inception 网络</h1><p>单个的inception模块如下：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgsv81j215g0m70w1.jpg" alt=""></p>
+<p>构成的google net如下：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kh9sd1j21eh0quk1o.jpg" alt=""></p>
+<h1 id="使用开源的实现方案"><a href="#使用开源的实现方案" class="headerlink" title="使用开源的实现方案"></a>使用开源的实现方案</h1><p>别人已经实现的网络已经很厉害了，我觉得重复造轮子很没有必要，而且浪费时间，何况你水平也没有别人高。。还不如直接用别人的网络，然后稍加改造，这样可以很快的实现你的想法。</p>
+<p>在GitHub上找到自己感兴趣的网络结构fork过来，好好研究！</p>
+<h1 id="迁移学习"><a href="#迁移学习" class="headerlink" title="迁移学习"></a>迁移学习</h1><p>之前已经讲过迁移学习了，也就是用别人训练好的网络，固定他们已经训练好的网络参数，然后套到自己的训练集上，完成训练。</p>
+<p>如果你只有很少的数据集，那么，改变已有网络的最后一层softmax就可以了，比如原来别人的模型是有1000个分类，现在你只需要有3个分类。然后freeze冻结前面隐藏层的所有参数不变。这样就好像是你自己在训练一个很浅的神经网络，把隐藏层看做一个函数来映射，只需要训练最后的softmax层就可以了。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgqbpqj20no062aca.jpg" alt=""></p>
+<p>如果你有一定量的数据，那么freeze的范围可以减少，你可以训练后面的几层隐藏层，或者自己设计后面的隐藏层。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fw26kgiq0xj20nm04wabg.jpg" alt=""></p>
+<h1 id="数据扩充"><a href="#数据扩充" class="headerlink" title="数据扩充"></a>数据扩充</h1><p>数据不够的话，进行数据扩充是很有用的。</p>
+<p>可以采用</p>
+<ul>
+<li>镜像</li>
+<li>随机裁剪</li>
+<li>色彩转换color shifting（如三通道：R+20,G-20,B+20）等等</li>
+</ul>
+<p><strong>tips:</strong></p>
+<p>在数据比赛中</p>
+<ul>
+<li>ensembling：训练多个网络模型，然后平均结果，或者加权平均</li>
+<li>测试时使用muti-crop，也就是在把单张测试图片用数据扩充的形式变成很多张，然后运行分类器，得到的结果进行平均。</li>
+</ul>
+
         </div>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="http://fangzh.top/2018/2018090520/" data-id="cjn1nx7kj0006ksu3om4cmtrq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://fangzh.top/2018/dl-ai-4-2/" data-id="cjn1nx7la001wksu3x0w2hdlu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -365,20 +423,20 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/2018090521/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/dl-ai-4-2h/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
-            Linux安装anaconda
+            DeepLearning.ai作业:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies）
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2018/2018090514/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/dl-ai-4-1h/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">hexo教程：github page+独立域名搭建(1)</p>
+        <p class="article-nav-title">DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN）</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -666,7 +724,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://fangzh.top/2018/2018090520/';
+    var disqus_url = 'http://fangzh.top/2018/dl-ai-4-2/';
     
     (function() {
     var dsq = document.createElement('script');
