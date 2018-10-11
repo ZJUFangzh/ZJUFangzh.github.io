@@ -21,7 +21,7 @@
 <meta property="og:description" content="这一周主要讲了卷积神经网络的进一步应用：目标检测。 主要内容有：目标定位、特征点检测、目标检测、滑动窗口、Bounding Box，IOU，NMS，Anchor Boxes，Yolo算法。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
-<meta property="og:updated_time" content="2018-10-11T12:59:03.985Z">
+<meta property="og:updated_time" content="2018-10-11T13:00:12.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepLearning.ai笔记:(4-3)-- 目标检测（Object detection）">
 <meta name="twitter:description" content="这一周主要讲了卷积神经网络的进一步应用：目标检测。 主要内容有：目标定位、特征点检测、目标检测、滑动窗口、Bounding Box，IOU，NMS，Anchor Boxes，Yolo算法。">
@@ -231,7 +231,7 @@
 <p>假设我们需要分类的类别有3个，行人，汽车，自行车，如果什么都没有，那么就是背景。可以看到，y一共有8个参数：</p>
 <ul>
 <li>$P_c$：是否有目标</li>
-<li>$b_x,b_y,_b_h,b_w$：目标的位置x,y，高宽h,w</li>
+<li>$b_x,b_y,b_h,b_w$：目标的位置x,y，高宽h,w</li>
 <li>$c_1,c_2,c_3$：行人、汽车、自行车</li>
 </ul>
 <p>如果$P_c = 0$那么表示没有目标，那么我们就不关心后面的其他参数了。</p>
