@@ -6,25 +6,25 @@
     
 
     
-    <title>DeepLearning.ai笔记:(4-1)-- 卷积神经网络（Foundations of CNN） | Fangzh的个人博客 | 人工智能拯救世界</title>
+    <title>DeepLearning.ai笔记:(4-3)-- 目标检测（Object detection） | Fangzh的个人博客 | 人工智能拯救世界</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="dl.ai" />
     
-    <meta name="description" content="第四门课开始就学习深度学习关于计算机视觉的重要应用—卷积神经网络。 第一周主要是对卷积神经网络的基本构造和原理做了介绍。">
+    <meta name="description" content="这一周主要讲了卷积神经网络的进一步应用：目标检测。 主要内容有：目标定位、特征点检测、目标检测、滑动窗口、Bounding Box，IOU，NMS，Anchor Boxes，Yolo算法。">
 <meta name="keywords" content="dl.ai">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DeepLearning.ai笔记:(4-1)-- 卷积神经网络（Foundations of CNN）">
-<meta property="og:url" content="http://fangzh.top/2018/dl-ai-4-1/index.html">
+<meta property="og:title" content="DeepLearning.ai笔记:(4-3)-- 目标检测（Object detection）">
+<meta property="og:url" content="http://fangzh.top/2018/dl-ai-4-3/index.html">
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta property="og:description" content="第四门课开始就学习深度学习关于计算机视觉的重要应用—卷积神经网络。 第一周主要是对卷积神经网络的基本构造和原理做了介绍。">
+<meta property="og:description" content="这一周主要讲了卷积神经网络的进一步应用：目标检测。 主要内容有：目标定位、特征点检测、目标检测、滑动窗口、Bounding Box，IOU，NMS，Anchor Boxes，Yolo算法。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
-<meta property="og:updated_time" content="2018-09-30T07:49:24.135Z">
+<meta property="og:updated_time" content="2018-10-11T12:59:03.985Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DeepLearning.ai笔记:(4-1)-- 卷积神经网络（Foundations of CNN）">
-<meta name="twitter:description" content="第四门课开始就学习深度学习关于计算机视觉的重要应用—卷积神经网络。 第一周主要是对卷积神经网络的基本构造和原理做了介绍。">
+<meta name="twitter:title" content="DeepLearning.ai笔记:(4-3)-- 目标检测（Object detection）">
+<meta name="twitter:description" content="这一周主要讲了卷积神经网络的进一步应用：目标检测。 主要内容有：目标定位、特征点检测、目标检测、滑动窗口、Bounding Box，IOU，NMS，Anchor Boxes，Yolo算法。">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
     
 
@@ -185,14 +185,14 @@
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-dl-ai-4-1" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-dl-ai-4-3" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        DeepLearning.ai笔记:(4-1)-- 卷积神经网络（Foundations of CNN）
+        DeepLearning.ai笔记:(4-3)-- 目标检测（Object detection）
         </h1>
     
 
@@ -202,8 +202,8 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2018/dl-ai-4-1/" class="article-date">
-            <time datetime="2018-09-30T02:20:54.000Z" itemprop="datePublished">2018-09-30</time>
+        <a href="/2018/dl-ai-4-3/" class="article-date">
+            <time datetime="2018-10-11T09:02:09.000Z" itemprop="datePublished">2018-10-11</time>
         </a>
     </div>
 
@@ -216,95 +216,118 @@
     </div>
 
                 <!---cloud阅读量统计系统-->
-                阅读数量:<span id="/2018/dl-ai-4-1/" class="leancloud_visitors" data-flag-title="DeepLearning.ai笔记:(4-1)-- 卷积神经网络（Foundations of CNN）"></span>次
+                阅读数量:<span id="/2018/dl-ai-4-3/" class="leancloud_visitors" data-flag-title="DeepLearning.ai笔记:(4-3)-- 目标检测（Object detection）"></span>次
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
             <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg" alt=""></p>
-<p>第四门课开始就学习深度学习关于计算机视觉的重要应用—卷积神经网络。</p>
-<p>第一周主要是对卷积神经网络的基本构造和原理做了介绍。</p>
+<p>这一周主要讲了卷积神经网络的进一步应用：目标检测。</p>
+<p>主要内容有：目标定位、特征点检测、目标检测、滑动窗口、Bounding Box，IOU，NMS，Anchor Boxes，Yolo算法。</p>
 <a id="more"></a>
-<h1 id="计算机视觉"><a href="#计算机视觉" class="headerlink" title="计算机视觉"></a>计算机视觉</h1><p>计算机视觉是深度学习的一个非常重要的应用。比如图像分类，目标检测，图片风格迁移等。</p>
-<p>用传统的深度学习算法，假设你有一张$64×64$的猫片，又有RGB三通道，那么这个时候是$64×64×3=12288$，input layer的维度就是12288，这样其实也还可以，因为图片很小。那么如果你有$1000×1000$的照片呢，你的向量就会有300万！假设有1000个隐藏神经元，那么就是第一层的参数矩阵$W$有30亿个参数！算到地老天荒。所以用传统的深度学习算法是不现实的。</p>
-<h1 id="边缘检测"><a href="#边缘检测" class="headerlink" title="边缘检测"></a>边缘检测</h1><p>如图，这些边缘检测中，用水平检测和垂直检测会得到不同的结果。</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1v3yw2j20hg0813z5.jpg" alt=""></p>
-<p>垂直检测如下图，用一个$3×3$的过滤器（filter），也叫卷积核，在原图片$6×6$的对应地方按元素相乘，得到$4×4$的图片。</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1whcopj20x40iln2i.jpg" alt=""></p>
-<p>可以看到，用垂直边缘的filter可以将原图片中间的边缘区分出来，也就是得到了最右图中最亮的部分即为检测到的边缘。</p>
-<p>当然，如果左图的亮暗分界线反过来，则输出图片中最暗的部分表示边缘。</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1v5z60j216s0o2q4z.jpg" alt=""></p>
-<p>也自然有水平的边缘分类器。</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1v2vcqj20t509ajrh.jpg" alt=""></p>
-<p>还有更复杂的，但是我们不需要进行人工的决定这些filter是什么，因为我们可以通过训练，让机器自己学到这些参数。</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1v72odj21450mh0v0.jpg" alt=""></p>
-<h1 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h1><p>padding是填充的意思。</p>
+<h1 id="目标定位（Object-localization）"><a href="#目标定位（Object-localization）" class="headerlink" title="目标定位（Object localization）"></a>目标定位（Object localization）</h1><p>在进行目标检测之前，需要先了解一下目标定位。</p>
+<p>因为进行目标检测的时候需要预测出目标的具体位置，所以在训练的时候需要先标定一下这个目标的实际位置。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktch0hzj20ot0e1juw.jpg" alt=""></p>
+<p>假设我们需要分类的类别有3个，行人，汽车，自行车，如果什么都没有，那么就是背景。可以看到，y一共有8个参数：</p>
 <ul>
-<li><p>我们可以从之前的例子看到，每经过一次卷积运算，图片的像素都会变小，从$6×6 —&gt; 4×4$，这样子图片就会越来越小，后面就毛都不剩了。</p>
-</li>
-<li><p>还有一点就是，从卷积的运算方法来看，边缘和角落的位置卷积的次数少，会丢失有用信息。</p>
-</li>
+<li>$P_c$：是否有目标</li>
+<li>$b_x,b_y,_b_h,b_w$：目标的位置x,y，高宽h,w</li>
+<li>$c_1,c_2,c_3$：行人、汽车、自行车</li>
 </ul>
-<p>所以就有padding的想法了，也就是在图片四周填补上像素。</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1v7wyoj20c70avju6.jpg" alt="填充后从$6\times6 -&gt;8\times8$，经过$3\times3$卷积后，还是$6\times6$"></p>
-<p>计算方法如下，</p>
-<p>原数据是$n \times n$，filter为$f \times f$,padding为$p \times p$，</p>
-<p>那么得到的矩阵大小是$(n + 2p -f +1)\times(n + 2p -f +1)$</p>
-<p>padding有两种：</p>
+<p>如果$P_c = 0$那么表示没有目标，那么我们就不关心后面的其他参数了。</p>
+<h1 id="特征点检测-Landmark-detection"><a href="#特征点检测-Landmark-detection" class="headerlink" title="特征点检测(Landmark detection)"></a>特征点检测(Landmark detection)</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktegta7j20p50e0tga.jpg" alt=""></p>
+<p>如果是要检测人脸，那么可以在人脸上标注若干个特征点，假设有64个特征点，那么这个时候就有128个参数了，再加上判断是否有人脸，就有129个参数。</p>
+<p>假设要检测的是人体肢体的动作，那么同样也可以标注若干个肢体上的特征点。</p>
+<p>注意，这些都是需要<strong>人工进行标注</strong>的。</p>
+<h1 id="目标检测"><a href="#目标检测" class="headerlink" title="目标检测"></a>目标检测</h1><p><strong>滑动窗口</strong></p>
+<p>目标检测通常采用的是滑动窗口的方法来检测的。也就是用一定窗口的大小，按照指定的步长，遍历整个图像；而后再选取更大的窗口，再次遍历，依次循环。这样子，每个窗口都相当于一张小图片，对这个小图片进行图像识别，从而得到预测结果。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktcgv82j20oo0dy0wz.jpg" alt=""></p>
+<p>但是这个方法有个很明显的问题，就是每个窗口都要进行一次图像识别，速度太慢了。因此就有了滑动窗口的卷积实现。在此之前，我们需要知道如何把全连接层变为卷积层。</p>
+<p><strong>全连接层转化为卷积层</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktb7cdvj20ov0dx0tx.jpg" alt=""></p>
+<p>如图，在经过Max pool后，我们得到了$5 \times 5 \times 16$的图像，经过第一个FC层后变成了400个节点。</p>
+<p>而此时我们可以使用400个$5\times5$的卷积核，进行卷积，得到了$1\times1\times400$</p>
+<p>而后再使用400个$1\times1$的卷积核，再得到了$1\times1\times400$矩阵，所以我们就将全连接层转化成了卷积层。</p>
+<p><strong>卷积滑动窗口的实现</strong></p>
+<p>因为之前的滑动窗口每一次都要进行一次计算，太慢了。所以利用上面的全连接层转化为卷积层的做法，可以一次性把滑动窗口的结果都计算出来。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktb94djj20ns09k0vh.jpg" alt=""></p>
+<p>为了方面观察，这里把三维图像画成了平面。</p>
+<p>假设滑动的窗口是$14\times14\times3$，原图像大小是$16\times\times16\times3$。</p>
+<p>蓝色表示滑动窗口，如果步数是2的话，很容易可以得到$2\times2$的图像，不难看出，在图中最后输出的左上角的蓝色部分就是原图中蓝色部分的计算结果，以此类推。</p>
+<p>也就是说，只需要原图进行一次运算，就可以一次性得到多个滑动窗口的输出值。</p>
+<p>具体例子如下图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktb8z1tj20no0cdwhr.jpg" alt=""></p>
+<p>可以看到，原图为$28\times28$，最后得到了$8\times8 = 64$个滑动窗口。</p>
+<h1 id="Bounding-Box"><a href="#Bounding-Box" class="headerlink" title="Bounding Box"></a>Bounding Box</h1><p>上面介绍的滑动窗口的方法有一个问题，就是很多情况下并不能检测出窗口的精确位置。</p>
+<p>那么如何找到这个准确的边界框呢？有一个很快的算法叫做YOLO(you only look once)，只需要计算一次便可以检测出物体的位置。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktcya16j20p10btq8q.jpg" alt=""></p>
+<p>如图，首先，将图片分为$n \times n$个部分，如图是划分成了$3\times3=9$份，而每一份都由一个向量y来表示。</p>
+<p>因此最终得到了$3\times3\times8$的矩阵。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktblfnuj20h70cg414.jpg" alt=""></p>
+<p>要得到这个$3\times3\times8$的矩阵，只要选择适当的卷积神经网络，让输出矩阵为这个矩阵就行，而每一个小图像都有一个目标标签y，这个时候y中的$b_x,b_y$都是这个小图像的相对位置，在0-1之间，而$b_h,b_w$是可以大于1的，因为整个大目标有可能在框框外。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktb8qxxj20v606i0v4.jpg" alt=""></p>
+<p>在实际过程中可以选用更精细的划分，如$19\times19$。</p>
+<h1 id="交并比-Intersection-over-Union-IoU"><a href="#交并比-Intersection-over-Union-IoU" class="headerlink" title="交并比(Intersection over Union, IoU)"></a>交并比(Intersection over Union, IoU)</h1><p>如何判断框框是否正确呢？</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4kte96wxj20ay0at7af.jpg" alt=""></p>
+<p>如图红色为车身的框，而紫色为检测到的框，那么紫色的框到底算不算有车呢？</p>
+<p>这个时候可以用交并比来判断，也就是两个框框的交集和并集之比。</p>
+<p>$$IoU = \frac{交集面积}{并集面积}$$</p>
+<p>一般来说 $IoU  \geq 0.5$，那么说明检测正确，当然，这个阈值可以自己设定。</p>
+<h1 id="非最大值抑制（NMS）"><a href="#非最大值抑制（NMS）" class="headerlink" title="非最大值抑制（NMS）"></a>非最大值抑制（NMS）</h1><p>在实际过程中，很可能很多个框框都检测出同一个物体，那么如何判断这些边界框检测的是同一个对象呢？</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktdewjvj20a6088tdv.jpg" alt=""></p>
 <ul>
-<li>valid：也就是不填充</li>
-<li>same：输入与输出大小相同的图片, $p=(f - 1) / 2$，一般padding为奇数，因为filter是奇数</li>
+<li>首先，每一个框都会返回一个概率$P_c$，我们需要先去掉那些概率比较低的框，如去掉$P_c \leq 0.55$的框。</li>
+<li>而后，在$P_c$中找到概率最大的框，然后用算法遍历其他的边框，找出并取消掉和这个边框IoU大于0.5的框（因为如果IoU大于0.5，我们可以认为是同一个物体）</li>
+<li>循环第二步的操作</li>
 </ul>
-<h1 id="stride（步长）"><a href="#stride（步长）" class="headerlink" title="stride（步长）"></a>stride（步长）</h1><p>卷积的步长也就是每一次运算后平移的距离，之前使用都是stride=1。</p>
-<p>假设stride=2，就会得到：</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1wj691j20x60if78d.jpg" alt=""></p>
-<p>得到的矩阵大小是</p>
-<p>$$\lfloor \frac{n+2p-f}{s}+1\rfloor \times \lfloor \frac{n+2p-f}{s}+1\rfloor$$</p>
-<p>向下取整: 59/60 = 0</p>
-<h1 id="立体卷积"><a href="#立体卷积" class="headerlink" title="立体卷积"></a>立体卷积</h1><p>之前都是单通道的图片进行卷积，如果有RGB三种颜色的话，就要使用立体卷积了。</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1v6zxyj211k0lt413.jpg" alt=""></p>
-<p>这个时候的卷积核就变成了$3 \times 3 \times 3$的三维卷积核，一共27个参数，每次对应着原图片上的RGB一共27个像素运算，然后求和得到输出图片的一个像素。因为只有一个卷积核，这个时候输出的还是$4 \times 4 \times 1$的图片。</p>
-<p><strong>多个卷积核</strong></p>
-<p>因为不同的卷积核可以提取不同的图片特征，所以可以有很多个卷积核，同时提取图片的特征，如分别提取图片的水平和垂直边缘特征。</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1vbgemj213t0m6gnu.jpg" alt=""></p>
-<p>因为有了两个卷积核，这时候输出的图片就是有两通道的图片$4\times 4 \times 2$。</p>
-<p>这里要搞清两个概念，卷积核的通道数和个数：</p>
+<p>如果有多个目标类别的检测，那么对每个类别分别进行上面的NMS算法。</p>
+<h1 id="Anchor-Box"><a href="#Anchor-Box" class="headerlink" title="Anchor Box"></a>Anchor Box</h1><p>如果一张格子中有多个目标，那怎么办？这时候就需要Anchor Box了，可以同时检测出多个对象。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktbwaixj2064065mzy.jpg" alt=""></p>
+<p>我们预先定义了两个不同形状的Anchor box，如比较高的来检测人，比较宽的来检测汽车，然后重新定义了目标向量y：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktb6okuj20e50bmq38.jpg" alt=""></p>
+<p>这个时候最后输出的矩阵从原来的$3\times3\times8$变成了$3\times3\times16$，也可以是$3\times3\times2\times8$</p>
+<p>在计算的时候就可以根据不同的box输出了，？号表示我们不关系这个值。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktb77nnj20dn0dtmxs.jpg" alt=""></p>
+<p><strong>问题：</strong></p>
 <ul>
-<li>通道数channel：即卷积核要作用在原图片上，原图片的通道处$n_c$，卷积核的通道数必须和原图片通道数相同</li>
-<li>个数：即要使用多少个这样的卷积核，使用$n_{c}^{\prime}$表示，卷积核的个数也就是输出图片的通道数，如有两个卷积核，那么生成了$4\times 4 \times 2$的图片，2  就是卷积核的个数</li>
-<li>即 $n \times n \times n_c$ ，乘上的$n_{c}^{\prime}$个卷积核 $ f \times f \times n_c$，得到$(n -f +1)\times (n - f +1 ) \times n_{c}^{\prime}$的新图片</li>
+<li>如果使用两个Box，那么如果出现3个目标怎么办，这时候需要别的手段了</li>
+<li>如果同一个格子的两个对象的box相同怎么办，那也需要别的手段来处理了。</li>
 </ul>
-<h1 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h1><p><strong>单层卷积网络</strong></p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1x8wxmj21ba0qd4nz.jpg" alt=""></p>
-<p>如图是单层卷积的基本过程，先经过两个卷积核，然后再加上bias进行relu激活函数。</p>
-<p>那么假设某层卷积层有10个$3 \times 3 \times 3$的卷积核，那么一共有$(3\times3\times3+1) \times10=280$个参数，加1是加上了bias</p>
-<p>在这里总结了各个参数的表示方法：</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1whr44j20m50bx43e.jpg" alt=""></p>
-<p><strong>简单神经网络</strong></p>
-<p>一般卷积神经网络层的类型有：</p>
+<p>因为这两种情况出现的几率都比较少，所以问题不大。</p>
+<p><strong>注意：</strong></p>
 <ul>
-<li>convolution卷积层</li>
-<li>pool池化层</li>
-<li>fully connected全连接层</li>
+<li>Anchor box的形状都是人工指定的，一般可以选择5-10种不同的形状，来涵盖我们想要检测的不同对象</li>
+<li>更高级一点的使用k-means聚类算法，将不同的对象形状进行聚类，然后得到一组比较具有代表性的boxes</li>
 </ul>
-<h1 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h1><p>pooling 的作用就是用来压缩数据，加速运算，提高提取特征的鲁棒性</p>
-<p><strong>Max pooling</strong></p>
-<p>在范围内取最大值</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1whjhbj20ra0g3wkp.jpg" alt=""></p>
-<p><strong>Average Pooling</strong></p>
-<p>取平均值</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1vp1w0j20pf0cbtaq.jpg" alt=""></p>
-<h1 id="卷积神经网络示例"><a href="#卷积神经网络示例" class="headerlink" title="卷积神经网络示例"></a>卷积神经网络示例</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1w3xmij20z00jl76m.jpg" alt=""></p>
-<p>一般conv后都会进行pooling，所以可以把conv和pooling当做一层。</p>
-<p>如上图就是$conv-pool-conv-pool-fc-fc-fc-softmax$的卷积神经网络结构。</p>
-<p>各个层的参数是这样的：</p>
-<p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrm1vv63zj20lv0bcdjg.jpg" alt=""></p>
-<p>可以看到，在卷积层的参数非常少，池化层没有参数，大量的参数在全连接层。</p>
-<h1 id="为何用卷积神经网络？"><a href="#为何用卷积神经网络？" class="headerlink" title="为何用卷积神经网络？"></a>为何用卷积神经网络？</h1><p>这里给出了两点主要原因：</p>
+<h1 id="YOLO算法"><a href="#YOLO算法" class="headerlink" title="YOLO算法"></a>YOLO算法</h1><p>假设我们需要检测三种目标：行人、汽车、摩托车，使用两种anchor box</p>
+<p> <strong>在训练集中：</strong></p>
 <ul>
-<li>参数共享：卷积核的参数是原图片中各个像素之间共享的，所以大大减少了参数</li>
-<li>连接的稀疏性：每个输出值，实际上只取决于很少量的输入而已。</li>
+<li>输入同样大小的图片X</li>
+<li>每张图片的输出Y是$3\times3\times16$的矩阵</li>
+<li>人工标定输出Y</li>
 </ul>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktdbjbij20om0de42t.jpg" alt=""></p>
+<p><strong>预测：</strong></p>
+<p>输入图片和训练集大小相同，得到$3\times3\times16$的输出结果</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktc1dooj20p00cjadn.jpg" alt=""></p>
+<p>这个时候得到了很多个框框，如果是两个Anchor box，那么就有$2\times9=18$个预测框框，那么就需要把没用的框框都去掉，也就用到了上面的NMS非最大值抑制算法。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktd13lnj208v08rn2c.jpg" alt=""></p>
+<p><strong>进行NMS算法：</strong></p>
+<ul>
+<li>去掉$P_c$小于某个阈值的框框</li>
+<li>对于每个对象分别使用NMS算法得到最终的边界框。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktdzoa1j209z09w461.jpg" alt=""></p>
+<h1 id="候选区域"><a href="#候选区域" class="headerlink" title="候选区域"></a>候选区域</h1><p>这里还介绍了其他的目标检测算法，不过貌似都是比较慢的。</p>
+<p><strong>R-CNN：</strong></p>
+<p>原本的滑动窗口，只有在少部分的区域是可以检测到目标的，很多区域都是背景，所以运算很慢，用R-CNN后，只选择一些候选的窗口，不需要对整个图片进行滑动。</p>
+<p>R-CNN使用的是图像分割算法，将图片分割成很多个色块，从而减少了窗口数量。</p>
+<p>是对每个候选区域进行分类，输出的标签和bounding box</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw4ktfhue7j20xn08lwo3.jpg" alt=""></p>
+<p><strong>Fast R-CNN：</strong></p>
+<p>候选区域，使用滑动窗口在区分所有的候选区域。</p>
+<p><strong>Faster R-CNN：</strong></p>
+<p>使用卷积神经网络而不是图像分割来获得候选区域。</p>
 
         </div>
         <footer class="article-footer">
@@ -312,7 +335,7 @@
 
 
 
-    <a data-url="http://fangzh.top/2018/dl-ai-4-1/" data-id="cjn4lavhn001uy0u3n39y9h31" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://fangzh.top/2018/dl-ai-4-3/" data-id="cjn4lavht0029y0u37e09uix6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -438,20 +461,20 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/dl-ai-4-1h/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/dl-ai-4-3h/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
-            DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN）
+            DeepLearning.ai作业:(4-3)-- 目标检测（Object detection）
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2018/cs231n-1h-5/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/dl-ai-4-2h/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">cs231n作业：assignment1 - features</p>
+        <p class="article-nav-title">DeepLearning.ai作业:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies）</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -739,7 +762,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://fangzh.top/2018/dl-ai-4-1/';
+    var disqus_url = 'http://fangzh.top/2018/dl-ai-4-3/';
     
     (function() {
     var dsq = document.createElement('script');
