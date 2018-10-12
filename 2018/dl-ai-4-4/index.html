@@ -6,21 +6,26 @@
     
 
     
-    <title>分类: Deep Learning | Fangzh的个人博客 | 人工智能拯救世界</title>
+    <title>DeepLearning.ai笔记:(4-4)-- 特殊应用:人脸识别和神经风格转换 | Fangzh的个人博客 | 人工智能拯救世界</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description" content="人工智能、计算机、机器学习、linux、程序员">
-<meta name="keywords" content="人工智能、计算机、机器学习、linux、程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta property="og:url" content="http://fangzh.top/categories/AI/Deep-Learning/index.html">
+        <meta name="keywords" content="dl.ai" />
+    
+    <meta name="description" content="本周讲了CNN的两个特殊应用：人脸识别和神经风格转换。 人脸识别Face Verification and Face Recognition人脸识别和人脸验证不一样。 人脸验证是输入一张图片，和这个人的ID或者名字，然后根据输入的图片判断这个人是不是对应这个ID，是个1对1的问题。 人脸识别是有K个人的数据库，然后输入一张人脸的图片，不确定他是哪一位，然后输出在K个人的数据库中对应的那个人，是1">
+<meta name="keywords" content="dl.ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepLearning.ai笔记:(4-4)-- 特殊应用:人脸识别和神经风格转换">
+<meta property="og:url" content="http://fangzh.top/2018/dl-ai-4-4/index.html">
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta property="og:description" content="人工智能、计算机、机器学习、linux、程序员">
+<meta property="og:description" content="本周讲了CNN的两个特殊应用：人脸识别和神经风格转换。 人脸识别Face Verification and Face Recognition人脸识别和人脸验证不一样。 人脸验证是输入一张图片，和这个人的ID或者名字，然后根据输入的图片判断这个人是不是对应这个ID，是个1对1的问题。 人脸识别是有K个人的数据库，然后输入一张人脸的图片，不确定他是哪一位，然后输出在K个人的数据库中对应的那个人，是1">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+<meta property="og:updated_time" content="2018-10-12T12:45:20.683Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta name="twitter:description" content="人工智能、计算机、机器学习、linux、程序员">
+<meta name="twitter:title" content="DeepLearning.ai笔记:(4-4)-- 特殊应用:人脸识别和神经风格转换">
+<meta name="twitter:description" content="本周讲了CNN的两个特殊应用：人脸识别和神经风格转换。 人脸识别Face Verification and Face Recognition人脸识别和人脸验证不一样。 人脸验证是输入一张图片，和这个人的ID或者名字，然后根据输入的图片判断这个人是不是对应这个ID，是个1对1的问题。 人脸识别是有K个人的数据库，然后输入一张人脸的图片，不确定他是哪一位，然后输出在K个人的数据库中对应的那个人，是1">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
     
 
     
@@ -175,445 +180,233 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-folder-open"></i>分类: <em class="page-title-link">Deep Learning</em>
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-dl-ai-4-4" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2018" class="archive-year"><i class="icon fa fa-calendar-o"></i>2018</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/dl-ai-4-4h/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai作业:(4-4)-- 特殊应用:人脸识别和神经风格转换" class="thumbnail-image"></span>
-    
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
-            </div>
-            <div class="date"><time datetime="2018-10-12T10:55:20.000Z" itemprop="datePublished">2018-10-12</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2018/dl-ai-4-4h/">DeepLearning.ai作业:(4-4)-- 特殊应用:人脸识别和神经风格转换</a>
+        DeepLearning.ai笔记:(4-4)-- 特殊应用:人脸识别和神经风格转换
         </h1>
     
 
-        <p class="article-excerpt">
-            
-本周作业分为了两个部分:
-
-人脸识别
-风格迁移
-
-Part1：人脸识别训练FaceNet很不现实，所以模型已经都训练好了，我们只是学习一下loss函数，然后调用模型来进行简单的识别而已。
-先计算triplet_loss函数，分为4步：
-1234567891011121314151617181920212223242526272829303132# GRADED FUNCTION: triplet
-        </p>
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/dl-ai-4-4/" class="article-date">
+            <time datetime="2018-10-12T10:55:15.000Z" itemprop="datePublished">2018-10-12</time>
+        </a>
     </div>
-</article>
-    
 
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/dl-ai-4-4/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai笔记:(4-4)-- 特殊应用:人脸识别和神经风格转换" class="thumbnail-image"></span>
-    
-    
-</a>
+		
 
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/dl-ai/">dl.ai</a>
+    </div>
+
+                <!---cloud阅读量统计系统-->
+                阅读数量:<span id="/2018/dl-ai-4-4/" class="leancloud_visitors" data-flag-title="DeepLearning.ai笔记:(4-4)-- 特殊应用:人脸识别和神经风格转换"></span>次
             </div>
-            <div class="date"><time datetime="2018-10-12T10:55:15.000Z" itemprop="datePublished">2018-10-12</time></div>
-        </div>
         
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/dl-ai-4-4/">DeepLearning.ai笔记:(4-4)-- 特殊应用:人脸识别和神经风格转换</a>
-        </h1>
-    
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg" alt=""></p>
+<p>本周讲了CNN的两个特殊应用：人脸识别和神经风格转换。</p>
+<h1 id="人脸识别"><a href="#人脸识别" class="headerlink" title="人脸识别"></a>人脸识别</h1><h2 id="Face-Verification-and-Face-Recognition"><a href="#Face-Verification-and-Face-Recognition" class="headerlink" title="Face Verification and Face Recognition"></a>Face Verification and Face Recognition</h2><p>人脸识别和人脸验证不一样。</p>
+<p>人脸验证是输入一张图片，和这个人的ID或者名字，然后根据输入的图片判断这个人是不是对应这个ID，是个1对1的问题。</p>
+<p>人脸识别是有K个人的数据库，然后输入一张人脸的图片，不确定他是哪一位，然后输出在K个人的数据库中对应的那个人，是1对K的问题。</p>
+<p>所以人脸识别难度更高，而且精度要求更高，因为如果每张图片都是99%的精度，那么K个人就是K倍了，所以应该有99.9%以上的精度。</p>
+<h2 id="One-shot-learning"><a href="#One-shot-learning" class="headerlink" title="One shot learning"></a>One shot learning</h2><p>人脸识别系统，通常都是只有一个人脸的样例，然后就能够成功的识别是不是这个人。这就是one shot learning，一次学习，单单通过一张照片就能识别这个人。</p>
+<p>因此，在只有单个样本的情况下，并不能用之前的方法来实现这个识别系统。这里就需要有一个相似性函数。</p>
+<p><strong>similarity函数：</strong></p>
+<p>通过$d(img1,img2)$来表示两张图片的差异程度，如果d大于某个阈值，那么就表示差别很大，如果小于某个阈值，则认为是同一个人。</p>
+<h1 id="Siamese网络"><a href="#Siamese网络" class="headerlink" title="Siamese网络"></a>Siamese网络</h1><p>那么如何计算这个$d(img1,img2)$呢？</p>
+<p>可以利用Siamese网络来实现。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2v3cqwj20ou0dx0um.jpg" alt=""></p>
+<p>如图，输入两张图片$x^{(1)},x^{(2)}$，经过一个卷积神经网络，去掉最后的softmax层，可以得到N维的向量，$f(x^{(1)}),f(x^{(2)})$，假设是128维，而N维的向量就相当于是对输入图片的的<strong>编码(encoding)。</strong></p>
+<p>然后比较这两个向量之间的差值：</p>
+<p>$$d(x1,x2) = ||f(x1) - f(x2)||^{2}_{2}$$</p>
+<p>如果距离$d$很小，那表示这两张图片很相近，认为是同一个人。</p>
+<p>如果距离$d$很大，那么表示这两张图片差别很大，不是同一个人。</p>
+<h2 id="Triplet-loss"><a href="#Triplet-loss" class="headerlink" title="Triplet loss"></a>Triplet loss</h2><p>那么，我们之前说到，要得到输入图片的向量编码$f(x)$，是需要经过卷积神经网络的，那么卷积神经网络的参数如何确定呢？使用的方法就是Triplet loss损失函数，而后用梯度下降法进行迭代。</p>
+<p>我们需要比较两组成对的图像 <strong>(Anchor, Positive, Negative)，简写(A,P,N)</strong></p>
+<p>Anchor：表示要检测的目标图片</p>
+<p>Positive：表示与anchor同个人的图片</p>
+<p>Negative：表示与anchor不同个人的图片</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2u6lkzj20j8072mz6.jpg" alt=""></p>
+<p>所以我们希望A和P的距离小，A和N的距离大，因此有了如下不等式：</p>
+<p>$$||f(A) - f(P)||^2 - ||f(A) - f(N)||^2 + \alpha \leq 0$$</p>
+<p>这里这个公式与SVM的损失函数很类似，$\alpha$是表示margin边界，也就是增加$d(A,P)$和$d(A,N)$之间的差距。</p>
+<p>而如果上面的不等式小于0，那说明是符合我们的要求的，如果是大于0，则要计入损失函数中，所以得到了Triplet loss的公式是：</p>
+<p>$$L(A,P,N) = max(||f(A) - f(P)||^2 - ||f(A) - f(N)||^2 + \alpha,0)$$</p>
+<p>整个网络的代价函数就是把所有的图片损失加起来：</p>
+<p>$$J = \sum L(A,P,N)$$</p>
+<h2 id="三元组的选择"><a href="#三元组的选择" class="headerlink" title="三元组的选择"></a>三元组的选择</h2><p>每个三元组的选择是有讲究的，如果你要识别的是一个女人，然后对比的Negative是个老大爷，那么条件就很容易满足，学不到什么东西。所以应该尽量选择那些相似的图片进行每一组的训练，也就是：</p>
+<p>$$d(A,P) \approx d(A,N) $$</p>
+<p>选择的例子如下图，可以看到，每一个三元组对比的都是一些比较相似的图片：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2u59x9j20kg0bv41m.jpg" alt=""></p>
+<h2 id="脸部验证和二分类"><a href="#脸部验证和二分类" class="headerlink" title="脸部验证和二分类"></a>脸部验证和二分类</h2><p>除了之前说的用Triplet loss进行训练以外，还有别的方法来进行训练，也就是可以把Siamese网络当做一个二分类的问题。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2u74asj20m50brgnh.jpg" alt=""></p>
+<p>如图，输入两张图片，当计算得到了两个图片的向量编码后，求两张图片的距离，然后通过一个sigmoid函数，把他变成一个二分类问题，如果同个人，输出1，不同个人则输出0。其中，权重$W,b$都可以通过训练来得到。</p>
+<p>这个时候，人脸识别问题就变成了一个<strong>监督学习</strong>的问题，在创建每一对训练集的时候，应该有对应的输出标签y。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2vnh63j20kx0bv41k.jpg" alt=""></p>
+<h1 id="神经风格迁移"><a href="#神经风格迁移" class="headerlink" title="神经风格迁移"></a>神经风格迁移</h1><p>神经风格的迁移，就是输入两张图片，一张当做内容图片content，另一张当做风格图片style，输出的图片g兼具有一张的内容，和另一张的风格。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2wcuc4j20ow0ctqg6.jpg" alt=""></p>
+<h2 id="卷积神经网络学什么？"><a href="#卷积神经网络学什么？" class="headerlink" title="卷积神经网络学什么？"></a>卷积神经网络学什么？</h2><p>在进行风格迁移前，我们需要了解我们的神经网络到底在学些什么东西，把中间的隐藏单元拎出来看看。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2wgh0ej21360l214v.jpg" alt=""></p>
+<p>如上图，假设我们有一个卷积神经网络，要看到不同层的隐藏单元计算结果，怎么办？依次对各个层进行如下操作：</p>
+<ul>
+<li>在当前层挑选一个隐藏单元；</li>
+<li>遍历训练集，找到最大化地激活了该运算单元的图片或者图片块；</li>
+<li>对该层的其他运算单元执行操作。</li>
+</ul>
+<p>对于在第一层的隐藏单元中，其只能看到卷积网络的小部分内容，也就是最后我们找到的那些最大化激活第一层隐层单元的是一些小的图片块。我们可以理解为第一层的神经单元通常会寻找一些简单的特征，如边缘或者颜色阴影等。</p>
+<p>而后随着层数的增加，隐藏层单元看到的东西就越来越复杂了：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2v7oo0j20ok06sagx.jpg" alt=""></p>
+<h2 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h2><p>对于神经风格迁移，我们的目标是由内容图片C和风格图片S，生成最终的风格迁移图片G。所以定义代价函数为：</p>
+<p>$$J(G) = \alpha J_{content}(C,G) + \beta J_{style}(S,G)$$</p>
+<ul>
+<li>$J_{content}(C, G)$: 代表生成图片G的内容和内容图片C的内容的相似度</li>
+<li>$J_{style}(S, G)$: 代表生成图片G的内容和风格图片S的内容的相似度</li>
+<li>$\alpha, \beta$: 两个超参数用来表示以上两者之间的权重</li>
+</ul>
+<p>首先随机初始化G的像素，然后进行梯度下降：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2v5on0j20or0dcte1.jpg" alt=""></p>
+<h2 id="内容代价函数"><a href="#内容代价函数" class="headerlink" title="内容代价函数"></a>内容代价函数</h2><ul>
+<li>首先假设我们使用第$l$层隐藏层来计算$J_{content}(C, G)$注意这里的$l$一般取在中间层，而不是最前面的层，或者最后层。因为太浅了啥也看不到，太深了就太像原图了。</li>
+<li>使用一个预训练的卷积网络。（如，VGG或其他）</li>
+<li>$a^{[l] (C)}$和$a^{[l] (G)}$分别代表内容图片C和生成图片G的$l$层的激活值；</li>
+<li>内容损失函数$J_{content} = \frac{1}{2}||a^{[l] (C)} - a^{[l] (G)}||^2$</li>
+</ul>
+<h2 id="风格代价函数"><a href="#风格代价函数" class="headerlink" title="风格代价函数"></a>风格代价函数</h2><p>对于一个卷积网络中，我们选择网络的中间层$l$， 定义“Style”表示$l$层的各个通道激活项之间的相关性。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2u35a3j20oa08wdgh.jpg" alt=""></p>
+<p>那如何计算这个相关性呢？</p>
+<p>假设我们在第$l$层有5个通道：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2undn5j20nu0d5ada.jpg" alt=""></p>
+<p><strong>不同的通道之间代表着不同的神经元学习到的特征，</strong>如第一个通道（红色）可以表示含有垂直纹理的特征，第二个通道（黄色）表示区域中出现橙色的特征。</p>
+<p>那么两个通道的相关性就表示图片中出现垂直纹理又出现橙色的可能性大小。</p>
+<p>所以可以得到相关系数的矩阵<strong>“Gram Matrix</strong>：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2u2s3rj209f068q2x.jpg" alt=""></p>
+<p>$i,j.k$表示神经元所在的高度，宽度和通道。也就是每个通道的神经元分别乘上另一个通道对应位置的神经元再求和即可得到这两个通道$k,k^{\prime}$的相关系数。这个矩阵的维度是$(n_{c}^{[l]},n_{c}^{[l]})$的，也就是第$l$层的通道数乘通道数的大小。</p>
+<p>而代价函数即为两张图片中相关系数矩阵的差值求和，再取平均。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2u1z3wj20im03mmx4.jpg" alt=""></p>
+<h2 id="1D-to-3D-卷积"><a href="#1D-to-3D-卷积" class="headerlink" title="1D to 3D 卷积"></a>1D to 3D 卷积</h2><p>图片都是2D的卷积运算，其实还可以推广到1D和3D的情况。</p>
+<p>典型的1D情况就是信号处理。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fw5q2u42q0j20o90dqabb.jpg" alt=""></p>
+<p>3D情况就像CT的切片，是一层一层叠加起来的。</p>
 
-        <p class="article-excerpt">
+        </div>
+        <footer class="article-footer">
             
-本周讲了CNN的两个特殊应用：人脸识别和神经风格转换。
-人脸识别Face Verification and Face Recognition人脸识别和人脸验证不一样。
-人脸验证是输入一张图片，和这个人的ID或者名字，然后根据输入的图片判断这个人是不是对应这个ID，是个1对1的问题。
-人脸识别是有K个人的数据库，然后输入一张人脸的图片，不确定他是哪一位，然后输出在K个人的数据库中对应的那个人，是1
-        </p>
+
+
+
+    <a data-url="http://fangzh.top/2018/dl-ai-4-4/" data-id="cjn608xdv0000zcu30ibdkwtb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+
+        </footer>
     </div>
 </article>
+<!--
+    <section id="comments">
     
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
         
-        <a href="/2018/dl-ai-4-3h/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai作业:(4-3)-- 目标检测（Object detection）" class="thumbnail-image"></span>
-    
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
-            </div>
-            <div class="date"><time datetime="2018-10-11T12:15:58.000Z" itemprop="datePublished">2018-10-11</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/dl-ai-4-3h/">DeepLearning.ai作业:(4-3)-- 目标检测（Object detection）</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-本周的作业实现了YOLO算法，并用于自动驾驶的目标检测中。
-Model details输入： (m, 608, 608, 3)
-输出： (m, 19, 19, 5, 85)
-IMAGE (m, 608, 608, 3) -&gt; DEEP CNN -&gt; ENCODING (m, 19, 19, 5, 85)
-也就是有5个Anchor boxes，一共有80个分类。
-
-所以，每个box的s
-        </p>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
-</article>
-    
 
     
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/dl-ai-4-3/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai笔记:(4-3)-- 目标检测（Object detection）" class="thumbnail-image"></span>
-    
-    
-</a>
+    </section>
 
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
-            </div>
-            <div class="date"><time datetime="2018-10-11T09:02:09.000Z" itemprop="datePublished">2018-10-11</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/dl-ai-4-3/">DeepLearning.ai笔记:(4-3)-- 目标检测（Object detection）</a>
-        </h1>
-    
+-->
+<!--来比力评论系统，在commetn/livebe.ejs中-->
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ4OC8xNjAxNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
 
-        <p class="article-excerpt">
-            
-这一周主要讲了卷积神经网络的进一步应用：目标检测。
-主要内容有：目标定位、特征点检测、目标检测、滑动窗口、Bounding Box，IOU，NMS，Anchor Boxes，Yolo算法。
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
+       if (typeof LivereTower === 'function') { return; }
 
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/dl-ai-4-2h/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai作业:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies）" class="thumbnail-image"></span>
-    
-    
-</a>
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
 
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
-            </div>
-            <div class="date"><time datetime="2018-10-09T11:20:57.000Z" itemprop="datePublished">2018-10-09</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/dl-ai-4-2h/">DeepLearning.ai作业:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies）</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-本周作业分为两部分，一部分是keras的基本使用，另一部分是ResNet的构建。
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/dl-ai-4-2/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai笔记:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies）" class="thumbnail-image"></span>
-    
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
-            </div>
-            <div class="date"><time datetime="2018-10-09T09:17:04.000Z" itemprop="datePublished">2018-10-09</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/dl-ai-4-2/">DeepLearning.ai笔记:(4-2)-- 深度卷积网络实例探究（Deep convolutional models:case studies）</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-本周主要讲了深度卷积网络的一些模型：LeNet,AlexNet,VGGNet,ResNet,Inception,1×1卷积，迁移学习等。
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/dl-ai-4-1h/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN）" class="thumbnail-image"></span>
-    
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
-            </div>
-            <div class="date"><time datetime="2018-09-30T08:07:23.000Z" itemprop="datePublished">2018-09-30</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/dl-ai-4-1h/">DeepLearning.ai作业:(4-1)-- 卷积神经网络（Foundations of CNN）</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-本周的作业分为了两部分：
-
-卷积神经网络的模型搭建
-用TensorFlow来训练卷积神经网络
-
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/dl-ai-4-1/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai笔记:(4-1)-- 卷积神经网络（Foundations of CNN）" class="thumbnail-image"></span>
-    
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
-            </div>
-            <div class="date"><time datetime="2018-09-30T02:20:54.000Z" itemprop="datePublished">2018-09-30</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/dl-ai-4-1/">DeepLearning.ai笔记:(4-1)-- 卷积神经网络（Foundations of CNN）</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-第四门课开始就学习深度学习关于计算机视觉的重要应用—卷积神经网络。
-第一周主要是对卷积神经网络的基本构造和原理做了介绍。
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/cs231n-1h-5/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - features" class="thumbnail-image"></span>
-    
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
-            </div>
-            <div class="date"><time datetime="2018-09-27T09:25:31.000Z" itemprop="datePublished">2018-09-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/cs231n-1h-5/">cs231n作业：assignment1 - features</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-GitHub地址：https://github.com/ZJUFangzh/cs231n
-抽取图像的HOG和HSV特征。
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2018/cs231n-1h-4/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment1 - two_layer_net" class="thumbnail-image"></span>
-    
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
-            </div>
-            <div class="date"><time datetime="2018-09-27T09:05:59.000Z" itemprop="datePublished">2018-09-27</time></div>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2018/cs231n-1h-4/">cs231n作业：assignment1 - two_layer_net</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            
-github地址：https://github.com/ZJUFangzh/cs231n
-搭建一个两层的神经网络。
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-
-    </div></section>
-
-
-    <nav id="page-nav">
-        <span class="pages">第 1 页，共 3 页</span>
-        <span class="page-number current">1</span><a class="page-number" href="/categories/AI/Deep-Learning/page/2/">2</a><a class="page-number" href="/categories/AI/Deep-Learning/page/3/">3</a><a class="extend next" rel="next" href="/categories/AI/Deep-Learning/page/2/">&raquo;</a>
-    </nav>
-
-
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
 
                         </div>
                     </section>
@@ -641,6 +434,29 @@ github地址：https://github.com/ZJUFangzh/cs231n
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/dl-ai-4-4h/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            DeepLearning.ai作业:(4-4)-- 特殊应用:人脸识别和神经风格转换
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/dl-ai-4-3h/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">DeepLearning.ai作业:(4-3)-- 目标检测（Object detection）</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         
@@ -923,11 +739,13 @@ github地址：https://github.com/ZJUFangzh/cs231n
     var disqus_shortname = 'hexo-theme-hueman';
     
     
+    var disqus_url = 'http://fangzh.top/2018/dl-ai-4-4/';
+    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
