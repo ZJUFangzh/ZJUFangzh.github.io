@@ -6,26 +6,26 @@
     
 
     
-    <title>Linux安装anaconda | Fangzh的个人博客 | 人工智能拯救世界</title>
+    <title>DeepLearning.ai笔记:(5-1)-- 循环神经网络（Recurrent Neural Networks） | Fangzh的个人博客 | 人工智能拯救世界</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="Linux,install,python" />
+        <meta name="keywords" content="dl.ai" />
     
-    <meta name="description" content="Anaconda是python的一个很好的发行版，安装了anaconda就可以解决很多python第三方库的问题。">
-<meta name="keywords" content="Linux,install,python">
+    <meta name="description" content="第五门课讲的是序列模型，主要是对RNN算法的应用，如GRU，LSTM算法，应用在词嵌入模型，情感分类，语音识别等领域。 第一周讲的是RNN的基本算法。">
+<meta name="keywords" content="dl.ai">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux安装anaconda">
-<meta property="og:url" content="http://fangzh.top/2018/2018090521/index.html">
+<meta property="og:title" content="DeepLearning.ai笔记:(5-1)-- 循环神经网络（Recurrent Neural Networks）">
+<meta property="og:url" content="http://fangzh.top/2018/dl-ai-5-1/index.html">
 <meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
-<meta property="og:description" content="Anaconda是python的一个很好的发行版，安装了anaconda就可以解决很多python第三方库的问题。">
+<meta property="og:description" content="第五门课讲的是序列模型，主要是对RNN算法的应用，如GRU，LSTM算法，应用在词嵌入模型，情感分类，语音识别等领域。 第一周讲的是RNN的基本算法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstprjcj20go0got95.jpg">
-<meta property="og:updated_time" content="2018-09-30T07:05:14.003Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+<meta property="og:updated_time" content="2018-10-18T08:39:52.001Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux安装anaconda">
-<meta name="twitter:description" content="Anaconda是python的一个很好的发行版，安装了anaconda就可以解决很多python第三方库的问题。">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstprjcj20go0got95.jpg">
+<meta name="twitter:title" content="DeepLearning.ai笔记:(5-1)-- 循环神经网络（Recurrent Neural Networks）">
+<meta name="twitter:description" content="第五门课讲的是序列模型，主要是对RNN算法的应用，如GRU，LSTM算法，应用在词嵌入模型，情感分类，语音识别等领域。 第一周讲的是RNN的基本算法。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
     
 
     
@@ -180,19 +180,19 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/日常技术/">日常技术</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/日常技术/Linux/">Linux</a>
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="post-Linux安装anaconda" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-dl-ai-5-1" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Linux安装anaconda
+        DeepLearning.ai笔记:(5-1)-- 循环神经网络（Recurrent Neural Networks）
         </h1>
     
 
@@ -202,8 +202,8 @@
             <div class="article-meta">
                 
     <div class="article-date">
-        <a href="/2018/2018090521/" class="article-date">
-            <time datetime="2018-09-05T13:52:53.000Z" itemprop="datePublished">2018-09-05</time>
+        <a href="/2018/dl-ai-5-1/" class="article-date">
+            <time datetime="2018-10-18T02:26:52.000Z" itemprop="datePublished">2018-10-18</time>
         </a>
     </div>
 
@@ -212,34 +212,103 @@
                 
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/install/">install</a>, <a class="tag-link" href="/tags/python/">python</a>
+        <a class="tag-link" href="/tags/dl-ai/">dl.ai</a>
     </div>
 
                 <!---cloud阅读量统计系统-->
-                阅读数量:<span id="/2018/2018090521/" class="leancloud_visitors" data-flag-title="Linux安装anaconda"></span>次
+                阅读数量:<span id="/2018/dl-ai-5-1/" class="leancloud_visitors" data-flag-title="DeepLearning.ai笔记:(5-1)-- 循环神经网络（Recurrent Neural Networks）"></span>次
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrkstprjcj20go0got95.jpg" alt=""><br>Anaconda是python的一个很好的发行版，安装了anaconda就可以解决很多python第三方库的问题。</p>
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg" alt=""></p>
+<p>第五门课讲的是序列模型，主要是对RNN算法的应用，如GRU，LSTM算法，应用在词嵌入模型，情感分类，语音识别等领域。</p>
+<p>第一周讲的是RNN的基本算法。</p>
 <a id="more"></a>
-<p>首先，检查一下电脑中的python版本。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ which python3</span><br><span class="line"></span><br><span class="line">/usr/bin/python3</span><br></pre></td></tr></table></figure>
-<p>此时调用的python3版本在<code>/usr/bin/</code>中。</p>
-<h2 id="1-Download-Anaconda"><a href="#1-Download-Anaconda" class="headerlink" title="1. Download Anaconda"></a>1. Download Anaconda</h2><p><a href="https://www.anaconda.com/download/#linux" target="_blank" rel="noopener">Download Anaconda</a></p>
-<h2 id="2-安装-Anaconda"><a href="#2-安装-Anaconda" class="headerlink" title="2. 安装 Anaconda"></a>2. 安装 Anaconda</h2><p>这里选择你下载的那个文件（可以用tab自动补全）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash ~/Download/Anaconda3-5.2.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-<h2 id="3-添加入path"><a href="#3-添加入path" class="headerlink" title="3. 添加入path"></a>3. 添加入path</h2><p>输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>自动添加完毕。</p>
-<p>如果不行，可以手动添加（慎用）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;export PATH=&quot;~/anaconda3/bin:$PATH&quot;&apos; &gt;&gt; ~/.bashrc</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>这个时候，pip已经可以使用了。用<code>which pip</code>可以显示在anaconda的pip。</p>
-<p>输入 python3，也显示的是anaconda的python3。</p>
-<p>这时候如果需要调用系统自带的python</p>
-<p>则需要输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo python3   # 3.6.5</span><br><span class="line"></span><br><span class="line">#或者</span><br><span class="line"></span><br><span class="line">sudo python   # 2.7</span><br></pre></td></tr></table></figure>
-<p>具体可以查看<a href="http://docs.anaconda.com/anaconda/install/linux/" target="_blank" rel="noopener">anaconda的使用帮助</a>。</p>
+<h1 id="序列模型的应用"><a href="#序列模型的应用" class="headerlink" title="序列模型的应用"></a>序列模型的应用</h1><p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokszq4j20og0dkq54.jpg" alt=""></p>
+<p>序列模型用在了很多的地方，如语音识别，音乐生成，情感分类，DNA序列分析，机器翻译，视频内容检测，名字检测等等。</p>
+<h1 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h1><p>先讲一下NG在课程中主要用到的数学符号。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokftypj20o507kwes.jpg" alt=""></p>
+<p>对于输入一个$x$的句子序列，可以细分为一个个的词，每一个词记为$x^{&lt;t>}$，对应的输出$y$记为$y^{&lt;t>}$</p>
+<p>其中，输入x的序列长度为 $T_x$，输出$y$的序列长度为$T_y$</p>
+<p>而针对很多个不同的序列，$X^{(i)&lt;t>}$表示第$i$个样本的第t的词。</p>
+<p>那么如何用数学的形式表示这个$x^{&lt;t>}$呢？这里用到了one-hot编码，假设词表中一共有10000个词汇，那么$x^{&lt;t>}$就是一个长度为10000的向量，在这之中只有一个维度是1，其他都是0</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokgq4pj20o80dkjsc.jpg" alt=""></p>
+<h1 id="循环神经网络"><a href="#循环神经网络" class="headerlink" title="循环神经网络"></a>循环神经网络</h1><p>如果用传统的神经网络，经过一个N层的神经网络得到输出y。</p>
+<p>效果并不是很好，因为：</p>
+<ul>
+<li>输入和输出在不同的样本中是可以不同长度的（每个句子可以有不同的长度）</li>
+<li>这种朴素的神经网络结果并不能共享从文本不同位置所学习到的特征。（如卷积神经网络中学到的特征的快速地推广到图片其他位置）</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokgsxfj20n40cfdgj.jpg" alt=""></p>
+<p>所以循环神经网络采用每一个时间步来计算，输入一个$x^{&lt;t>}$和前面留下来的记忆$a^{&lt;t-1>}$，来得到这一层的输出$y^{&lt;t>}$和下一层的记忆$a^{&lt;t>}$</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokk8tvj20n108s0tp.jpg" alt=""></p>
+<p>这里需要注意在零时刻，我们需要编造一个激活值，通常输入一个零向量，有的研究人员会使用随机的方法对该初始激活向量进行初始化。同时，上图中右边的循环神经网络的绘制结构与左边是等价的。</p>
+<p>循环神经网络是从左到右扫描数据的，同时共享每个时间步的参数。</p>
+<ul>
+<li>$W_{ax}$管理从输入$x^{&lt;t>}$到隐藏层的连接，每个时间步都使用相同的$W_{ax}$，同下；</li>
+<li>$W_{aa}$管理激活值$a^{&lt;t>}$到隐藏层的连接；</li>
+<li>$W_{ya}$管理隐藏层到激活值$y^{&lt;t>}$的连接。</li>
+</ul>
+<p><strong>RNN的前向传播</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokk24pj20np0ckmya.jpg" alt=""></p>
+<p>前向传播公式如图，这里可以把$W_{aa}，W_{ax}$合并成一项，为$W_a$，而后将$[a^{&lt;t-1>},x^{&lt;t>}]$合并成一项。</p>
+<p><strong>RNN的反向传播</strong></p>
+<p>定义一个loss function，然后倒回去计算。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgoksqpcj20nf0cxdhj.jpg" alt=""></p>
+<h1 id="不同类型的RNN"><a href="#不同类型的RNN" class="headerlink" title="不同类型的RNN"></a>不同类型的RNN</h1><p>对于RNN，不同的问题需要不同的输入输出结构。</p>
+<ul>
+<li>One to many：如音乐生成，输入一个音乐类型或者空值，生成一段音乐</li>
+<li>Many to one：如情感分类问题，输入某个序列，输出一个值来判断得分。</li>
+<li>many to many（$T_x = T_y$）：输入和输出的序列长度相同</li>
+<li>many to many（$T_x != T_y$）：如机器翻译这种，先输入一段，然后自己生成一段，输入和输出长度不一定相同的。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokh75rj20nm0d274y.jpg" alt=""></p>
+<h1 id="语言模型和序列生成"><a href="#语言模型和序列生成" class="headerlink" title="语言模型和序列生成"></a>语言模型和序列生成</h1><p><strong>什么是语言模型？</strong></p>
+<p>对于下面的例子，两句话有相似的发音，但是想表达的意义和正确性却不相同，如何让我们的构建的语音识别系统能够输出正确地给出想要的输出。也就是对于语言模型来说，从输入的句子中，评估各个句子中各个单词出现的可能性，进而给出整个句子出现的可能性。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokqwy9j20ln0b83yw.jpg" alt=""></p>
+<p> <strong>使用RNN构建语言模型：</strong></p>
+<ul>
+<li>训练集：一个很大的语言文本语料库；</li>
+<li>Tokenize：将句子使用字典库标记化；其中，未出现在字典库中的词使用“UNK”来表示；</li>
+<li>第一步：使用零向量对输出进行预测，即预测第一个单词是某个单词的可能性；</li>
+<li>第二步：通过前面的输入，逐步预测后面一个单词出现的概率；</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokk6ckj20n70cx75i.jpg" alt=""></p>
+<h1 id="对新序列采样"><a href="#对新序列采样" class="headerlink" title="对新序列采样"></a>对新序列采样</h1><p>当我们训练得到了一个模型之后，如果我们想知道这个模型学到了些什么，一个非正式的方法就是对新序列进行采样。具体方法如下：</p>
+<p>在每一步输出$y$时，通常使用 softmax 作为激活函数，然后根据输出的分布，随机选择一个值，也就是对应的一个字或者英文单词。</p>
+<p>然后将这个值作为下一个单元的x输入进去(即$x^{&lt;t>}=y^{&lt;t−1>}$), 直到我们输出了终结符，或者输出长度超过了提前的预设值n才停止采样。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokk4rpj20ic063jre.jpg" alt=""></p>
+<h1 id="RNN的梯度消失"><a href="#RNN的梯度消失" class="headerlink" title="RNN的梯度消失"></a>RNN的梯度消失</h1><p>RNN存在一个梯度消失问题，如：</p>
+<ul>
+<li>The cat, which already ate ………..，was full；</li>
+<li>The cats, which already ate ………..，were full.</li>
+</ul>
+<p>cat 和 cats要经过很长的一系列词汇后，才对应 was 和 were，但是我们在传递过程中$a^{&lt;t>}$很难记住前面这么多词汇的内容，往往只和前面最近几个词汇有关而已。</p>
+<p>当然，也有可能是每一层的梯度都很大，导致的梯度爆炸问题，不过这个问题可以通过设置阈值来解决，关键是要解决梯度消失问题。我们知道一旦神经网络层次很多时，反向传播很难影响前面层次的参数。</p>
+<h1 id="GRU-Gated-Recurrent-Unit"><a href="#GRU-Gated-Recurrent-Unit" class="headerlink" title="GRU(Gated Recurrent Unit)"></a>GRU(Gated Recurrent Unit)</h1><p>那么如何解决梯度消失问题了，使用GRU单元可以有效的捕捉到更深层次的连接，来改善梯度消失问题。</p>
+<p>原本的RNN单元如图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokkehij20m00aiglw.jpg" alt=""></p>
+<p>而GRU单元多了一个c（memory cell）变量，用来提供长期的记忆能力。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgoktgchj20n20cwjtf.jpg" alt=""></p>
+<p>具体过程为：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokn137j20pg04m0t4.jpg" alt=""></p>
+<p>完整的GRU还存在另一个门，用来控制$\bar c$和 $c^{&lt;t-1>}$之间的联系强弱：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokn4qrj20dp06maaj.jpg" alt=""></p>
+<h1 id="LSTM-Long-short-term-memory"><a href="#LSTM-Long-short-term-memory" class="headerlink" title="LSTM(Long short-term memory)"></a>LSTM(Long short-term memory)</h1><p>GRU能够让我们在序列中学习到更深的联系，长短期记忆（long short-term memory, LSTM）对捕捉序列中更深层次的联系要比GRU更加有效。</p>
+<p>GRU只有两个门，而LSTM有三个门，分别是更新门、遗忘门、输出门：$\Gamma_u,\Gamma_f, \Gamma_o$</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgoko16mj20n50c174n.jpg" alt="GRU和LSTM公式对比"></p>
+<p>更新门：用来决定是否更新$\bar c^{&lt;t>}$</p>
+<p>遗忘门：来决定是否遗忘上一个$c^{&lt;t-1>}$</p>
+<p>输出门：来决定是否输出$c^{&lt;t>}$</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgolrcslj20wl0idjth.jpg" alt=""></p>
+<h1 id="双向RNN"><a href="#双向RNN" class="headerlink" title="双向RNN"></a>双向RNN</h1><p>双向RNN（bidirectional RNNs）模型能够让我们在序列的某处，不仅可以获取之间的信息，还可以获取未来的信息。</p>
+<p>对于下图的单向RNN的例子中，无论我们的RNN单元是基本的RNN单元，还是GRU，或者LSTM单元，对于例子中第三个单词”Teddy”很难判断是否是人名，仅仅使用前面的两个单词是不够的，需要后面的信息来进行判断，但是单向RNN就无法实现获取未来的信息。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokp4z4j20mn0boaas.jpg" alt=""></p>
+<p>而双向RNN则可以解决单向RNN存在的弊端。在BRNN中，不仅有从左向右的前向连接层，还存在一个从右向左的反向连接层。</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgolueabj20n20cwq4i.jpg" alt=""></p>
+<h1 id="Deep-RNN"><a href="#Deep-RNN" class="headerlink" title="Deep RNN"></a>Deep RNN</h1><p>与深层的基本神经网络结构相似，深层RNNs模型具有多层的循环结构，但不同的是，在传统的神经网络中，我们可能会拥有很多层，几十层上百层，但是对与RNN来说，三层的网络结构就已经很多了，因为RNN存在时间的维度，所以其结构已经足够的庞大。如下图所示：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcgokxta0j20mu0cuab9.jpg" alt=""></p>
 
         </div>
         <footer class="article-footer">
@@ -247,7 +316,7 @@
 
 
 
-    <a data-url="http://fangzh.top/2018/2018090521/" data-id="cjnec4qcr00013cu3360dm8a6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://fangzh.top/2018/dl-ai-5-1/" data-id="cjnec4qe8002g3cu3g5krowg1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -373,20 +442,20 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/2018090522/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/dl-ai-5-1h1/" id="article-nav-newer" class="article-nav-link-wrap">
         <strong class="article-nav-caption">下一篇</strong>
         <p class="article-nav-title">
         
-            Linux安装shadowcocks
+            DeepLearning.ai作业:(5-1)-- 循环神经网络（Recurrent Neural Networks）（1）
         
         </p>
         <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
     </a>
     
     
-        <a href="/2018/2018090520/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/dl-ai-4-4h/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">Linux安装selenium+chromedriver</p>
+        <p class="article-nav-title">DeepLearning.ai作业:(4-4)-- 特殊应用:人脸识别和神经风格转换</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
@@ -674,7 +743,7 @@
     var disqus_shortname = 'hexo-theme-hueman';
     
     
-    var disqus_url = 'http://fangzh.top/2018/2018090521/';
+    var disqus_url = 'http://fangzh.top/2018/dl-ai-5-1/';
     
     (function() {
     var dsq = document.createElement('script');
