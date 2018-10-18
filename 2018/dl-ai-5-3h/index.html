@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制 | Fangzh的个人博客 | 人工智能拯救世界</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="homework,dl.ai" />
+    
+    <meta name="description" content="这周作业分为了两部分：  机器翻译 触发关键字  Part1：机器翻译你将建立一个将人类可读日期（“2009年6月25日”）转换为机器可读日期（“2009-06-25”）的神经机器翻译（NMT）模型。 你将使用注意力机制来执行此操作，这是模型序列中最尖端的一个序列。 你将创建的模型可用于从一种语言翻译为另一种语言，如从英语翻译为印地安语。 但是，语言翻译需要大量的数据集，并且通常需要几天的GPU">
+<meta name="keywords" content="homework,dl.ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制">
+<meta property="og:url" content="http://fangzh.top/2018/dl-ai-5-3h/index.html">
+<meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
+<meta property="og:description" content="这周作业分为了两部分：  机器翻译 触发关键字  Part1：机器翻译你将建立一个将人类可读日期（“2009年6月25日”）转换为机器可读日期（“2009-06-25”）的神经机器翻译（NMT）模型。 你将使用注意力机制来执行此操作，这是模型序列中最尖端的一个序列。 你将创建的模型可用于从一种语言翻译为另一种语言，如从英语翻译为印地安语。 但是，语言翻译需要大量的数据集，并且通常需要几天的GPU">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+<meta property="og:updated_time" content="2018-10-18T11:48:12.439Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制">
+<meta name="twitter:description" content="这周作业分为了两部分：  机器翻译 触发关键字  Part1：机器翻译你将建立一个将人类可读日期（“2009年6月25日”）转换为机器可读日期（“2009-06-25”）的神经机器翻译（NMT）模型。 你将使用注意力机制来执行此操作，这是模型序列中最尖端的一个序列。 你将创建的模型可用于从一种语言翻译为另一种语言，如从英语翻译为印地安语。 但是，语言翻译需要大量的数据集，并且通常需要几天的GPU">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Fangzh的个人博客 | 人工智能拯救世界" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon_1.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+    <!--百度统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c48627a60135ae47d77a79844f7e5b04";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    <!--百度SEO-->
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+        </script>
+    <!--googleseo-->
+    <meta name="google-site-verification" content="p1u63jgcp2J7NsJHR_UxQX2Fzj_UY6Zwf8C1zTRpONM" />
+    
+    <meta name="google-site-verification" content="8ojU19tXQIB94wIY0cAPI5BKSsrqV-xxrlx46C_-WMg" />
+	<!--xiongzhang-->
+	<script src="https://xiongzhang.baidu.com/sdk/c.js?appid=1608109025415176"></script>
+	<!--shougou-->
+	<meta name="sogou_site_verification" content="tRwGjUhpuk"/>
+	<!--360-->
+	<meta name="360-site-verification" content="06663b5113fe8a05769074a579c4d4ea" />
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">人工智能、人生感悟</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/archives">归档</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/">日常技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/Linux/">Linux</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/博客搭建/">博客搭建</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/">生活</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/旅行/">旅行</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/随笔/">随笔</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">留言板</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-dl-ai-5-3h" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/dl-ai-5-3h/" class="article-date">
+            <time datetime="2018-10-18T10:39:15.000Z" itemprop="datePublished">2018-10-18</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/dl-ai/">dl.ai</a>, <a class="tag-link" href="/tags/homework/">homework</a>
+    </div>
+
+                <!---cloud阅读量统计系统-->
+                阅读数量:<span id="/2018/dl-ai-5-3h/" class="leancloud_visitors" data-flag-title="DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg" alt=""></p>
+<p>这周作业分为了两部分：</p>
+<ul>
+<li>机器翻译</li>
+<li>触发关键字</li>
+</ul>
+<h1 id="Part1：机器翻译"><a href="#Part1：机器翻译" class="headerlink" title="Part1：机器翻译"></a>Part1：机器翻译</h1><p>你将建立一个将人类可读日期（“2009年6月25日”）转换为机器可读日期（“2009-06-25”）的神经机器翻译（NMT）模型。 你将使用注意力机制来执行此操作，这是模型序列中最尖端的一个序列。</p>
+<p>你将创建的模型可用于从一种语言翻译为另一种语言，如从英语翻译为印地安语。 但是，语言翻译需要大量的数据集，并且通常需要几天的GPU训练。 在不使用海量数据的情况下，为了让你有机会尝试使用这些模型，我们使用更简单的“日期转换”任务。</p>
+<p>网络以各种可能格式（例如“1958年8月29日”，“03/30/1968”，“1987年6月24日”）写成的日期作为输入，并将它们转换成标准化的机器可读的日期（例如“1958 -08-29“，”1968-03-30“，”1987-06-24“），让网络学习以通用机器可读格式YYYY-MM-DD输出日期。</p>
+<ul>
+<li>X: 经过处理的训练集中人类可读日期，其中每个字符都替换为其在human_vocab中映射到的索引。 每个日期用特殊字符进一步填充为Tx长度。 X.shape =（m，Tx）</li>
+<li>Y: 经过处理的训练集中机器可读日期，其中每个字符都替换为其在machine_vocab中映射到的索引。 你应该有Y.shape =（m，Ty）。</li>
+<li>Xoh：X的one-hot向量，Xoh.shape = (m，Tx，len(human_vocab))</li>
+<li>Yoh：Y的one-hot向量，Yoh.shape = (m，Tx，len(machine_vocab))</li>
+</ul>
+<h2 id="采用注意力机制的机器翻译"><a href="#采用注意力机制的机器翻译" class="headerlink" title="采用注意力机制的机器翻译"></a>采用注意力机制的机器翻译</h2><p>定义一些layers</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Defined shared layers as global variables</span></span><br><span class="line">repeator = RepeatVector(Tx)</span><br><span class="line">concatenator = Concatenate(axis=<span class="number">-1</span>)</span><br><span class="line">densor1 = Dense(<span class="number">10</span>, activation = <span class="string">"tanh"</span>)</span><br><span class="line">densor2 = Dense(<span class="number">1</span>, activation = <span class="string">"relu"</span>)</span><br><span class="line">activator = Activation(softmax, name=<span class="string">'attention_weights'</span>) <span class="comment"># We are using a custom softmax(axis = 1) loaded in this notebook</span></span><br><span class="line">dotor = Dot(axes = <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>然后根据a 和 s 得到context</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcm6agwq9j20yk0vwaeg.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: one_step_attention</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">one_step_attention</span><span class="params">(a, s_prev)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Performs one step of attention: Outputs a context vector computed as a dot product of the attention weights</span></span><br><span class="line"><span class="string">    "alphas" and the hidden states "a" of the Bi-LSTM.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    a -- hidden state output of the Bi-LSTM, numpy-array of shape (m, Tx, 2*n_a)</span></span><br><span class="line"><span class="string">    s_prev -- previous hidden state of the (post-attention) LSTM, numpy-array of shape (m, n_s)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    context -- context vector, input of the next (post-attetion) LSTM cell</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ###</span></span><br><span class="line">    <span class="comment"># Use repeator to repeat s_prev to be of shape (m, Tx, n_s) so that you can concatenate it with all hidden states "a" (≈ 1 line)</span></span><br><span class="line">    s_prev = repeator(s_prev)</span><br><span class="line">    <span class="comment"># Use concatenator to concatenate a and s_prev on the last axis (≈ 1 line)</span></span><br><span class="line">    concat = concatenator([a, s_prev])</span><br><span class="line">    <span class="comment"># Use densor1 to propagate concat through a small fully-connected neural network to compute the "intermediate energies" variable e. (≈1 lines)</span></span><br><span class="line">    e = densor1(concat)</span><br><span class="line">    <span class="comment"># Use densor2 to propagate e through a small fully-connected neural network to compute the "energies" variable energies. (≈1 lines)</span></span><br><span class="line">    energies = densor2(e)</span><br><span class="line">    <span class="comment"># Use "activator" on "energies" to compute the attention weights "alphas" (≈ 1 line)</span></span><br><span class="line">    alphas = activator(energies)</span><br><span class="line">    <span class="comment"># Use dotor together with "alphas" and "a" to compute the context vector to be given to the next (post-attention) LSTM-cell (≈ 1 line)</span></span><br><span class="line">    context = dotor([alphas, a])</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> context</span><br></pre></td></tr></table></figure>
+<p>实现model()</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcm6apu4fj21d417g0zz.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n_a = <span class="number">32</span></span><br><span class="line">n_s = <span class="number">64</span></span><br><span class="line">post_activation_LSTM_cell = LSTM(n_s, return_state = <span class="keyword">True</span>)</span><br><span class="line">output_layer = Dense(len(machine_vocab), activation=softmax)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: model</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(Tx, Ty, n_a, n_s, human_vocab_size, machine_vocab_size)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    Tx -- length of the input sequence</span></span><br><span class="line"><span class="string">    Ty -- length of the output sequence</span></span><br><span class="line"><span class="string">    n_a -- hidden state size of the Bi-LSTM</span></span><br><span class="line"><span class="string">    n_s -- hidden state size of the post-attention LSTM</span></span><br><span class="line"><span class="string">    human_vocab_size -- size of the python dictionary "human_vocab"</span></span><br><span class="line"><span class="string">    machine_vocab_size -- size of the python dictionary "machine_vocab"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    model -- Keras model instance</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Define the inputs of your model with a shape (Tx,)</span></span><br><span class="line">    <span class="comment"># Define s0 and c0, initial hidden state for the decoder LSTM of shape (n_s,)</span></span><br><span class="line">    X = Input(shape=(Tx, human_vocab_size))</span><br><span class="line">    s0 = Input(shape=(n_s,), name=<span class="string">'s0'</span>)</span><br><span class="line">    c0 = Input(shape=(n_s,), name=<span class="string">'c0'</span>)</span><br><span class="line">    s = s0</span><br><span class="line">    c = c0</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Initialize empty list of outputs</span></span><br><span class="line">    outputs = []</span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Step 1: Define your pre-attention Bi-LSTM. Remember to use return_sequences=True. (≈ 1 line)</span></span><br><span class="line">    a = Bidirectional(LSTM(n_a, return_sequences=<span class="keyword">True</span>))(X)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Step 2: Iterate for Ty steps</span></span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> range(Ty):</span><br><span class="line">    </span><br><span class="line">        <span class="comment"># Step 2.A: Perform one step of the attention mechanism to get back the context vector at step t (≈ 1 line)</span></span><br><span class="line">        context = one_step_attention(a ,s)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Step 2.B: Apply the post-attention LSTM cell to the "context" vector.</span></span><br><span class="line">        <span class="comment"># Don't forget to pass: initial_state = [hidden state, cell state] (≈ 1 line)</span></span><br><span class="line">        s, _, c = post_activation_LSTM_cell(context, initial_state=[s, c])</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Step 2.C: Apply Dense layer to the hidden state output of the post-attention LSTM (≈ 1 line)</span></span><br><span class="line">        out = output_layer(s)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Step 2.D: Append "out" to the "outputs" list (≈ 1 line)</span></span><br><span class="line">        outputs.append(out)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Step 3: Create model instance taking three inputs and returning the list of outputs. (≈ 1 line)</span></span><br><span class="line">    model = Model(inputs=[X,s0,c0], outputs=outputs)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> model</span><br></pre></td></tr></table></figure>
+<h1 id="Part2-Trigger-Word-Detection"><a href="#Part2-Trigger-Word-Detection" class="headerlink" title="Part2:Trigger Word Detection"></a>Part2:Trigger Word Detection</h1><p>做触发关键字的检测。</p>
+<p>X: 这里把每一段音频分为了10s，而10s内细分为了5511个小的片段，也就是Tx = 5511</p>
+<p>Y: Ty = 1375，每个y都是一个布尔值，用来记录有没有收到触发关键字。</p>
+<h2 id="生成一个训练示例"><a href="#生成一个训练示例" class="headerlink" title="生成一个训练示例"></a>生成一个训练示例</h2><p>这里把样本分为了三种，背景音乐，正向的音频，反向的音频，合成训练示例：</p>
+<ul>
+<li>随机选择一个10秒的背景音频剪辑</li>
+<li>随机将0-4个正向音频片段插入此10秒剪辑中</li>
+<li>随机将0-2个反向音频片段插入此10秒剪辑中</li>
+</ul>
+<p>合成后类似这样：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcm69v62hj20jo08sac1.jpg" alt=""></p>
+<p>定义一个随机插入片段起始和终点位置的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_random_time_segment</span><span class="params">(segment_ms)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Gets a random time segment of duration segment_ms in a 10,000 ms audio clip.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    segment_ms -- the duration of the audio clip in ms ("ms" stands for "milliseconds")</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    segment_time -- a tuple of (segment_start, segment_end) in ms</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    segment_start = np.random.randint(low=<span class="number">0</span>, high=<span class="number">10000</span>-segment_ms)   <span class="comment"># Make sure segment doesn't run past the 10sec background </span></span><br><span class="line">    segment_end = segment_start + segment_ms - <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (segment_start, segment_end)</span><br></pre></td></tr></table></figure>
+<p>然后需要判断在别的片段插入的时候，有没有被占用:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: is_overlapping</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_overlapping</span><span class="params">(segment_time, previous_segments)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Checks if the time of a segment overlaps with the times of existing segments.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    segment_time -- a tuple of (segment_start, segment_end) for the new segment</span></span><br><span class="line"><span class="string">    previous_segments -- a list of tuples of (segment_start, segment_end) for the existing segments</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    True if the time segment overlaps with any of the existing segments, False otherwise</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    segment_start, segment_end = segment_time</span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ### (≈ 4 line)</span></span><br><span class="line">    <span class="comment"># Step 1: Initialize overlap as a "False" flag. (≈ 1 line)</span></span><br><span class="line">    overlap = <span class="keyword">False</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Step 2: loop over the previous_segments start and end times.</span></span><br><span class="line">    <span class="comment"># Compare start/end times and set the flag to True if there is an overlap (≈ 3 lines)</span></span><br><span class="line">    <span class="keyword">for</span> previous_start, previous_end <span class="keyword">in</span> previous_segments:</span><br><span class="line">        <span class="keyword">if</span> segment_start &lt;= previous_end <span class="keyword">and</span> segment_end &gt;= previous_start:</span><br><span class="line">            overlap = <span class="keyword">True</span></span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> overlap</span><br></pre></td></tr></table></figure>
+<p>生成input音频片段：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: insert_audio_clip</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_audio_clip</span><span class="params">(background, audio_clip, previous_segments)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Insert a new audio segment over the background noise at a random time step, ensuring that the </span></span><br><span class="line"><span class="string">    audio segment does not overlap with existing segments.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    background -- a 10 second background audio recording.  </span></span><br><span class="line"><span class="string">    audio_clip -- the audio clip to be inserted/overlaid. </span></span><br><span class="line"><span class="string">    previous_segments -- times where audio segments have already been placed</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    new_background -- the updated background audio</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Get the duration of the audio clip in ms</span></span><br><span class="line">    segment_ms = len(audio_clip)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ### </span></span><br><span class="line">    <span class="comment"># Step 1: Use one of the helper functions to pick a random time segment onto which to insert </span></span><br><span class="line">    <span class="comment"># the new audio clip. (≈ 1 line)</span></span><br><span class="line">    segment_time = get_random_time_segment(segment_ms)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Step 2: Check if the new segment_time overlaps with one of the previous_segments. If so, keep </span></span><br><span class="line">    <span class="comment"># picking new segment_time at random until it doesn't overlap. (≈ 2 lines)</span></span><br><span class="line">    <span class="keyword">while</span> is_overlapping(segment_time,previous_segments):</span><br><span class="line">        segment_time = get_random_time_segment(segment_ms)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Step 3: Add the new segment_time to the list of previous_segments (≈ 1 line)</span></span><br><span class="line">    previous_segments.append(segment_time)</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Step 4: Superpose audio segment and background</span></span><br><span class="line">    new_background = background.overlay(audio_clip, position = segment_time[<span class="number">0</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> new_background, segment_time</span><br></pre></td></tr></table></figure>
+<p>生成y标签：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: insert_ones</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_ones</span><span class="params">(y, segment_end_ms)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Update the label vector y. The labels of the 50 output steps strictly after the end of the segment </span></span><br><span class="line"><span class="string">    should be set to 1. By strictly we mean that the label of segment_end_y should be 0 while, the</span></span><br><span class="line"><span class="string">    50 followinf labels should be ones.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    y -- numpy array of shape (1, Ty), the labels of the training example</span></span><br><span class="line"><span class="string">    segment_end_ms -- the end time of the segment in ms</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    y -- updated labels</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># duration of the background (in terms of spectrogram time-steps)</span></span><br><span class="line">    segment_end_y = int(segment_end_ms * Ty / <span class="number">10000.0</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Add 1 to the correct index in the background label (y)</span></span><br><span class="line">    <span class="comment">### START CODE HERE ### (≈ 3 lines)</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(segment_end_y+<span class="number">1</span>, segment_end_y+<span class="number">51</span>):</span><br><span class="line">        <span class="keyword">if</span> i &lt; Ty:</span><br><span class="line">            y[<span class="number">0</span>, i] = <span class="number">1</span></span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> y</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: create_training_example</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_training_example</span><span class="params">(background, activates, negatives)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Creates a training example with a given background, activates, and negatives.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    background -- a 10 second background audio recording</span></span><br><span class="line"><span class="string">    activates -- a list of audio segments of the word "activate"</span></span><br><span class="line"><span class="string">    negatives -- a list of audio segments of random words that are not "activate"</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    x -- the spectrogram of the training example</span></span><br><span class="line"><span class="string">    y -- the label at each time step of the spectrogram</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Set the random seed</span></span><br><span class="line">    np.random.seed(<span class="number">18</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Make background quieter</span></span><br><span class="line">    background = background - <span class="number">20</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">### START CODE HERE ###</span></span><br><span class="line">    <span class="comment"># Step 1: Initialize y (label vector) of zeros (≈ 1 line)</span></span><br><span class="line">    y = np.zeros((<span class="number">1</span>, Ty))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Step 2: Initialize segment times as empty list (≈ 1 line)</span></span><br><span class="line">    previous_segments = []</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Select 0-4 random "activate" audio clips from the entire list of "activates" recordings</span></span><br><span class="line">    number_of_activates = np.random.randint(<span class="number">0</span>, <span class="number">5</span>)</span><br><span class="line">    random_indices = np.random.randint(len(activates), size=number_of_activates)</span><br><span class="line">    random_activates = [activates[i] <span class="keyword">for</span> i <span class="keyword">in</span> random_indices]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ### (≈ 3 lines)</span></span><br><span class="line">    <span class="comment"># Step 3: Loop over randomly selected "activate" clips and insert in background</span></span><br><span class="line">    <span class="keyword">for</span> random_activate <span class="keyword">in</span> random_activates:</span><br><span class="line">        <span class="comment"># Insert the audio clip on the background</span></span><br><span class="line">        background, segment_time = insert_audio_clip(background, random_activate, previous_segments)</span><br><span class="line">        <span class="comment"># Retrieve segment_start and segment_end from segment_time</span></span><br><span class="line">        segment_start, segment_end = segment_time</span><br><span class="line">        <span class="comment"># Insert labels in "y"</span></span><br><span class="line">        y = insert_ones(y, segment_end)</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Select 0-2 random negatives audio recordings from the entire list of "negatives" recordings</span></span><br><span class="line">    number_of_negatives = np.random.randint(<span class="number">0</span>, <span class="number">3</span>)</span><br><span class="line">    random_indices = np.random.randint(len(negatives), size=number_of_negatives)</span><br><span class="line">    random_negatives = [negatives[i] <span class="keyword">for</span> i <span class="keyword">in</span> random_indices]</span><br><span class="line"></span><br><span class="line">    <span class="comment">### START CODE HERE ### (≈ 2 lines)</span></span><br><span class="line">    <span class="comment"># Step 4: Loop over randomly selected negative clips and insert in background</span></span><br><span class="line">    <span class="keyword">for</span> random_negative <span class="keyword">in</span> random_negatives:</span><br><span class="line">        <span class="comment"># Insert the audio clip on the background </span></span><br><span class="line">        background, _ = insert_audio_clip(background, random_negative, previous_segments)</span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Standardize the volume of the audio clip </span></span><br><span class="line">    background = match_target_amplitude(background, <span class="number">-20.0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Export new training example </span></span><br><span class="line">    file_handle = background.export(<span class="string">"train"</span> + <span class="string">".wav"</span>, format=<span class="string">"wav"</span>)</span><br><span class="line">    print(<span class="string">"File (train.wav) was saved in your directory."</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Get and plot spectrogram of the new recording (background with superposition of positive and negatives)</span></span><br><span class="line">    x = graph_spectrogram(<span class="string">"train.wav"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> x, y</span><br></pre></td></tr></table></figure>
+<p>实现model()</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwcm6amjp4j21hc1jkn36.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: model</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(input_shape)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Function creating the model's graph in Keras.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Argument:</span></span><br><span class="line"><span class="string">    input_shape -- shape of the model's input data (using Keras conventions)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    model -- Keras model instance</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    X_input = Input(shape = input_shape)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">### START CODE HERE ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Step 1: CONV layer (≈4 lines)</span></span><br><span class="line">    X = Conv1D(filters=<span class="number">196</span>,kernel_size=<span class="number">15</span>,strides=<span class="number">4</span>)(X_input)                                 <span class="comment"># CONV1D</span></span><br><span class="line">    X = BatchNormalization()(X)                                 <span class="comment"># Batch normalization</span></span><br><span class="line">    X = Activation(<span class="string">'relu'</span>)(X)                                 <span class="comment"># ReLu activation</span></span><br><span class="line">    X = Dropout(<span class="number">0.8</span>)(X)                                 <span class="comment"># dropout (use 0.8)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Step 2: First GRU Layer (≈4 lines)</span></span><br><span class="line">    X = GRU(units = <span class="number">128</span>, return_sequences = <span class="keyword">True</span>)(X)                                 <span class="comment"># GRU (use 128 units and return the sequences)</span></span><br><span class="line">    X = Dropout(<span class="number">0.8</span>)(X)                                  <span class="comment"># dropout (use 0.8)</span></span><br><span class="line">    X = BatchNormalization()(X)                                 <span class="comment"># Batch normalization</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Step 3: Second GRU Layer (≈4 lines)</span></span><br><span class="line">    X = GRU(units = <span class="number">128</span>, return_sequences = <span class="keyword">True</span>)(X)                                 <span class="comment"># GRU (use 128 units and return the sequences)</span></span><br><span class="line">    X = Dropout(<span class="number">0.8</span>)(X)                                  <span class="comment"># dropout (use 0.8)</span></span><br><span class="line">    X = BatchNormalization()(X)                                 <span class="comment"># Batch normalization</span></span><br><span class="line">    X = Dropout(<span class="number">0.8</span>)(X)                                 <span class="comment"># dropout (use 0.8)</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Step 4: Time-distributed dense layer (≈1 line)</span></span><br><span class="line">    X = TimeDistributed(Dense(<span class="number">1</span>, activation = <span class="string">"sigmoid"</span>))(X) <span class="comment"># time distributed  (sigmoid)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">### END CODE HERE ###</span></span><br><span class="line"></span><br><span class="line">    model = Model(inputs = X_input, outputs = X)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> model</span><br></pre></td></tr></table></figure>
+<p>这里载入预训练好的模型，不需要自己训练那么久了，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = load_model(<span class="string">'./models/tr_model.h5'</span>)</span><br><span class="line">opt = Adam(lr=<span class="number">0.0001</span>, beta_1=<span class="number">0.9</span>, beta_2=<span class="number">0.999</span>, decay=<span class="number">0.01</span>)</span><br><span class="line">model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=opt, metrics=[<span class="string">"accuracy"</span>])</span><br><span class="line">model.fit(X, Y, batch_size = <span class="number">5</span>, epochs=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://fangzh.top/2018/dl-ai-5-3h/" data-id="cjneiv8h800357ku3ulzqn5sz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+
+        </footer>
+    </div>
+</article>
+<!--
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+-->
+<!--来比力评论系统，在commetn/livebe.ejs中-->
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ4OC8xNjAxNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ZJUFangzh" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/dl-ai-5-3/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">DeepLearning.ai笔记:(5-3) -- 序列模型和注意力机制</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-5-3h/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-5-3h/" class="title">DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T10:39:15.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-5-3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai笔记:(5-3) -- 序列模型和注意力机制" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-5-3/" class="title">DeepLearning.ai笔记:(5-3) -- 序列模型和注意力机制</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T10:39:10.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-5-2h/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai作业:(5-2) -- 自然语言处理与词嵌入(NLP and Word Embeddings)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-5-2h/" class="title">DeepLearning.ai作业:(5-2) -- 自然语言处理与词嵌入(NLP and Word Embeddings)</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T09:00:21.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-5-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai笔记:(5-2) -- 自然语言处理与词嵌入(NLP and Word Embeddings)" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-5-2/" class="title">DeepLearning.ai笔记:(5-2) -- 自然语言处理与词嵌入(NLP and Word Embeddings)</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T09:00:17.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-5-1h3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai作业:(5-1)-- 循环神经网络（Recurrent Neural Networks）（3）" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-5-1h3/" class="title">DeepLearning.ai作业:(5-1)-- 循环神经网络（Recurrent Neural Networks）（3）</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T08:20:36.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">联系方式</h3>
+        <div class="widget">
+            <!--fangzhyx@foxmail.com-->
+		<p>fangzhyx@foxmail.com</p>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">33</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/Deep-Learning/">Deep Learning</a><span class="category-list-count">33</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/博客搭建/">博客搭建</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/生活/旅行/">旅行</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/随笔/">随笔</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">28</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cs231n/">cs231n</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dl-ai/">dl.ai</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/旅行/">旅行</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/航拍/">航拍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频/">视频</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/cs231n/" style="font-size: 16.67px;">cs231n</a> <a href="/tags/dl-ai/" style="font-size: 20px;">dl.ai</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/homework/" style="font-size: 18.33px;">homework</a> <a href="/tags/install/" style="font-size: 13.33px;">install</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/教程/" style="font-size: 13.33px;">教程</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/航拍/" style="font-size: 10px;">航拍</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://qhgong.com">Avalon</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://hfanss.com">幻凡ss</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://trhx.top">trhx</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Fangzh</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+
+				<!--coding pages and github-->
+                <p><span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span> and <span><a href="https://github.com" style="font-weight: bold">Github</a></span></p>
+                <!--这一段是不蒜子的访问量统计脚本-->
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+                <span id="busuanzi_container_site_uv">
+                    访客数<span id="busuanzi_value_site_uv"></span>人次
+                  </span>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--往下是cloud的文章阅读量系统-->
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = 'YVSE8R91f8Qc6d6FwMTnwytk-gzGzoHsz';
+    var APP_KEY = 'ajFB9Ueh08Y5pIvkDsXSOW56';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://fangzh.top/2018/dl-ai-5-3h/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
