@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>cs231n作业：assignment2 - Batch Normalization and Dropout | Fangzh的个人博客 | 人工智能拯救世界</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="cs231n,homework" />
+    
+    <meta name="description" content="Batch Normalization批量归一化相当于在每一层神经网络的激活函数前进行归一化预处理。 先写batchnorm_forward 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686">
+<meta name="keywords" content="cs231n,homework">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs231n作业：assignment2 - Batch Normalization and Dropout">
+<meta property="og:url" content="http://fangzh.top/2018/cs231n-2-2/index.html">
+<meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
+<meta property="og:description" content="Batch Normalization批量归一化相当于在每一层神经网络的激活函数前进行归一化预处理。 先写batchnorm_forward 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg">
+<meta property="og:updated_time" content="2018-10-22T06:09:35.898Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cs231n作业：assignment2 - Batch Normalization and Dropout">
+<meta name="twitter:description" content="Batch Normalization批量归一化相当于在每一层神经网络的激活函数前进行归一化预处理。 先写batchnorm_forward 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Fangzh的个人博客 | 人工智能拯救世界" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon_1.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+    <!--百度统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c48627a60135ae47d77a79844f7e5b04";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    <!--百度SEO-->
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+        </script>
+    <!--googleseo-->
+    <meta name="google-site-verification" content="p1u63jgcp2J7NsJHR_UxQX2Fzj_UY6Zwf8C1zTRpONM" />
+    
+    <meta name="google-site-verification" content="8ojU19tXQIB94wIY0cAPI5BKSsrqV-xxrlx46C_-WMg" />
+	<!--xiongzhang-->
+	<script src="https://xiongzhang.baidu.com/sdk/c.js?appid=1608109025415176"></script>
+	<!--shougou-->
+	<meta name="sogou_site_verification" content="tRwGjUhpuk"/>
+	<!--360-->
+	<meta name="360-site-verification" content="06663b5113fe8a05769074a579c4d4ea" />
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">人工智能、人生感悟</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/archives">归档</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/">日常技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/Linux/">Linux</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/博客搭建/">博客搭建</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/汇总帖/">汇总帖</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/">生活</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/旅行/">旅行</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/随笔/">随笔</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">留言板</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-cs231n-2-2" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        cs231n作业：assignment2 - Batch Normalization and Dropout
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/cs231n-2-2/" class="article-date">
+            <time datetime="2018-10-22T05:07:45.000Z" itemprop="datePublished">2018-10-22</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/cs231n/">cs231n</a>, <a class="tag-link" href="/tags/homework/">homework</a>
+    </div>
+
+                <!---cloud阅读量统计系统-->
+                阅读数量:<span id="/2018/cs231n-2-2/" class="leancloud_visitors" data-flag-title="cs231n作业：assignment2 - Batch Normalization and Dropout"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg" alt=""></p>
+<h1 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h1><p>批量归一化相当于在每一层神经网络的激活函数前进行归一化预处理。</p>
+<p>先写<code>batchnorm_forward</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">batchnorm_forward</span><span class="params">(x, gamma, beta, bn_param)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Forward pass for batch normalization.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    During training the sample mean and (uncorrected) sample variance are</span></span><br><span class="line"><span class="string">    computed from minibatch statistics and used to normalize the incoming data.</span></span><br><span class="line"><span class="string">    During training we also keep an exponentially decaying running mean of the</span></span><br><span class="line"><span class="string">    mean and variance of each feature, and these averages are used to normalize</span></span><br><span class="line"><span class="string">    data at test-time.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    At each timestep we update the running averages for mean and variance using</span></span><br><span class="line"><span class="string">    an exponential decay based on the momentum parameter:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    running_mean = momentum * running_mean + (1 - momentum) * sample_mean</span></span><br><span class="line"><span class="string">    running_var = momentum * running_var + (1 - momentum) * sample_var</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Note that the batch normalization paper suggests a different test-time</span></span><br><span class="line"><span class="string">    behavior: they compute sample mean and variance for each feature using a</span></span><br><span class="line"><span class="string">    large number of training images rather than using a running average. For</span></span><br><span class="line"><span class="string">    this implementation we have chosen to use running averages instead since</span></span><br><span class="line"><span class="string">    they do not require an additional estimation step; the torch7</span></span><br><span class="line"><span class="string">    implementation of batch normalization also uses running averages.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Input:</span></span><br><span class="line"><span class="string">    - x: Data of shape (N, D)</span></span><br><span class="line"><span class="string">    - gamma: Scale parameter of shape (D,)</span></span><br><span class="line"><span class="string">    - beta: Shift paremeter of shape (D,)</span></span><br><span class="line"><span class="string">    - bn_param: Dictionary with the following keys:</span></span><br><span class="line"><span class="string">      - mode: 'train' or 'test'; required</span></span><br><span class="line"><span class="string">      - eps: Constant for numeric stability</span></span><br><span class="line"><span class="string">      - momentum: Constant for running mean / variance.</span></span><br><span class="line"><span class="string">      - running_mean: Array of shape (D,) giving running mean of features</span></span><br><span class="line"><span class="string">      - running_var Array of shape (D,) giving running variance of features</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns a tuple of:</span></span><br><span class="line"><span class="string">    - out: of shape (N, D)</span></span><br><span class="line"><span class="string">    - cache: A tuple of values needed in the backward pass</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    mode = bn_param[<span class="string">'mode'</span>]</span><br><span class="line">    eps = bn_param.get(<span class="string">'eps'</span>, <span class="number">1e-5</span>)</span><br><span class="line">    momentum = bn_param.get(<span class="string">'momentum'</span>, <span class="number">0.9</span>)</span><br><span class="line"></span><br><span class="line">    N, D = x.shape</span><br><span class="line">    running_mean = bn_param.get(<span class="string">'running_mean'</span>, np.zeros(D, dtype=x.dtype))</span><br><span class="line">    running_var = bn_param.get(<span class="string">'running_var'</span>, np.zeros(D, dtype=x.dtype))</span><br><span class="line"></span><br><span class="line">    out, cache = <span class="keyword">None</span>, <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">if</span> mode == <span class="string">'train'</span>:</span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> Implement the training-time forward pass for batch norm.      #</span></span><br><span class="line">        <span class="comment"># Use minibatch statistics to compute the mean and variance, use      #</span></span><br><span class="line">        <span class="comment"># these statistics to normalize the incoming data, and scale and      #</span></span><br><span class="line">        <span class="comment"># shift the normalized data using gamma and beta.                     #</span></span><br><span class="line">        <span class="comment">#                                                                     #</span></span><br><span class="line">        <span class="comment"># You should store the output in the variable out. Any intermediates  #</span></span><br><span class="line">        <span class="comment"># that you need for the backward pass should be stored in the cache   #</span></span><br><span class="line">        <span class="comment"># variable.                                                           #</span></span><br><span class="line">        <span class="comment">#                                                                     #</span></span><br><span class="line">        <span class="comment"># You should also use your computed sample mean and variance together #</span></span><br><span class="line">        <span class="comment"># with the momentum variable to update the running mean and running   #</span></span><br><span class="line">        <span class="comment"># variance, storing your result in the running_mean and running_var   #</span></span><br><span class="line">        <span class="comment"># variables.                                                          #</span></span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        </span><br><span class="line">        sample_mean = np.mean(x, axis=<span class="number">0</span>)  <span class="comment">#每一列均值</span></span><br><span class="line">        sample_var = np.var(x, axis=<span class="number">0</span>)    <span class="comment">#每一列方差</span></span><br><span class="line">        x_hat = (x - sample_mean) / (np.sqrt(sample_var + eps)) <span class="comment">#归一化后</span></span><br><span class="line">        out = gamma * x_hat + beta   <span class="comment">#变成新的均值和方差</span></span><br><span class="line">        cache = (gamma, x, sample_mean, sample_var, eps, x_hat)</span><br><span class="line">        running_mean = momentum * running_mean + (<span class="number">1</span> - momentum) * sample_mean <span class="comment">#然后把均值和方差在每一步都进行指数加权平均</span></span><br><span class="line">        running_var = momentum * running_var + (<span class="number">1</span> - momentum) * sample_var</span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        <span class="comment">#                           END OF YOUR CODE                          #</span></span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">    <span class="keyword">elif</span> mode == <span class="string">'test'</span>:</span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> Implement the test-time forward pass for batch normalization. #</span></span><br><span class="line">        <span class="comment"># Use the running mean and variance to normalize the incoming data,   #</span></span><br><span class="line">        <span class="comment"># then scale and shift the normalized data using gamma and beta.      #</span></span><br><span class="line">        <span class="comment"># Store the result in the out variable.                               #</span></span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        scale = gamma / np.sqrt(running_var + eps)</span><br><span class="line">        out = x * scale + (beta - running_mean * scale)</span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        <span class="comment">#                          END OF YOUR CODE                           #</span></span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'Invalid forward batchnorm mode "%s"'</span> % mode)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Store the updated running means back into bn_param</span></span><br><span class="line">    bn_param[<span class="string">'running_mean'</span>] = running_mean</span><br><span class="line">    bn_param[<span class="string">'running_var'</span>] = running_var</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> out, cache</span><br></pre></td></tr></table></figure>
+<p><code>backword</code>很难，公式看图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwgywyfgs8j20jb0ae3zv.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">batchnorm_backward</span><span class="params">(dout, cache)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Backward pass for batch normalization.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    For this implementation, you should write out a computation graph for</span></span><br><span class="line"><span class="string">    batch normalization on paper and propagate gradients backward through</span></span><br><span class="line"><span class="string">    intermediate nodes.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - dout: Upstream derivatives, of shape (N, D)</span></span><br><span class="line"><span class="string">    - cache: Variable of intermediates from batchnorm_forward.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns a tuple of:</span></span><br><span class="line"><span class="string">    - dx: Gradient with respect to inputs x, of shape (N, D)</span></span><br><span class="line"><span class="string">    - dgamma: Gradient with respect to scale parameter gamma, of shape (D,)</span></span><br><span class="line"><span class="string">    - dbeta: Gradient with respect to shift parameter beta, of shape (D,)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    dx, dgamma, dbeta = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the backward pass for batch normalization. Store the    #</span></span><br><span class="line">    <span class="comment"># results in the dx, dgamma, and dbeta variables.                         #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    gamma, x, mean, var, eps, x_hat = cache</span><br><span class="line">    N =x.shape[<span class="number">0</span>]</span><br><span class="line">    dgamma = np.sum(dout * x_hat, axis=<span class="number">0</span>)   <span class="comment"># 第5行公式</span></span><br><span class="line">    dbeta = np.sum(dout * <span class="number">1.0</span>, axis=<span class="number">0</span>)      <span class="comment"># 第6行公式</span></span><br><span class="line">    dx_hat = dout * gamma                   <span class="comment"># 第1行公式</span></span><br><span class="line">    dx_hat_numerator = dx_hat / np.sqrt(var + eps)      <span class="comment"># 第3行第1项(未负求和)</span></span><br><span class="line">    dx_hat_denominator = np.sum(dx_hat * (x - mean), axis=<span class="number">0</span>)    <span class="comment"># 第2行前半部分</span></span><br><span class="line">    dx_1 = dx_hat_numerator                 <span class="comment"># 第4行第1项</span></span><br><span class="line">    dvar = <span class="number">-0.5</span> * ((var + eps) ** (<span class="number">-1.5</span>)) * dx_hat_denominator  <span class="comment"># 第2行公式</span></span><br><span class="line">    <span class="comment"># Note var is also a function of mean</span></span><br><span class="line">    dmean = <span class="number">-1.0</span> * np.sum(dx_hat_numerator, axis=<span class="number">0</span>) + \</span><br><span class="line">              dvar * np.mean(<span class="number">-2.0</span> * (x - mean), axis=<span class="number">0</span>)  <span class="comment"># 第3行公式(部分)</span></span><br><span class="line">    dx_var = dvar * <span class="number">2.0</span> / N * (x - mean)    <span class="comment"># 第4行第2项</span></span><br><span class="line">    dx_mean = dmean * <span class="number">1.0</span> / N               <span class="comment"># 第4行第3项</span></span><br><span class="line">    <span class="comment"># with shape (D,), no trouble with broadcast</span></span><br><span class="line">    dx = dx_1 + dx_var + dx_mean            <span class="comment"># 第4行公式</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#                             END OF YOUR CODE                            #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dx, dgamma, dbeta</span><br></pre></td></tr></table></figure>
+<p>另一种backword</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">batchnorm_backward_alt</span><span class="params">(dout, cache)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Alternative backward pass for batch normalization.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    For this implementation you should work out the derivatives for the batch</span></span><br><span class="line"><span class="string">    normalizaton backward pass on paper and simplify as much as possible. You</span></span><br><span class="line"><span class="string">    should be able to derive a simple expression for the backward pass.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Note: This implementation should expect to receive the same cache variable</span></span><br><span class="line"><span class="string">    as batchnorm_backward, but might not use all of the values in the cache.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs / outputs: Same as batchnorm_backward</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    dx, dgamma, dbeta = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the backward pass for batch normalization. Store the    #</span></span><br><span class="line">    <span class="comment"># results in the dx, dgamma, and dbeta variables.                         #</span></span><br><span class="line">    <span class="comment">#                                                                         #</span></span><br><span class="line">    <span class="comment"># After computing the gradient with respect to the centered inputs, you   #</span></span><br><span class="line">    <span class="comment"># should be able to compute gradients with respect to the inputs in a     #</span></span><br><span class="line">    <span class="comment"># single statement; our implementation fits on a single 80-character line.#</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    gamma, x, sample_mean, sample_var, eps, x_hat = cache</span><br><span class="line">    N = x.shape[<span class="number">0</span>]</span><br><span class="line">    dx_hat = dout * gamma</span><br><span class="line">    dvar = np.sum(dx_hat* (x - sample_mean) * <span class="number">-0.5</span> * np.power(sample_var + eps, <span class="number">-1.5</span>), axis = <span class="number">0</span>)</span><br><span class="line">    dmean = np.sum(dx_hat * <span class="number">-1</span> / np.sqrt(sample_var +eps), axis = <span class="number">0</span>) + dvar * np.mean(<span class="number">-2</span> * (x - sample_mean), axis =<span class="number">0</span>)</span><br><span class="line">    dx = <span class="number">1</span> / np.sqrt(sample_var + eps) * dx_hat + dvar * <span class="number">2.0</span> / N * (x-sample_mean) + <span class="number">1.0</span> / N * dmean</span><br><span class="line">    dgamma = np.sum(x_hat * dout, axis = <span class="number">0</span>)</span><br><span class="line">    dbeta = np.sum(dout , axis = <span class="number">0</span>)</span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#                             END OF YOUR CODE                            #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dx, dgamma, dbeta</span><br></pre></td></tr></table></figure>
+<p>然后把之前的FullyConnectedNet的use_batchnorm补上，之前已经写好了，不再赘述。</p>
+<h1 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h1><p>定义一个mask，用来生成0-1随机数，然后转化为大于某个数的布尔值，再把输入值乘上这个mask就可以得到一部分失活，一部分没有失活的神经元</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dropout_forward</span><span class="params">(x, dropout_param)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Performs the forward pass for (inverted) dropout.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - x: Input data, of any shape</span></span><br><span class="line"><span class="string">    - dropout_param: A dictionary with the following keys:</span></span><br><span class="line"><span class="string">      - p: Dropout parameter. We drop each neuron output with probability p.</span></span><br><span class="line"><span class="string">      - mode: 'test' or 'train'. If the mode is train, then perform dropout;</span></span><br><span class="line"><span class="string">        if the mode is test, then just return the input.</span></span><br><span class="line"><span class="string">      - seed: Seed for the random number generator. Passing seed makes this</span></span><br><span class="line"><span class="string">        function deterministic, which is needed for gradient checking but not</span></span><br><span class="line"><span class="string">        in real networks.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Outputs:</span></span><br><span class="line"><span class="string">    - out: Array of the same shape as x.</span></span><br><span class="line"><span class="string">    - cache: tuple (dropout_param, mask). In training mode, mask is the dropout</span></span><br><span class="line"><span class="string">      mask that was used to multiply the input; in test mode, mask is None.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    p, mode = dropout_param[<span class="string">'p'</span>], dropout_param[<span class="string">'mode'</span>]</span><br><span class="line">    <span class="keyword">if</span> <span class="string">'seed'</span> <span class="keyword">in</span> dropout_param:</span><br><span class="line">        np.random.seed(dropout_param[<span class="string">'seed'</span>])</span><br><span class="line"></span><br><span class="line">    mask = <span class="keyword">None</span></span><br><span class="line">    out = <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> mode == <span class="string">'train'</span>:</span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> Implement training phase forward pass for inverted dropout.   #</span></span><br><span class="line">        <span class="comment"># Store the dropout mask in the mask variable.                        #</span></span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        mask = np.random.rand(*x.shape) &gt;= p</span><br><span class="line">        mask = mask / (<span class="number">1</span> - p)</span><br><span class="line">        out = mask * x</span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        <span class="comment">#                           END OF YOUR CODE                          #</span></span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">    <span class="keyword">elif</span> mode == <span class="string">'test'</span>:</span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> Implement the test phase forward pass for inverted dropout.   #</span></span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        out = x</span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        <span class="comment">#                            END OF YOUR CODE                         #</span></span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line"></span><br><span class="line">    cache = (dropout_param, mask)</span><br><span class="line">    out = out.astype(x.dtype, copy=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> out, cache</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dropout_backward</span><span class="params">(dout, cache)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Perform the backward pass for (inverted) dropout.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - dout: Upstream derivatives, of any shape</span></span><br><span class="line"><span class="string">    - cache: (dropout_param, mask) from dropout_forward.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    dropout_param, mask = cache</span><br><span class="line">    mode = dropout_param[<span class="string">'mode'</span>]</span><br><span class="line"></span><br><span class="line">    dx = <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">if</span> mode == <span class="string">'train'</span>:</span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> Implement training phase backward pass for inverted dropout   #</span></span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        dx = dout * mask</span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">        <span class="comment">#                          END OF YOUR CODE                           #</span></span><br><span class="line">        <span class="comment">#######################################################################</span></span><br><span class="line">    <span class="keyword">elif</span> mode == <span class="string">'test'</span>:</span><br><span class="line">        dx = dout</span><br><span class="line">    <span class="keyword">return</span> dx</span><br></pre></td></tr></table></figure>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://fangzh.top/2018/cs231n-2-2/" data-id="cjnjwiw7v000o4ku3ftoxo20h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+
+        </footer>
+    </div>
+</article>
+<!--
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+-->
+<!--来比力评论系统，在commetn/livebe.ejs中-->
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ4OC8xNjAxNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ZJUFangzh" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/cs231n-2-3/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            cs231n作业：assignment2 - Convolutional Networks
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2018/dl-ai-summary/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">吴恩达Coursera(DeepLearning.ai)笔记和作业汇总帖</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/cs231n-2-3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment2 - Convolutional Networks" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/cs231n-2-3/" class="title">cs231n作业：assignment2 - Convolutional Networks</a></p>
+                            <p class="item-date"><time datetime="2018-10-22T05:49:41.000Z" itemprop="datePublished">2018-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/cs231n-2-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment2 - Batch Normalization and Dropout" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/cs231n-2-2/" class="title">cs231n作业：assignment2 - Batch Normalization and Dropout</a></p>
+                            <p class="item-date"><time datetime="2018-10-22T05:07:45.000Z" itemprop="datePublished">2018-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-summary/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="吴恩达Coursera(DeepLearning.ai)笔记和作业汇总帖" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/汇总帖/">汇总帖</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-summary/" class="title">吴恩达Coursera(DeepLearning.ai)笔记和作业汇总帖</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T12:01:05.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-5-3h/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-5-3h/" class="title">DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T10:39:15.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-5-3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai笔记:(5-3) -- 序列模型和注意力机制" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-5-3/" class="title">DeepLearning.ai笔记:(5-3) -- 序列模型和注意力机制</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T10:39:10.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">联系方式</h3>
+        <div class="widget">
+            <!--fangzhyx@foxmail.com-->
+		<p>fangzhyx@foxmail.com</p>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/Deep-Learning/">Deep Learning</a><span class="category-list-count">36</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/博客搭建/">博客搭建</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇总帖/">汇总帖</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/生活/旅行/">旅行</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/随笔/">随笔</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">29</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cs231n/">cs231n</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dl-ai/">dl.ai</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/旅行/">旅行</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/航拍/">航拍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频/">视频</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/cs231n/" style="font-size: 16.67px;">cs231n</a> <a href="/tags/dl-ai/" style="font-size: 20px;">dl.ai</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/homework/" style="font-size: 18.33px;">homework</a> <a href="/tags/install/" style="font-size: 13.33px;">install</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/教程/" style="font-size: 13.33px;">教程</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/航拍/" style="font-size: 10px;">航拍</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://qhgong.com">Avalon</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://hfanss.com">幻凡ss</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://trhx.top">trhx</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Fangzh</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+
+				<!--coding pages and github-->
+                <p><span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span> and <span><a href="https://github.com" style="font-weight: bold">Github</a></span></p>
+                <!--这一段是不蒜子的访问量统计脚本-->
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+                <span id="busuanzi_container_site_uv">
+                    访客数<span id="busuanzi_value_site_uv"></span>人次
+                  </span>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--往下是cloud的文章阅读量系统-->
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = 'YVSE8R91f8Qc6d6FwMTnwytk-gzGzoHsz';
+    var APP_KEY = 'ajFB9Ueh08Y5pIvkDsXSOW56';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://fangzh.top/2018/cs231n-2-2/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>cs231n作业：assignment2 - Convolutional Networks | Fangzh的个人博客 | 人工智能拯救世界</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="cs231n,homework" />
+    
+    <meta name="description" content="作业做到这里才真正进入了cnn的范畴。 先用最基本的循环来写forward  1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162def conv_forward_naive(x, w, b, conv_param):">
+<meta name="keywords" content="cs231n,homework">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs231n作业：assignment2 - Convolutional Networks">
+<meta property="og:url" content="http://fangzh.top/2018/cs231n-2-3/index.html">
+<meta property="og:site_name" content="Fangzh的个人博客 | 人工智能拯救世界">
+<meta property="og:description" content="作业做到这里才真正进入了cnn的范畴。 先用最基本的循环来写forward  1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162def conv_forward_naive(x, w, b, conv_param):">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg">
+<meta property="og:updated_time" content="2018-10-22T06:09:39.267Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cs231n作业：assignment2 - Convolutional Networks">
+<meta name="twitter:description" content="作业做到这里才真正进入了cnn的范畴。 先用最基本的循环来写forward  1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162def conv_forward_naive(x, w, b, conv_param):">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Fangzh的个人博客 | 人工智能拯救世界" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon_1.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+
+
+    <!--百度统计-->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c48627a60135ae47d77a79844f7e5b04";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    <!--百度SEO-->
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+        </script>
+    <!--googleseo-->
+    <meta name="google-site-verification" content="p1u63jgcp2J7NsJHR_UxQX2Fzj_UY6Zwf8C1zTRpONM" />
+    
+    <meta name="google-site-verification" content="8ojU19tXQIB94wIY0cAPI5BKSsrqV-xxrlx46C_-WMg" />
+	<!--xiongzhang-->
+	<script src="https://xiongzhang.baidu.com/sdk/c.js?appid=1608109025415176"></script>
+	<!--shougou-->
+	<meta name="sogou_site_verification" content="tRwGjUhpuk"/>
+	<!--360-->
+	<meta name="360-site-verification" content="06663b5113fe8a05769074a579c4d4ea" />
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">人工智能、人生感悟</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/archives">归档</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/">AI</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/">日常技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/Linux/">Linux</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/日常技术/博客搭建/">博客搭建</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/汇总帖/">汇总帖</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/">生活</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/旅行/">旅行</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/生活/随笔/">随笔</a></li></ul></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/board">留言板</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/AI/Deep-Learning/">Deep Learning</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-cs231n-2-3" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        cs231n作业：assignment2 - Convolutional Networks
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2018/cs231n-2-3/" class="article-date">
+            <time datetime="2018-10-22T05:49:41.000Z" itemprop="datePublished">2018-10-22</time>
+        </a>
+    </div>
+
+		
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/cs231n/">cs231n</a>, <a class="tag-link" href="/tags/homework/">homework</a>
+    </div>
+
+                <!---cloud阅读量统计系统-->
+                阅读数量:<span id="/2018/cs231n-2-3/" class="leancloud_visitors" data-flag-title="cs231n作业：assignment2 - Convolutional Networks"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg" alt=""></p>
+<p>作业做到这里才真正进入了cnn的范畴。</p>
+<p>先用最基本的循环来写forward</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwgyxae6rgj20xq0f475n.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_forward_naive</span><span class="params">(x, w, b, conv_param)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A naive implementation of the forward pass for a convolutional layer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    The input consists of N data points, each with C channels, height H and</span></span><br><span class="line"><span class="string">    width W. We convolve each input with F different filters, where each filter</span></span><br><span class="line"><span class="string">    spans all C channels and has height HH and width HH.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Input:</span></span><br><span class="line"><span class="string">    - x: Input data of shape (N, C, H, W)</span></span><br><span class="line"><span class="string">    - w: Filter weights of shape (F, C, HH, WW)</span></span><br><span class="line"><span class="string">    - b: Biases, of shape (F,)</span></span><br><span class="line"><span class="string">    - conv_param: A dictionary with the following keys:</span></span><br><span class="line"><span class="string">      - 'stride': The number of pixels between adjacent receptive fields in the</span></span><br><span class="line"><span class="string">        horizontal and vertical directions.</span></span><br><span class="line"><span class="string">      - 'pad': The number of pixels that will be used to zero-pad the input.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns a tuple of:</span></span><br><span class="line"><span class="string">    - out: Output data, of shape (N, F, H', W') where H' and W' are given by</span></span><br><span class="line"><span class="string">      H' = 1 + (H + 2 * pad - HH) / stride</span></span><br><span class="line"><span class="string">      W' = 1 + (W + 2 * pad - WW) / stride</span></span><br><span class="line"><span class="string">    - cache: (x, w, b, conv_param)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    out = <span class="keyword">None</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the convolutional forward pass.                         #</span></span><br><span class="line">    <span class="comment"># Hint: you can use the function np.pad for padding.                      #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#N个样本，C个通道，H高度，W宽度</span></span><br><span class="line">    N, C, H, W = x.shape</span><br><span class="line">    <span class="comment">#F个filter，C个通道，HH个核高度，WW核宽度</span></span><br><span class="line">    F, C, HH, WW = w.shape</span><br><span class="line">    <span class="comment">#步长</span></span><br><span class="line">    stride = conv_param[<span class="string">'stride'</span>]</span><br><span class="line">    <span class="comment">#padding 的像素个数</span></span><br><span class="line">    pad = conv_param[<span class="string">'pad'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#经过卷积核之后的图片大小</span></span><br><span class="line">    new_H = <span class="number">1</span> + int((H + <span class="number">2</span> * pad - HH)/stride)</span><br><span class="line">    new_W = <span class="number">1</span> + int((W + <span class="number">2</span> * pad - WW)/stride)</span><br><span class="line">    out = np.zeros([N, F, new_H, new_W])</span><br><span class="line"></span><br><span class="line">    <span class="comment">#遍历N个样本卷积</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> range(F):</span><br><span class="line">            <span class="comment">#需要加上bias</span></span><br><span class="line">            conv_newH_new_W = np.ones([new_H, new_W]) * b[f]</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> range(C):</span><br><span class="line">                <span class="comment">#填充原图片x</span></span><br><span class="line">                padded_x = np.lib.pad(x[n, c], pad_width = pad, mode=<span class="string">'constant'</span>,constant_values=<span class="number">0</span>)</span><br><span class="line">                <span class="comment">#开始计算卷积后的图中的每一个像素，每一个像素就是对应一个卷积核乘上原来的图片的位置</span></span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> range(new_H):</span><br><span class="line">                    <span class="keyword">for</span> j <span class="keyword">in</span> range(new_W):</span><br><span class="line">                        conv_newH_new_W[i, j] += np.sum(padded_x[i * stride:i * stride+HH, j * stride: j*stride+WW]* w[f, c, :, :])</span><br><span class="line">            <span class="comment">#把C个通道中的那些对应像素加在一起，得到了单张图片单个核数的out</span></span><br><span class="line">            out[n, f] = conv_newH_new_W</span><br><span class="line"></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#                             END OF YOUR CODE                            #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    cache = (x, w, b, conv_param)</span><br><span class="line">    <span class="keyword">return</span> out, cache</span><br></pre></td></tr></table></figure>
+<p>backward如图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/d40b6c29ly1fwgyxio6swj20xj0uegqr.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_backward_naive</span><span class="params">(dout, cache)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A naive implementation of the backward pass for a convolutional layer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - dout: Upstream derivatives.</span></span><br><span class="line"><span class="string">    - cache: A tuple of (x, w, b, conv_param) as in conv_forward_naive</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns a tuple of:</span></span><br><span class="line"><span class="string">    - dx: Gradient with respect to x</span></span><br><span class="line"><span class="string">    - dw: Gradient with respect to w</span></span><br><span class="line"><span class="string">    - db: Gradient with respect to b</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    dx, dw, db = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the convolutional backward pass.                        #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment"># 数据准备</span></span><br><span class="line">    x, w, b, conv_param = cache</span><br><span class="line">    pad = conv_param[<span class="string">'pad'</span>]</span><br><span class="line">    stride = conv_param[<span class="string">'stride'</span>]</span><br><span class="line">    F, C, HH, WW = w.shape</span><br><span class="line">    N, C, H, W = x.shape</span><br><span class="line">    N, F, new_H, new_W = dout.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 下面，我们模拟卷积，首先填充x。</span></span><br><span class="line">    padded_x = np.lib.pad(x,</span><br><span class="line">                          ((<span class="number">0</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">0</span>), (pad, pad), (pad, pad)),</span><br><span class="line">                          mode=<span class="string">'constant'</span>,</span><br><span class="line">                          constant_values=<span class="number">0</span>)</span><br><span class="line">    padded_dx = np.zeros_like(padded_x)  <span class="comment"># 填充了的dx，后面去填充即可得到dx</span></span><br><span class="line">    dw = np.zeros_like(w)</span><br><span class="line">    db = np.zeros_like(b)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> range(N):  <span class="comment"># 第n个图像</span></span><br><span class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> range(F):  <span class="comment"># 第f个过滤器</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(new_H):</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(new_W):</span><br><span class="line">                    <span class="comment">#dw 等于所有out的每一个像素求导之和，因为out每个像素都共享参数</span></span><br><span class="line">                    db[f] += dout[n, f, i, j] <span class="comment"># dg对db求导为1*dout</span></span><br><span class="line">                    dw[f] += padded_x[n, :, i*stride : HH + i*stride, j*stride : WW + j*stride] * dout[n, f, i, j]</span><br><span class="line">                    padded_dx[n, :, i*stride : HH + i*stride, j*stride : WW + j*stride] += w[f] * dout[n, f, i, j]</span><br><span class="line">    <span class="comment"># 去掉填充部分</span></span><br><span class="line">    dx = padded_dx[:, :, pad:pad + H, pad:pad + W]</span><br><span class="line"></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#                             END OF YOUR CODE                            #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="keyword">return</span> dx, dw, db</span><br></pre></td></tr></table></figure>
+<p>然后是max pool 层</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pool_forward_naive</span><span class="params">(x, pool_param)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A naive implementation of the forward pass for a max pooling layer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - x: Input data, of shape (N, C, H, W)</span></span><br><span class="line"><span class="string">    - pool_param: dictionary with the following keys:</span></span><br><span class="line"><span class="string">      - 'pool_height': The height of each pooling region</span></span><br><span class="line"><span class="string">      - 'pool_width': The width of each pooling region</span></span><br><span class="line"><span class="string">      - 'stride': The distance between adjacent pooling regions</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns a tuple of:</span></span><br><span class="line"><span class="string">    - out: Output data</span></span><br><span class="line"><span class="string">    - cache: (x, pool_param)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    out = <span class="keyword">None</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the max pooling forward pass                            #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    N, C, H, W = x.shape</span><br><span class="line">    pool_height = pool_param[<span class="string">'pool_height'</span>] <span class="comment"># 池化过滤器高度</span></span><br><span class="line">    pool_width  = pool_param[<span class="string">'pool_width'</span>]  <span class="comment"># 池化过滤器宽度</span></span><br><span class="line">    pool_stride = pool_param[<span class="string">'stride'</span>]      <span class="comment"># 移动步长</span></span><br><span class="line">    new_H = <span class="number">1</span> + int((H - pool_height) / pool_stride)    <span class="comment"># 池化结果矩阵高度</span></span><br><span class="line">    new_W = <span class="number">1</span> + int((W - pool_width) / pool_stride)     <span class="comment"># 池化结果矩阵宽度</span></span><br><span class="line">    out = np.zeros([N, C, new_H, new_W])</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> range(C):</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(new_H):</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(new_W):</span><br><span class="line">                    out[n,c,i,j] = np.max(x[n, c, i*pool_stride : i*pool_stride+pool_height, j*pool_stride : j*pool_stride+pool_width])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#                             END OF YOUR CODE                            #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    cache = (x, pool_param)</span><br><span class="line">    <span class="keyword">return</span> out, cache</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pool_backward_naive</span><span class="params">(dout, cache)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A naive implementation of the backward pass for a max pooling layer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - dout: Upstream derivatives</span></span><br><span class="line"><span class="string">    - cache: A tuple of (x, pool_param) as in the forward pass.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    - dx: Gradient with respect to x</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    dx = <span class="keyword">None</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the max pooling backward pass                           #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#太难</span></span><br><span class="line">    x, pool_param = cache</span><br><span class="line">    N, C, H, W = x.shape</span><br><span class="line">    pool_height = pool_param[<span class="string">'pool_height'</span>]</span><br><span class="line">    pool_width  = pool_param[<span class="string">'pool_width'</span>]</span><br><span class="line">    pool_stride = pool_param[<span class="string">'stride'</span>]</span><br><span class="line">    new_H = <span class="number">1</span> + int((H - pool_height) / pool_stride)</span><br><span class="line">    new_W = <span class="number">1</span> + int((W - pool_width) / pool_stride)</span><br><span class="line">    dx = np.zeros_like(x)</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> range(C):</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(new_H):</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(new_W):</span><br><span class="line">                    window = x[n, c, i * pool_stride: i * pool_stride + pool_height,j * pool_stride: j * pool_stride + pool_width]</span><br><span class="line">                    dx[n, c, i * pool_stride: i * pool_stride + pool_height, j * pool_stride: j * pool_stride + pool_width] = (window == np.max(window))*dout[n,c,i,j]</span><br><span class="line"></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="comment">#                             END OF YOUR CODE                            #</span></span><br><span class="line">    <span class="comment">###########################################################################</span></span><br><span class="line">    <span class="keyword">return</span> dx</span><br></pre></td></tr></table></figure>
+<p>以上只是尝试最基本的CNN和max pool结构。实际使用不用这个，因为有更高效的版本。</p>
+<p>然后用高效的版本定义了三明治层：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_relu_forward</span><span class="params">(x, w, b, conv_param)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A convenience layer that performs a convolution followed by a ReLU.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Inputs:</span></span><br><span class="line"><span class="string">    - x: Input to the convolutional layer</span></span><br><span class="line"><span class="string">    - w, b, conv_param: Weights and parameters for the convolutional layer</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns a tuple of:</span></span><br><span class="line"><span class="string">    - out: Output from the ReLU</span></span><br><span class="line"><span class="string">    - cache: Object to give to the backward pass</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    a, conv_cache = conv_forward_fast(x, w, b, conv_param)</span><br><span class="line">    out, relu_cache = relu_forward(a)</span><br><span class="line">    cache = (conv_cache, relu_cache)</span><br><span class="line">    <span class="keyword">return</span> out, cache</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_relu_backward</span><span class="params">(dout, cache)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Backward pass for the conv-relu convenience layer.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    conv_cache, relu_cache = cache</span><br><span class="line">    da = relu_backward(dout, relu_cache)</span><br><span class="line">    dx, dw, db = conv_backward_fast(da, conv_cache)</span><br><span class="line">    <span class="keyword">return</span> dx, dw, db</span><br></pre></td></tr></table></figure>
+<p>在<code>cnn.py</code>中完成了三层的ConvNet</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreeLayerConvNet</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A three-layer convolutional network with the following architecture:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    conv - relu - 2x2 max pool - affine - relu - affine - softmax</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    The network operates on minibatches of data that have shape (N, C, H, W)</span></span><br><span class="line"><span class="string">    consisting of N images, each with height H and width W and with C input</span></span><br><span class="line"><span class="string">    channels.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_dim=<span class="params">(<span class="number">3</span>, <span class="number">32</span>, <span class="number">32</span>)</span>, num_filters=<span class="number">32</span>, filter_size=<span class="number">7</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 hidden_dim=<span class="number">100</span>, num_classes=<span class="number">10</span>, weight_scale=<span class="number">1e-3</span>, reg=<span class="number">0.0</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 dtype=np.float32)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Initialize a new network.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Inputs:</span></span><br><span class="line"><span class="string">        - input_dim: Tuple (C, H, W) giving size of input data</span></span><br><span class="line"><span class="string">        - num_filters: Number of filters to use in the convolutional layer</span></span><br><span class="line"><span class="string">        - filter_size: Size of filters to use in the convolutional layer</span></span><br><span class="line"><span class="string">        - hidden_dim: Number of units to use in the fully-connected hidden layer</span></span><br><span class="line"><span class="string">        - num_classes: Number of scores to produce from the final affine layer.</span></span><br><span class="line"><span class="string">        - weight_scale: Scalar giving standard deviation for random initialization</span></span><br><span class="line"><span class="string">          of weights.</span></span><br><span class="line"><span class="string">        - reg: Scalar giving L2 regularization strength</span></span><br><span class="line"><span class="string">        - dtype: numpy datatype to use for computation.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.params = &#123;&#125;</span><br><span class="line">        self.reg = reg</span><br><span class="line">        self.dtype = dtype</span><br><span class="line"></span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> Initialize weights and biases for the three-layer convolutional    #</span></span><br><span class="line">        <span class="comment"># network. Weights should be initialized from a Gaussian with standard     #</span></span><br><span class="line">        <span class="comment"># deviation equal to weight_scale; biases should be initialized to zero.   #</span></span><br><span class="line">        <span class="comment"># All weights and biases should be stored in the dictionary self.params.   #</span></span><br><span class="line">        <span class="comment"># Store weights and biases for the convolutional layer using the keys 'W1' #</span></span><br><span class="line">        <span class="comment"># and 'b1'; use keys 'W2' and 'b2' for the weights and biases of the       #</span></span><br><span class="line">        <span class="comment"># hidden affine layer, and keys 'W3' and 'b3' for the weights and biases   #</span></span><br><span class="line">        <span class="comment"># of the output affine layer.                                              #</span></span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line">        C, H, W = input_dim</span><br><span class="line">        <span class="comment">#W1为第一层conv参数</span></span><br><span class="line">        self.params[<span class="string">'W1'</span>] = weight_scale * np.random.randn(num_filters, C, filter_size, filter_size)</span><br><span class="line">        self.params[<span class="string">'b1'</span>] = np.zeros(num_filters)</span><br><span class="line">        <span class="comment">#W2为maxpool - hiddenlayer</span></span><br><span class="line">        self.params[<span class="string">'W2'</span>] = weight_scale * np.random.randn(int(H / <span class="number">2</span>) * int(W / <span class="number">2</span>)*num_filters, hidden_dim)</span><br><span class="line">        self.params[<span class="string">'b2'</span>] = np.zeros(hidden_dim)</span><br><span class="line">        <span class="comment">#W3 hidden - output</span></span><br><span class="line">        self.params[<span class="string">'W3'</span>] = weight_scale * np.random.randn(hidden_dim, num_classes)</span><br><span class="line">        self.params[<span class="string">'b3'</span>] = np.zeros(num_classes)</span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line">        <span class="comment">#                             END OF YOUR CODE                             #</span></span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> self.params.items():</span><br><span class="line">            self.params[k] = v.astype(dtype)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, X, y=None)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Evaluate loss and gradient for the three-layer convolutional network.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Input / output: Same API as TwoLayerNet in fc_net.py.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        W1, b1 = self.params[<span class="string">'W1'</span>], self.params[<span class="string">'b1'</span>]</span><br><span class="line">        W2, b2 = self.params[<span class="string">'W2'</span>], self.params[<span class="string">'b2'</span>]</span><br><span class="line">        W3, b3 = self.params[<span class="string">'W3'</span>], self.params[<span class="string">'b3'</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># pass conv_param to the forward pass for the convolutional layer</span></span><br><span class="line">        filter_size = W1.shape[<span class="number">2</span>]</span><br><span class="line">        conv_param = &#123;<span class="string">'stride'</span>: <span class="number">1</span>, <span class="string">'pad'</span>: (filter_size - <span class="number">1</span>) // <span class="number">2</span>&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># pass pool_param to the forward pass for the max-pooling layer</span></span><br><span class="line">        pool_param = &#123;<span class="string">'pool_height'</span>: <span class="number">2</span>, <span class="string">'pool_width'</span>: <span class="number">2</span>, <span class="string">'stride'</span>: <span class="number">2</span>&#125;</span><br><span class="line"></span><br><span class="line">        scores = <span class="keyword">None</span></span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> Implement the forward pass for the three-layer convolutional net,  #</span></span><br><span class="line">        <span class="comment"># computing the class scores for X and storing them in the scores          #</span></span><br><span class="line">        <span class="comment"># variable.                                                                #</span></span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        conv_forward_out_1, cache_forward_1 = conv_relu_pool_forward(X, W1, b1, conv_param, pool_param)</span><br><span class="line">        affine_out_2, cache_forward_2 = affine_relu_forward(conv_forward_out_1, W2, b2)</span><br><span class="line">        scores, cache_forward_3 = affine_forward(affine_out_2, W3, b3)</span><br><span class="line"></span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line">        <span class="comment">#                             END OF YOUR CODE                             #</span></span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> y <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">return</span> scores</span><br><span class="line"></span><br><span class="line">        loss, grads = <span class="number">0</span>, &#123;&#125;</span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> Implement the backward pass for the three-layer convolutional net, #</span></span><br><span class="line">        <span class="comment"># storing the loss and gradients in the loss and grads variables. Compute  #</span></span><br><span class="line">        <span class="comment"># data loss using softmax, and make sure that grads[k] holds the gradients #</span></span><br><span class="line">        <span class="comment"># for self.params[k]. Don't forget to add L2 regularization!               #</span></span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">        loss, dscore = softmax_loss(scores, y)</span><br><span class="line">        <span class="comment">#da2 即affine_out_2的d</span></span><br><span class="line">        da2, grads[<span class="string">'W3'</span>], grads[<span class="string">'b3'</span>] = affine_backward(dscore, cache_forward_3)</span><br><span class="line">        <span class="comment">#da1,即第一层经过conv pool之后的d</span></span><br><span class="line">        da1, grads[<span class="string">'W2'</span>], grads[<span class="string">'b2'</span>] = affine_relu_backward(da2, cache_forward_2)</span><br><span class="line">        _, grads[<span class="string">'W1'</span>], grads[<span class="string">'b1'</span>] = conv_relu_pool_backward(da1, cache_forward_1)</span><br><span class="line"></span><br><span class="line">        loss += <span class="number">0.5</span> * self.reg * (np.sum(W1 ** <span class="number">2</span>) + np.sum(W2 **<span class="number">2</span>) + np.sum(W3 ** <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">        grads[<span class="string">'W1'</span>] += self.reg * W1</span><br><span class="line">        grads[<span class="string">'W2'</span>] += self.reg * W2</span><br><span class="line">        grads[<span class="string">'W3'</span>] += self.reg * W3</span><br><span class="line"></span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line">        <span class="comment">#                             END OF YOUR CODE                             #</span></span><br><span class="line">        <span class="comment">############################################################################</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> loss, grads</span><br></pre></td></tr></table></figure>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://fangzh.top/2018/cs231n-2-3/" data-id="cjnjwiw7x000r4ku3fog9kjok" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+
+        </footer>
+    </div>
+</article>
+<!--
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+-->
+<!--来比力评论系统，在commetn/livebe.ejs中-->
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ4OC8xNjAxNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/ZJUFangzh" target="_blank" rel="noopener">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/atom.xml" target="_blank" rel="noopener">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/cs231n-2-2/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">cs231n作业：assignment2 - Batch Normalization and Dropout</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/cs231n-2-3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment2 - Convolutional Networks" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/cs231n-2-3/" class="title">cs231n作业：assignment2 - Convolutional Networks</a></p>
+                            <p class="item-date"><time datetime="2018-10-22T05:49:41.000Z" itemprop="datePublished">2018-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/cs231n-2-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrlvz19onj20yh0k1dms.jpg)" alt="cs231n作业：assignment2 - Batch Normalization and Dropout" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/cs231n-2-2/" class="title">cs231n作业：assignment2 - Batch Normalization and Dropout</a></p>
+                            <p class="item-date"><time datetime="2018-10-22T05:07:45.000Z" itemprop="datePublished">2018-10-22</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-summary/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="吴恩达Coursera(DeepLearning.ai)笔记和作业汇总帖" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/汇总帖/">汇总帖</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-summary/" class="title">吴恩达Coursera(DeepLearning.ai)笔记和作业汇总帖</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T12:01:05.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-5-3h/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-5-3h/" class="title">DeepLearning.ai作业:(5-3) -- 序列模型和注意力机制</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T10:39:15.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/dl-ai-5-3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://ww1.sinaimg.cn/large/d40b6c29gy1fvrl8dyhm4j218w0nstdc.jpg)" alt="DeepLearning.ai笔记:(5-3) -- 序列模型和注意力机制" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/AI/">AI</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/AI/Deep-Learning/">Deep Learning</a></p>
+                            <p class="item-title"><a href="/2018/dl-ai-5-3/" class="title">DeepLearning.ai笔记:(5-3) -- 序列模型和注意力机制</a></p>
+                            <p class="item-date"><time datetime="2018-10-18T10:39:10.000Z" itemprop="datePublished">2018-10-18</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">联系方式</h3>
+        <div class="widget">
+            <!--fangzhyx@foxmail.com-->
+		<p>fangzhyx@foxmail.com</p>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/">AI</a><span class="category-list-count">36</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/AI/Deep-Learning/">Deep Learning</a><span class="category-list-count">36</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/">日常技术</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日常技术/博客搭建/">博客搭建</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/汇总帖/">汇总帖</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/">生活</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/生活/旅行/">旅行</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活/随笔/">随笔</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">29</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cs231n/">cs231n</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dl-ai/">dl.ai</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homework/">homework</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/install/">install</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/旅行/">旅行</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/航拍/">航拍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/视频/">视频</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/cs231n/" style="font-size: 16.67px;">cs231n</a> <a href="/tags/dl-ai/" style="font-size: 20px;">dl.ai</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/homework/" style="font-size: 18.33px;">homework</a> <a href="/tags/install/" style="font-size: 13.33px;">install</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/教程/" style="font-size: 13.33px;">教程</a> <a href="/tags/旅行/" style="font-size: 10px;">旅行</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a> <a href="/tags/航拍/" style="font-size: 10px;">航拍</a> <a href="/tags/视频/" style="font-size: 10px;">视频</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">友情链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://qhgong.com">Avalon</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://hfanss.com">幻凡ss</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://trhx.top">trhx</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2018 Fangzh</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+
+				<!--coding pages and github-->
+                <p><span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span> and <span><a href="https://github.com" style="font-weight: bold">Github</a></span></p>
+                <!--这一段是不蒜子的访问量统计脚本-->
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次 &nbsp;   </span>
+                <span id="busuanzi_container_site_uv">
+                    访客数<span id="busuanzi_value_site_uv"></span>人次
+                  </span>
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--往下是cloud的文章阅读量系统-->
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = 'YVSE8R91f8Qc6d6FwMTnwytk-gzGzoHsz';
+    var APP_KEY = 'ajFB9Ueh08Y5pIvkDsXSOW56';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
+
+        
+    
+    <script>
+    var disqus_shortname = 'hexo-theme-hueman';
+    
+    
+    var disqus_url = 'http://fangzh.top/2018/cs231n-2-3/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
